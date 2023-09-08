@@ -12,7 +12,7 @@
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Senescyt</name>
-    <description>Gestionar de manera eficiente y precisa la asistencia y el tiempo de vacaciones de los empleados de la SENESCYT zonal 6. Esto incluye la recopilación y almacenamiento de datos biométricos y personales del personal, así como la automatización de cálculos relacionados con la asistencia y las vacaciones, lo que facilitará la toma de decisiones y la administración de recursos humanos.</description>
+    <description>Gestionar de manera eficiente y precisa la asistencia y el tiempo de vacaciones de los empleados de la SENESCYT zonal 6. Esto incluye la recopilación y almacenamiento de datos biométricos y Rolles del Roll, así como la automatización de cálculos relacionados con la asistencia y las vacaciones, lo que facilitará la toma de decisiones y la administración de recursos humanos.</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -33,7 +33,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -55,6 +54,20 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--swagger-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!---->
+
     </dependencies>
 
     <build>

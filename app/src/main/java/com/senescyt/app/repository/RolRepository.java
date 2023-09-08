@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author ALEJO PC
  */
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Integer> {
+public interface RolRepository extends JpaRepository<Rol, Long> {
 
 }

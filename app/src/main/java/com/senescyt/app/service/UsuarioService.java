@@ -2,14 +2,16 @@ package com.senescyt.app.service;
 
 import com.senescyt.app.model.Usuario;
 import com.senescyt.app.repository.UsuarioRepository;
-import com.senescyt.app.repository.genericService.GenericService;
-import com.senescyt.app.repository.genericService.GenericServiceImpl;
+import com.senescyt.app.service.genericService.GenericService;
+import com.senescyt.app.service.genericService.GenericServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService extends GenericServiceImpl<Usuario, Integer> implements GenericService<Usuario, Integer> {
+public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements GenericService<Usuario, Long> {
 
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     public Usuario getByUsuarioOrEmail(String nombreOrEmail) {
@@ -17,7 +19,7 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     }
 
     @Override
-    public CrudRepository<Usuario, Integer> getDao() {
+    public CrudRepository<Usuario, Long> getDao() {
         return usuarioRepository;
     }
 }

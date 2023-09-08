@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    @Query(value = "SELECT * FROM usuario u, persona p WHERE u.usu_nombre_usuario = :usuario OR p.per_correo = :email", nativeQuery = true)
+    @Query(value = "SELECT * FROM usuario u, Rol p WHERE u.usu_nombre_usuario = :usuario OR p.per_correo = :email", nativeQuery = true)
     public Usuario findByUsernameOrEmail(@Param("usuario") String usuario, @Param("email") String email);
 
     @Query(value = "SELECT COUNT(*) FROM usuario WHERE usu_nombre_usuario = :usuario", nativeQuery = true)

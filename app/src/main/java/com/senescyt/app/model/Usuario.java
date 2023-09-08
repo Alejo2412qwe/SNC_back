@@ -4,17 +4,13 @@
  */
 package com.senescyt.app.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -63,11 +59,6 @@ public class Usuario implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "usuIdHuella")
-    private int usuIdHuella;
-
-    @Getter
-    @Setter
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
@@ -75,11 +66,16 @@ public class Usuario implements Serializable {
     @Setter
     @OneToOne
     @JoinColumn(name = "usuPerId")
-    private Persona usuPerId;
+    private Rol usuPerId;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuIdHuella")
+    private List<Asistencia> usuIdHuella;
+
 }
