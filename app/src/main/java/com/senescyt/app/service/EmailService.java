@@ -29,15 +29,7 @@ public class EmailService {
     @Value("${mail.urlFront}")
     private String urlFront;
 
-    public void sendEmail() {
-        SimpleMailMessage message = new SimpleMailMessage();
-
-
-        javaMailSender.send(message);
-
-    }
-
-    public void sendEmailTemplate(EmailValues valores) {
+    public void sendEmail(EmailValues valores) {
 
         MimeMessage message = javaMailSender.createMimeMessage();
         try {

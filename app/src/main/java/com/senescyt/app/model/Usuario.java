@@ -63,6 +63,11 @@ public class Usuario implements Serializable {
 
     @Getter
     @Setter
+    @Column(name = "usuIdHuella")
+    private int usuIdHuella;
+
+    @Getter
+    @Setter
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
