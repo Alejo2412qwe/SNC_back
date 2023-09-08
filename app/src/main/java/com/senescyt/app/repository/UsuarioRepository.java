@@ -13,6 +13,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     public Usuario findByUsernameOrEmail(@Param("usuario") String usuario, @Param("email") String email);
 
     @Query(value = "SELECT * FROM usuario WHERE usu_nombre_usuario = :usuario AND usu_contrasena = :password", nativeQuery = true)
-    public Usuario login(@Param("usuario") String usuario, @Param("password") String password);
+    public boolean login(@Param("usuario") String usuario, @Param("password") String password);
 
 }
