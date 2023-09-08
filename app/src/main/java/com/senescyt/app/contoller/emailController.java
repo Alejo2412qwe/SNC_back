@@ -18,6 +18,6 @@ public class emailController {
     @PostMapping("/send-email")
     public ResponseEntity<?> sendEmailTemplate(@RequestBody EmailValues values) {
         emailService.sendEmail(values);
-        return new ResponseEntity<>(new Mensaje(), HttpStatus.OK);
+        return new ResponseEntity<>("Correo enviado exitosamente", HttpStatus.OK);
     }
 }
