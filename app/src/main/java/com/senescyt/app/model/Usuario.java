@@ -53,6 +53,11 @@ public class Usuario implements Serializable {
 
     @Getter
     @Setter
+    @Column(name = "usuTokenPassword")
+    private String usuTokenPassword;
+
+    @Getter
+    @Setter
     @Column(name = "usuEstado")
     private int usuEstado;
 
