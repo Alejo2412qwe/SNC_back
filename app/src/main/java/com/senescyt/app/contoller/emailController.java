@@ -9,20 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/email")
+@CrossOrigin
 public class emailController {
 
     @Autowired
     EmailService emailService;
 
-    @GetMapping("/send")
-    public ResponseEntity<?> sendEmail() {
-        emailService.sendEmail();
-        return new ResponseEntity<>("Correo enviado con exito", HttpStatus.OK);
-    }
-
-    @PostMapping("/sendHtml")
-    public ResponseEntity<?> sendEmailTemplate(@RequestBody EmailValues valores) {
-        emailService.sendEmailTemplate(valores);
-        return new ResponseEntity<>("Correo con plantilla enviado con exito", HttpStatus.OK);
+    @PostMapping("/send-email")
+    public ResponseEntity<?> sendEmailTemplate(@RequestBody EmailValues values) {
+        emailService.sendEmail(values);
+        return new ResponseEntity<>(new Mensaje(), HttpStatus.OK);
     }
 }
