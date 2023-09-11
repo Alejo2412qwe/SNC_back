@@ -25,10 +25,11 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
         return usuarioRepository;
     }
 
+    public Usuario findByPersonaCorreo(String email){
+        return usuarioRepository.findByPersonaCorreo(email);
+    }
 
-
-    @Override
-    public Usuario findById(Integer integer) {
-        return super.findById(integer);
+    public Usuario findByUsuTokenPassword(String token){
+        return  usuarioRepository.findByUsuTokenPassword(token);
     }
 }

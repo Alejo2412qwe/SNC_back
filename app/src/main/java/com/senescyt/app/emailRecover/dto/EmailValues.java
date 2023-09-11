@@ -1,4 +1,4 @@
-package com.senescyt.app.contoller.dto;
+package com.senescyt.app.emailRecover.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

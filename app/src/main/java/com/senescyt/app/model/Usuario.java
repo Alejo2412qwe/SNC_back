@@ -66,7 +66,7 @@ public class Usuario implements Serializable {
     @Setter
     @OneToOne
     @JoinColumn(name = "usuPerId")
-    private Rol usuPerId;
+    private Persona usuPerId;
 
     @Getter
     @Setter
