@@ -22,4 +22,12 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
     public CrudRepository<Usuario, Long> getDao() {
         return usuarioRepository;
     }
+
+    public Usuario findByPersonaCorreo(String email){
+        return usuarioRepository.findByPersonaCorreo(email);
+    }
+
+    public Usuario findByUsuTokenPassword(String token){
+        return  usuarioRepository.findByUsuTokenPassword(token);
+    }
 }
