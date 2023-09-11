@@ -2,13 +2,18 @@ package com.senescyt.app.service;
 
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.repository.RolRepository;
+import com.senescyt.app.security.enums.RolNombre;
 import com.senescyt.app.service.genericService.GenericService;
 import com.senescyt.app.service.genericService.GenericServiceImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@Transactional
 public class RolService extends GenericServiceImpl<Rol, Long> implements GenericService<Rol, Long> {
 
     @Autowired
@@ -17,6 +22,10 @@ public class RolService extends GenericServiceImpl<Rol, Long> implements Generic
     @Override
     public CrudRepository<Rol, Long> getDao() {
         return rolRepository;
+    }
+
+    public Optional<Rol> getByRolNombre(RolNombre rolNombre){
+        return rolRepository.findByRolNombre(rolNombre);
     }
 
 }
