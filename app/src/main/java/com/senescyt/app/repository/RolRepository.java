@@ -5,14 +5,21 @@
 package com.senescyt.app.repository;
 
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.Usuario;
+import com.senescyt.app.security.enums.RolNombre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  *
  * @author ALEJO PC
  */
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Integer> {
+public interface RolRepository extends JpaRepository<Rol, Long> {
 
+    Optional<Rol> findByRolNombre(RolNombre rolNombre);
+
+    boolean existsByUsuNombreUsuario(String usuNombreUsuario);
 }

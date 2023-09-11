@@ -7,6 +7,8 @@ import com.senescyt.app.repository.genericService.GenericServiceImpl;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService extends GenericServiceImpl<Usuario, Integer> implements GenericService<Usuario, Integer> {
 
@@ -19,5 +21,12 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     @Override
     public CrudRepository<Usuario, Integer> getDao() {
         return usuarioRepository;
+    }
+
+
+
+    @Override
+    public Usuario findById(Integer integer) {
+        return super.findById(integer);
     }
 }
