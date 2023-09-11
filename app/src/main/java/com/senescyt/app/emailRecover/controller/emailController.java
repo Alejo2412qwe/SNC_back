@@ -1,7 +1,7 @@
-package com.senescyt.app.contoller;
+package com.senescyt.app.emailRecover.controller;
 
-import com.senescyt.app.contoller.dto.EmailValues;
-import com.senescyt.app.service.EmailService;
+import com.senescyt.app.emailRecover.dto.EmailValues;
+import com.senescyt.app.emailRecover.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

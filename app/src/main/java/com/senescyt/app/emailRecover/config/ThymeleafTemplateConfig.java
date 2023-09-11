@@ -1,4 +1,4 @@
-package com.senescyt.app.config;
+package com.senescyt.app.emailRecover.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
