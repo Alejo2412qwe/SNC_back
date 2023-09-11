@@ -6,19 +6,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Optional<Usuario> findByUsuNombreUsuario(String usuNombreUsuario);
-
-    boolean existsByUsuNombreUsuario(String usuNombreUsuario);
-
-    @Query(value = "SELECT * FROM usuario u, persona p WHERE u.usu_nombre_usuario = :usuario OR p.per_correo = :email", nativeQuery = true)
+    @Query(value = "SELECT * FROM usuario u, Rol p WHERE u.usu_nombre_usuario = :usuario OR p.per_correo = :email", nativeQuery = true)
     public Usuario findByUsernameOrEmail(@Param("usuario") String usuario, @Param("email") String email);
 
+    @Query(value = "SELECT COUNT(*) FROM usuario WHERE usu_nombre_usuario = :usuario", nativeQuery = true)
+    int usuarioUnico(@Param("usuario") String usuario);
+
     @Query(value = "SELECT * FROM usuario WHERE usu_nombre_usuario = :usuario AND usu_contrasena = :password", nativeQuery = true)
-    public boolean login(@Param("usuario") String usuario, @Param("password") String password);
+    public Usuario login(@Param("usuario") String usuario, @Param("password") String password);
 
 }

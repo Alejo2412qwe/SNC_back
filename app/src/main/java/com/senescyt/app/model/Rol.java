@@ -16,13 +16,14 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author ALEJO PC
  */
 @Entity
-@Data
 @Table(name = "Rol")
 public class Rol implements Serializable {
 
@@ -33,14 +34,20 @@ public class Rol implements Serializable {
     /**
      *
      */
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rolId")
     private Long rolId;
 
+    @Getter
+    @Setter
     @Column(name = "rolNombre")
     private String rolNombre;
 
+    @Getter
+    @Setter
     @Column(name = "rolFechaRegistro")
     private Timestamp rolFechaRegistro;
 

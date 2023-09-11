@@ -1,6 +1,8 @@
 package com.senescyt.app.service;
 
+import com.senescyt.app.model.Asistencia;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.repository.AsistenciaRepository;
 import com.senescyt.app.repository.RolRepository;
 import com.senescyt.app.service.genericService.GenericService;
 import com.senescyt.app.service.genericService.GenericServiceImpl;
@@ -9,14 +11,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RolService extends GenericServiceImpl<Rol, Long> implements GenericService<Rol, Long> {
+public class AsistenciaService extends GenericServiceImpl<Asistencia, Long> implements GenericService<Asistencia, Long> {
 
     @Autowired
-    private RolRepository rolRepository;
+    public AsistenciaRepository asistenciaRepository;
 
     @Override
-    public CrudRepository<Rol, Long> getDao() {
-        return rolRepository;
+    public CrudRepository<Asistencia, Long> getDao() {
+        return asistenciaRepository;
     }
-
 }
