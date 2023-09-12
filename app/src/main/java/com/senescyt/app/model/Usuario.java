@@ -74,8 +74,4 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuIdHuella")
-    private List<Asistencia> usuIdHuella;
-
 }

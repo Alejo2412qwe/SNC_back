@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senescyt.app.emailRecover.dto.CambiarContra;
 import com.senescyt.app.emailRecover.dto.EmailValues;
 import com.senescyt.app.emailRecover.message.Message;
-import com.senescyt.app.emailRecover.service.EmailServiceImpl;
+import com.senescyt.app.emailRecover.dto.service.EmailServiceImpl;
 import com.senescyt.app.model.Usuario;
 import com.senescyt.app.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public class emailController {
 
     @Autowired
-    EmailServiceImpl emailService;
+    private EmailServiceImpl emailService;
 
     @Value("${spring.mail.username}")
     private String emailFrom;
@@ -51,7 +51,7 @@ public class emailController {
             values.setToken(tokenPassword);
             usuario.setUsuTokenPassword(tokenPassword);
 
-            if(emailService.sendEmail(values) == true) {
+            if(emailService.sendEmail(values)) {
                 usuarioService.save(usuario);
                 String responseBody = objectMapper.writeValueAsString(Message.SUCCESSFUL_200);
                 return ResponseEntity.status(HttpStatus.OK).body(responseBody);
