@@ -18,5 +18,4 @@ import java.util.Optional;
 @Repository
 public interface RolRepository extends JpaRepository<Rol, Long> {
 
-    boolean existsByUsuNombreUsuario(String usuNombreUsuario);
 }
