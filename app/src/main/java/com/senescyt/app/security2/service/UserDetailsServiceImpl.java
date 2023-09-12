@@ -1,7 +1,7 @@
-package com.senescyt.app.security.service;
+package com.senescyt.app.security2.service;
 
 import com.senescyt.app.model.Usuario;
-import com.senescyt.app.security.entity.UsuarioPrincipal;
+import com.senescyt.app.security2.entity.UsuarioPrincipal;
 import com.senescyt.app.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

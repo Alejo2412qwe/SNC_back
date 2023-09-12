@@ -1,4 +1,4 @@
-package com.senescyt.app.security.repository;
+package com.senescyt.app.security2.repository;
 
 import com.senescyt.app.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;

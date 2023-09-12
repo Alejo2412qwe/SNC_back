@@ -1,18 +1,13 @@
-package com.senescyt.app.security.entity;
+package com.senescyt.app.security2.entity;
 
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.model.Usuario;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 

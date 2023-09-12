@@ -5,8 +5,7 @@
 package com.senescyt.app.repository;
 
 import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.Usuario;
-import com.senescyt.app.security.enums.RolNombre;
+import com.senescyt.app.security2.enums.RolNombre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
