@@ -26,10 +26,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM usuario WHERE usu_token_password =: token",nativeQuery = true)
     public Usuario findByUsuTokenPassword(@Param("token") String token);
 
-    Optional<Usuario> findByUsuNombreUsuario(String usuNombreUsuario);
-
-    boolean existsByUsuNombreUsuario(String usuNombreUsuario);
-
 
 
 }
