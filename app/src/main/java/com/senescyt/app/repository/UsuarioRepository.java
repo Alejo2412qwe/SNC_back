@@ -20,8 +20,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(value = "SELECT * FROM usuario WHERE usu_nombre_usuario = :usuario AND usu_contrasena = :password", nativeQuery = true)
     public Usuario login(@Param("usuario") String usuario, @Param("password") String password);
 
-    @Query(value = "SELECT u.* FROM persona p, usuario u WHERE p.per_id = u.usu_per_id AND p.per_correo =: email",nativeQuery = true)
-    public Usuario findByPersonaCorreo(@Param("email") String email);
+    @Query(value = "SELECT * FROM usuario WHERE usu_correo =: email",nativeQuery = true)
+    public Usuario findByUsuCorreo(@Param("email") String email);
 
     @Query(value = "SELECT * FROM usuario WHERE usu_token_password =: token",nativeQuery = true)
     public Usuario findByUsuTokenPassword(@Param("token") String token);

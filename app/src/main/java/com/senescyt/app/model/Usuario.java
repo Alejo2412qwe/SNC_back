@@ -49,6 +49,11 @@ public class Usuario implements Serializable {
 
     @Getter
     @Setter
+    @Column(name = "usuCorreo")
+    private String usuCorreo;
+
+    @Getter
+    @Setter
     @Column(name = "usuTokenPassword")
     private String usuTokenPassword;
 
@@ -73,9 +78,5 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuIdHuella")
-    private List<Asistencia> usuIdHuella;
 
 }

@@ -44,7 +44,6 @@ public class PersonaController {
 
                 persona.setPerApellido(p.getPerApellido());
                 persona.setPerCedula(p.getPerCedula());
-                persona.setPerCorreo(p.getPerCorreo());
                 persona.setPerDireccion(p.getPerDireccion());
                 persona.setPerTelefono(p.getPerTelefono());
                 persona.setPerNombre(p.getPerNombre());
