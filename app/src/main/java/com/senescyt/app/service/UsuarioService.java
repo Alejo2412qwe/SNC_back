@@ -35,11 +35,4 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
         return  usuarioRepository.findByUsuTokenPassword(token);
     }
 
-    public Optional<Usuario> getByUsuNombreUsuario(String nombreUsuario){
-        return usuarioRepository.findByUsuNombreUsuario(nombreUsuario);
-    }
-
-    public boolean existsByNombreUsuario(String nombreUsuario){
-        return  usuarioRepository.existsByUsuNombreUsuario(nombreUsuario);
-    }
 }
