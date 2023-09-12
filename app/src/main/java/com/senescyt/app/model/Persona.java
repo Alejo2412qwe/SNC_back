@@ -55,11 +55,6 @@ public class Persona {
 
     @Getter
     @Setter
-    @Column(name = "perCorreo")
-    private String perCorreo;
-
-    @Getter
-    @Setter
     @Column(name = "perDireccion")
     private String perDireccion;
 

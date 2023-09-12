@@ -24,7 +24,7 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
     }
 
     public Usuario findByPersonaCorreo(String email){
-        return usuarioRepository.findByPersonaCorreo(email);
+        return usuarioRepository.findByUsuCorreo(email);
     }
 
     public Usuario findByUsuTokenPassword(String token){

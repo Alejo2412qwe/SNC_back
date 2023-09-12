@@ -43,7 +43,7 @@ public class emailController {
             }
             EmailValues values = new EmailValues();
             values.setEmailFrom(emailFrom);
-            values.setEmailTo(usuario.getUsuPerId().getPerCorreo());
+            values.setEmailTo(usuario.getUsuCorreo());
             values.setUserName(usuario.getUsuPerId().getPerNombre() + ' ' + usuario.getUsuPerId().getPerApellido());
             values.setSubject("RESTAURAR CONSTRASEÑA");
             UUID uuid = UUID.randomUUID();
