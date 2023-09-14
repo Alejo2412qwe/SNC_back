@@ -1,4 +1,4 @@
-package com.senescyt.app.Auth.Demo;
+package com.senescyt.app.Security.Demo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
