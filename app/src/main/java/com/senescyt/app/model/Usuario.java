@@ -79,4 +79,24 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
+    @Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "funId", referencedColumnName = "funId")
+    private Funciones funId;
+
+    @Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "insId", referencedColumnName = "insId")
+    private Institucion insId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<CargoUsuario> listaCargoUsuarios;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<Asistencia> listaAsistencia;
+
 }
