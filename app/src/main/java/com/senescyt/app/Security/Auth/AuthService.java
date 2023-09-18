@@ -5,6 +5,8 @@ import com.senescyt.app.model.Usuario;
 import com.senescyt.app.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +14,37 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UsuarioRepository repository;
+    private final UsuarioRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsuNombreUsuario(), request.getUsuContrasena()));
+        UserDetails user=userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()).orElseThrow();
+//        System.out.println("PASSS = "+userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()));
 
-        return null;
+        String token=jwtService.getToken(user);
+
+        return AuthResponse.builder()
+                .token(token)
+                .build();
+
     }
 
     public AuthResponse register(RegisterRequest request) {
-
         Usuario user = Usuario.builder()
-                .usuContrasena(request.getUsuContrasena())
-                .usuContrasena(request.getUsuContrasena())
+                .usuNombreUsuario(request.getUsuNombreUsuario())
+                .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
                 .usuCorreo(request.getUsuCorreo())
                 .rolId(request.rol)
                 .build();
 
-        repository.save(user);
+        userRepository.save(user);
+
         return AuthResponse.builder()
-                .token(null)
                 .token(jwtService.getToken(user))
                 .build();
+
     }
 }
