@@ -2,12 +2,18 @@ package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Institucion")
 public class Institucion implements Serializable {
@@ -19,23 +25,13 @@ public class Institucion implements Serializable {
     /**
      *
      */
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "insId")
     private Long insId;
 
-    @Getter
-    @Setter
     private String insNombre;
-
-    @Getter
-    @Setter
     private String intDireccion;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "tipId", referencedColumnName = "tipId")
     private TipoInstitucion tipId;
