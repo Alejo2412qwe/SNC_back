@@ -26,10 +26,7 @@ import lombok.Setter;
  *
  * @author ALEJO PC
  */
-@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
@@ -71,13 +68,7 @@ public class Usuario implements UserDetails {
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
-    private String usuNombreUsuario;
-    private String usuContrasena;
     private Long usuIdHuella;
-    private String usuCorreo;
-    private String usuTokenPassword;
-    private int usuEstado;
-    private Timestamp usuFechaRegistro;
 
     @OneToOne
     @JoinColumn(name = "usuPerId")
