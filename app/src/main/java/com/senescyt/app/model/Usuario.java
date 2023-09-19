@@ -11,13 +11,19 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author ALEJO PC
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable {
@@ -29,69 +35,31 @@ public class Usuario implements Serializable {
     /**
      *
      */
-
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
     private Long usuId;
 
-    @Getter
-    @Setter
-    @Column(name = "usuNombreUsuario")
     private String usuNombreUsuario;
-
-    @Getter
-    @Setter
-    @Column(name = "usuContrasena")
     private String usuContrasena;
-
-    @Getter
-    @Setter
-    @Column(name = "usuIdHuella")
     private Long usuIdHuella;
-
-    @Getter
-    @Setter
-    @Column(name = "usuCorreo")
     private String usuCorreo;
-
-    @Getter
-    @Setter
-    @Column(name = "usuTokenPassword")
     private String usuTokenPassword;
-
-    @Getter
-    @Setter
-    @Column(name = "usuEstado")
     private int usuEstado;
-
-    @Getter
-    @Setter
-    @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
-    @Getter
-    @Setter
     @OneToOne
     @JoinColumn(name = "usuPerId")
     private Persona usuPerId;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "funId", referencedColumnName = "funId")
     private Funciones funId;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "insId", referencedColumnName = "insId")
     private Institucion insId;
