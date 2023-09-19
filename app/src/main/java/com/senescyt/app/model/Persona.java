@@ -8,13 +8,20 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  *
  * @author ALEJO PC
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Persona")
 public class Persona implements Serializable {
@@ -26,49 +33,22 @@ public class Persona implements Serializable {
     /**
      *
      */
-
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "perId")
     private Long perId;
 
-    @Getter
-    @Setter
     @Column(unique = true, name = "perCedula")
     private String perCedula;
 
-    @Getter
-    @Setter
-    @Column(name = "perNombre")
     private String perNombre;
-
-    @Getter
-    @Setter
-    @Column(name = "perApellido")
     private String perApellido;
-
-    @Getter
-    @Setter
-    @Column(name = "perDireccion")
     private String perDireccion;
-
-    @Getter
-    @Setter
-    @Column(name = "perTelefono")
     private String perTelefono;
-
-    @Getter
-    @Setter
-    @Column(name = "perFechaNacimiento")
     private Date perFechaNacimiento;
 
     @OneToOne(mappedBy = "usuPerId")
     private Usuario usuario;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "ciuId", referencedColumnName = "ciuId")
     private Ciudad ciuId;

@@ -2,13 +2,15 @@ package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Ciudad")
 @Data
@@ -23,14 +25,10 @@ public class Ciudad implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ciuId")
     private Long ciuId;
 
-    @Column(name = "ciuNombre")
     private String ciuNombre;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "proId", referencedColumnName = "proId")
     private Provincia proId;

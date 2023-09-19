@@ -2,12 +2,18 @@ package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Procesos")
 public class Procesos /*zona*/ implements Serializable {
@@ -19,17 +25,11 @@ public class Procesos /*zona*/ implements Serializable {
     /**
      *
      */
-
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "procId")
     private Long procId;
 
-    @Getter
-    @Setter
-    @Column(name = "procNombre")
     private String procNombre;
 
     @JsonIgnore

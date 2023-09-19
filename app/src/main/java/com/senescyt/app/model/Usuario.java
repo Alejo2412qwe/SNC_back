@@ -14,10 +14,13 @@ import java.util.List;
 
 import lombok.*;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -27,6 +30,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements UserDetails {
@@ -34,7 +41,7 @@ public class Usuario implements UserDetails {
     /**
      *
      */
-//    private static final long serialVersionUID = 1L;
+    // private static final long serialVersionUID = 1L;
     /**
      *
      */
@@ -61,10 +68,16 @@ public class Usuario implements UserDetails {
     @Column(name = "usuEstado")
     private int usuEstado;
 
-
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
+    private String usuNombreUsuario;
+    private String usuContrasena;
+    private Long usuIdHuella;
+    private String usuCorreo;
+    private String usuTokenPassword;
+    private int usuEstado;
+    private Timestamp usuFechaRegistro;
 
     @OneToOne
     @JoinColumn(name = "usuPerId")
@@ -74,11 +87,18 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((rolId.getRolNombre())));
     }
+
+    @ManyToOne
+    @JoinColumn(name = "funId", referencedColumnName = "funId")
+    private Funciones funId;
+
+    @ManyToOne
+    @JoinColumn(name = "insId", referencedColumnName = "insId")
+    private Institucion insId;
 
     @Override
     public String getPassword() {
@@ -89,7 +109,6 @@ public class Usuario implements UserDetails {
     public String getUsername() {
         return this.usuNombreUsuario;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
