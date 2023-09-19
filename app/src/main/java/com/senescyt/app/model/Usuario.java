@@ -7,6 +7,7 @@ package com.senescyt.app.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Usuario implements Serializable {
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 1L;
     /**
      *
@@ -71,5 +73,13 @@ public class Usuario implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "usuId")
     private List<Asistencia> listaAsistencia;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<Permisos> listaPermisos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<Vacaciones> listaVacaciones;
 
 }
