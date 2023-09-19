@@ -10,8 +10,13 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,13 +26,13 @@ import lombok.Setter;
  *
  * @author ALEJO PC
  */
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails {
 
     /**
      *
@@ -37,17 +42,31 @@ public class Usuario implements Serializable {
     /**
      *
      */
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
     private Long usuId;
 
+    @Basic
+    @Column(nullable = false)
     private String usuNombreUsuario;
+
+    @Basic
+    @Column(nullable = false)
     private String usuContrasena;
-    private Long usuIdHuella;
+
+    @Column(name = "usuCorreo")
     private String usuCorreo;
+
+    @Column(name = "usuTokenPassword")
     private String usuTokenPassword;
+
+    @Column(name = "usuEstado")
     private int usuEstado;
+
+
+    @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
     @OneToOne
@@ -57,7 +76,27 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
+  
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority((rolId.getRolNombre())));
+    }
 
+    @Override
+    public String getPassword() {
+        return this.getUsuContrasena();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.usuNombreUsuario;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
     @ManyToOne
     @JoinColumn(name = "funId", referencedColumnName = "funId")
     private Funciones funId;
@@ -66,13 +105,15 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "insId", referencedColumnName = "insId")
     private Institucion insId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuId")
-    private List<CargoUsuario> listaCargoUsuarios;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuId")
-    private List<Asistencia> listaAsistencia;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuId")
@@ -82,4 +123,8 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuId")
     private List<Vacaciones> listaVacaciones;
 
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
