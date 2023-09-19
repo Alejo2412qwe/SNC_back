@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "CargoUsuario")
-@Data
 public class CargoUsuario implements Serializable {
 
     /**

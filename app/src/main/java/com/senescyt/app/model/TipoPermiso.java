@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -14,19 +16,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Tipo_Formulario")
-public class Tipo_Formulario {
+@Table(name = "TipoPermiso")
+public class TipoPermiso implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_TipoFormulario;
+    private Long tiPeId;
 
-    private String nombre_tpform;
-    private String documento_tpform;
+    private String tiPeNombre;
+    private boolean tiPeEstado;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "id_TipoFormulario")
-    private List<Permisos> listaPermisos;
+    @ManyToOne
+    @JoinColumn(name = "permId", referencedColumnName = "permId")
+    private Permisos permId;
 }

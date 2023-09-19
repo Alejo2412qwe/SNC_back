@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -15,19 +17,20 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Periodo")
-public class Periodo {
+public class Periodo implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_periodo;
+    private Long periId;
 
-    private String periodo_actual;
-    private String periodo_anterior;
+    private String periActual;
+    private String periAnterior;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "id_periodo")
-    private List<Vacaciones> listaVacaciones;
+    @ManyToOne
+    @JoinColumn(name = "vacId", referencedColumnName = "vacId")
+    private Vacaciones vacId;
 
 }

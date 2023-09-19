@@ -7,6 +7,7 @@ package com.senescyt.app.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -112,6 +113,14 @@ public class Usuario implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<Permisos> listaPermisos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId")
+    private List<Vacaciones> listaVacaciones;
 
     @Override
     public boolean isEnabled() {

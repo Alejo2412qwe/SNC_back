@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,30 +18,32 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Permisos")
-public class Permisos {
+public class Permisos implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_permiso;
+    private Long permId;
 
-    private String documento_perm;
-    private String tipo_perm;
-    private Date fecha_perm;
-    private boolean estado_perm;
-    private String condicion_perm;
-    private int n_horas_perm;
-
-    @ManyToOne
-    @JoinColumn(name = "id_tpFormulario", referencedColumnName = "id_tpFormulario")
-    private Tipo_Formulario id_tpFormulario;
+    private String permDocumento;
+    private String permTipo;
+    private Date permFecha;
+    private boolean permEstado;
+    private String permCondicion;
+    private int permNumHoras;
 
     @ManyToOne
-    @JoinColumn(name = "id_tpFormulario", referencedColumnName = "id_tpFormulario")
-    private Tipo_Permiso id_tpPermiso;
+    @JoinColumn(name = "usuId", referencedColumnName = "usuId")
+    private Usuario usuId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id_permiso")
-    private List<Usuario> listaUsuarios;
+    @OneToMany(mappedBy = "permId")
+    private List<TipoFormulario> listaTipoFormulario;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "permId")
+    private List<TipoPermiso> listTipoPermiso;
+
 }
