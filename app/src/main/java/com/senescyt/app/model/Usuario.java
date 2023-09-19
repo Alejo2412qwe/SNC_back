@@ -103,14 +103,6 @@ public class Usuario implements UserDetails {
         return true;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "funId", referencedColumnName = "funId")
-    private Funciones funId;
-
-    @ManyToOne
-    @JoinColumn(name = "insId", referencedColumnName = "insId")
-    private Institucion insId;
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
