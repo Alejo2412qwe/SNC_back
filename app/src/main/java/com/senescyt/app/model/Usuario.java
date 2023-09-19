@@ -42,7 +42,6 @@ public class Usuario implements UserDetails {
     /**
      *
      */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
@@ -67,8 +66,6 @@ public class Usuario implements UserDetails {
 
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
-
-    private Long usuIdHuella;
 
     @OneToOne
     @JoinColumn(name = "usuPerId")
@@ -105,6 +102,14 @@ public class Usuario implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "funId", referencedColumnName = "funId")
+    private Funciones funId;
+
+    @ManyToOne
+    @JoinColumn(name = "insId", referencedColumnName = "insId")
+    private Institucion insId;
 
     @Override
     public boolean isAccountNonLocked() {
