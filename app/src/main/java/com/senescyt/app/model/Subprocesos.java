@@ -2,12 +2,18 @@ package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Subprocesos")
 public class Subprocesos /*departamento*/ implements Serializable {
@@ -20,20 +26,12 @@ public class Subprocesos /*departamento*/ implements Serializable {
      *
      */
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subId")
     private Long subId;
 
-    @Getter
-    @Setter
-    @Column(name = "subNombre")
     private String subNombre;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "procId", referencedColumnName = "procId")
     private Procesos procId;

@@ -1,11 +1,17 @@
 package com.senescyt.app.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Horarios")
 public class Horarios implements Serializable {
@@ -17,36 +23,14 @@ public class Horarios implements Serializable {
     /**
      *
      */
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "horId")
     private Long horId;
 
-    @Getter
-    @Setter
-    @Column(name = "horNumHoras")
     private String horNumHoras;
-
-    @Getter
-    @Setter
-    @Column(name = "horHoraIngreso")
     private String horHoraIngreso;
-
-    @Getter
-    @Setter
-    @Column(name = "horHoraSalida")
     private String horHoraSalida;
-
-    @Getter
-    @Setter
-    @Column(name = "horHoraAlmuerzoInicio")
     private String horHoraAlmuerzoInicio;
-
-    @Getter
-    @Setter
-    @Column(name = "horHoraAlmuerzoFin")
     private String horHoraAlmuerzoFin;
 
 }

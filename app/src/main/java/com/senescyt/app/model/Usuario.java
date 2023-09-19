@@ -13,11 +13,13 @@ import java.util.Collection;
 import java.util.List;
 
 import lombok.*;
-
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -38,7 +40,7 @@ public class Usuario implements UserDetails {
     /**
      *
      */
-
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
@@ -65,7 +67,6 @@ public class Usuario implements UserDetails {
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
-
     @OneToOne
     @JoinColumn(name = "usuPerId")
     private Persona usuPerId;
@@ -73,8 +74,7 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
-
-
+  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((rolId.getRolNombre())));
@@ -95,6 +95,13 @@ public class Usuario implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+    @ManyToOne
+    @JoinColumn(name = "funId", referencedColumnName = "funId")
+    private Funciones funId;
+
+    @ManyToOne
+    @JoinColumn(name = "insId", referencedColumnName = "insId")
+    private Institucion insId;
 
     @Override
     public boolean isAccountNonLocked() {
