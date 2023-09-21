@@ -38,12 +38,12 @@ public class Permisos implements Serializable {
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "permId")
-    private List<TipoFormulario> listaTipoFormulario;
+    @ManyToOne
+    @JoinColumn(name = "tiFoId", referencedColumnName = "tiFoId")
+    private TipoFormulario tiFoId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "permId")
-    private List<TipoPermiso> listTipoPermiso;
+    @ManyToOne
+    @JoinColumn(name = "tiPeId", referencedColumnName = "tiPeId")
+    private TipoPermiso tiPeId;
 
 }

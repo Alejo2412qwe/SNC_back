@@ -29,7 +29,8 @@ public class TipoFormulario implements Serializable {
     private String tiFoNombre;
     private String tiFoDocumento;
 
-    @ManyToOne
-    @JoinColumn(name = "permId", referencedColumnName = "permId")
-    private Permisos permId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "tiFoId")
+    private List<Permisos> listaPermisos;
 }

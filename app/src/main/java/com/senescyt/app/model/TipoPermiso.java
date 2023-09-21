@@ -29,7 +29,7 @@ public class TipoPermiso implements Serializable {
     private String tiPeNombre;
     private boolean tiPeEstado;
 
-    @ManyToOne
-    @JoinColumn(name = "permId", referencedColumnName = "permId")
-    private Permisos permId;
+    @JsonIgnore
+    @OneToMany(mappedBy = "tiPeId")
+    private List<TipoPermiso> listPermisos;
 }
