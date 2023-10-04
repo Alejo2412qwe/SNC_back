@@ -122,6 +122,10 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuId")
     private List<Vacaciones> listaVacaciones;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuId", cascade = CascadeType.ALL)
+    private List<Asistencia> listaAsistencia;
+
     @Override
     public boolean isEnabled() {
         return true;

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Asistencia")
+@Table(name = "asistencia")
 public class Asistencia implements Serializable {
 
     /**
@@ -44,6 +44,6 @@ public class Asistencia implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "estId", referencedColumnName = "estId")
-    private EstadoAsistencia estId;
+    private EstadoAsistencia estadoAsistencia;
 
 }

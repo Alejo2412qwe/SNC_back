@@ -34,6 +34,7 @@ public class EstadoAsistencia implements Serializable {
     private boolean estEstado;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "estId")
+    @OneToMany(mappedBy = "estadoAsistencia", cascade = CascadeType.ALL)
     private List<Asistencia> listaAsistencia;
+
 }

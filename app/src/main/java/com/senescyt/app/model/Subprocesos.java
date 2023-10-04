@@ -37,6 +37,6 @@ public class Subprocesos /*departamento*/ implements Serializable {
     private Procesos procId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "subId")
+    @OneToMany(mappedBy = "subId", cascade = CascadeType.ALL)
     private List<Asistencia> listaAsistencia;
 }
