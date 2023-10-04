@@ -6,25 +6,16 @@ package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
-import lombok.*;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
- *
  * @author ALEJO PC
  */
 @Builder
@@ -36,13 +27,6 @@ import lombok.Setter;
 @Table(name = "Usuario")
 public class Usuario implements UserDetails {
 
-    /**
-     *
-     */
-    // private static final long serialVersionUID = 1L;
-    /**
-     *
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
@@ -88,6 +72,10 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "insId", referencedColumnName = "insId")
     private Institucion insId;
+
+    @ManyToOne
+    @JoinColumn(name = "procId", referencedColumnName = "procId")
+    private Procesos procId;
 
     @Override
     public String getPassword() {

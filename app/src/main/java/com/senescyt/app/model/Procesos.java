@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class Procesos /*zona*/ implements Serializable {
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 1L;
     /**
      *
@@ -35,4 +37,8 @@ public class Procesos /*zona*/ implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "procId")
     private List<Subprocesos> listaSubprocesos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "procId")
+    private List<Usuario> listaUsuarios;
 }
