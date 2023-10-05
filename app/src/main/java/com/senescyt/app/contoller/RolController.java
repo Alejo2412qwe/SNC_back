@@ -18,7 +18,7 @@ import java.util.List;
  * @author ALEJO PC
  */
 
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/rol")
 public class RolController {
