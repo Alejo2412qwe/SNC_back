@@ -43,9 +43,6 @@ public class Usuario implements UserDetails {
     @Column(name = "usuCorreo")
     private String usuCorreo;
 
-    @Column(name = "usuTokenPassword")
-    private String usuTokenPassword;
-
     @Column(name = "usuEstado")
     private int usuEstado;
 
