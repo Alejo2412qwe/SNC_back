@@ -49,7 +49,6 @@ public class emailController {
             UUID uuid = UUID.randomUUID();
             String tokenPassword  = uuid.toString();
             values.setToken(tokenPassword);
-            usuario.setUsuTokenPassword(tokenPassword);
 
             if(emailService.sendEmail(values)) {
                 usuarioService.save(usuario);
@@ -80,7 +79,6 @@ public class emailController {
             }
 
             usuario.setUsuContrasena(dto.getPassword());
-            usuario.setUsuTokenPassword(null);
             usuarioService.save(usuario);
             return new ResponseEntity<>(objectMapper.writeValueAsString("SUCCESSFUL"), HttpStatus.OK);
         }catch (Exception e){
