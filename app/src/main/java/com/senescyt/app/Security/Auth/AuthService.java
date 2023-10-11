@@ -33,11 +33,15 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
+        System.out.println(request.toString()+"\n\n\n\n\n\n");
         Usuario user = Usuario.builder()
                 .usuNombreUsuario(request.getUsuNombreUsuario())
                 .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
                 .usuCorreo(request.getUsuCorreo())
-                .rolId(request.rol)
+                .usuEstado(request.getUsuEstado())
+                .usuFechaRegistro(request.getUsuFechaRegistro())
+                .usuPerId(request.getUsuPerId())
+                .rolId(request.getRolId())
                 .build();
 
         userRepository.save(user);
@@ -46,5 +50,15 @@ public class AuthService {
                 .token(jwtService.getToken(user))
                 .build();
 
+    }
+
+    public boolean usuarioValido(String user) {
+        int cont = userRepository.usuarioUnico(user.trim());
+
+        if (cont > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

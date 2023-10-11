@@ -31,6 +31,11 @@ public class RolController {
         return new ResponseEntity<>(rolService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Rol> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(rolService.findById(id), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Rol> create(@RequestBody Rol p) {
         return new ResponseEntity<>(rolService.save(p), HttpStatus.CREATED);

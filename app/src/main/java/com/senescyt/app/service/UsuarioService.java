@@ -30,6 +30,17 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
         return usuarioRepository.findByUsuCorreo(email);
     }
 
+    public boolean usuarioUnico(String user) {
+        int cont = usuarioRepository.usuarioUnico(user.trim());
+        System.out.println("user = "+ user+"  count = "+ cont+"\n\n\n\n\n");
+
+        if (cont > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public Usuario findByUsuTokenPassword(String token){
         return  usuarioRepository.findByUsuTokenPassword(token);
     }
