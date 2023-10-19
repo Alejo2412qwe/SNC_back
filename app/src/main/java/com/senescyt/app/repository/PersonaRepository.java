@@ -19,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonaRepository extends GenericRepository<Persona, Long> {
 
-    @Query(value = "SELECT COUNT(*) FROM Rol WHERE per_cedula = :cedulaRol", nativeQuery = true)
-    int contarCedulas(@Param("cedulaRol") String cedulaRol);
+    @Query(value = "SELECT COUNT(*) FROM `persona` WHERE per_cedula = :ci", nativeQuery = true)
+    int cedulaUnica(@Param("ci") String ci);
 }

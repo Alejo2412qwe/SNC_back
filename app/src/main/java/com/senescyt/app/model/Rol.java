@@ -43,6 +43,7 @@ public class Rol implements Serializable {
     private Long rolId;
 
     private String rolNombre;
+    private String rolDescripcion;
     private Timestamp rolFechaRegistro;
 
     @JsonIgnore

@@ -1,8 +1,8 @@
 INSERT INTO `rol`(`rol_id`, `rol_nombre`)
 VALUES (1, 'Administrador');
 
--- INSERT INTO `usuario`(`usu_contrasena`, `usu_nombre_usuario`)
--- VALUES ('1234', 'admin')
+-- INSERT INTO `usuario`(`usu_contrasena`, `usu_nombre_usuario`, `rol_id`)
+-- VALUES ('$2a$10$IzjZvnKqq2TYfKz2SpVS2eATn/a2ycRhlemswPYs5DG0OnsntANly', 'admin', 1);
 
 -- PROVINCIAS
 INSERT INTO provincia (pro_id,pro_nombre)

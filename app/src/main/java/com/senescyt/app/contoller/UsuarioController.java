@@ -1,5 +1,8 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.Security.Auth.AuthResponse;
+import com.senescyt.app.Security.Auth.AuthService;
+import com.senescyt.app.Security.Auth.RegisterRequest;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.model.Usuario;
 import com.senescyt.app.service.RolService;
@@ -18,17 +21,33 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    private final AuthService authService;
+    private RolService rolService;
+
+    public UsuarioController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @GetMapping("/read")
     public ResponseEntity<List<Usuario>> read() {
         return new ResponseEntity<>(usuarioService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/usuarioUnico")
+    public ResponseEntity<Boolean> usuarioUnico(@RequestParam String user) {
+        return new ResponseEntity<>(usuarioService.usuarioUnico(user), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Usuario> create(@RequestBody Usuario u) {
         return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
     }
+    @PostMapping(value = "register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request)
+    {
 
+        return ResponseEntity.ok(authService.register(request));
+    }
     @PutMapping("/update/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario u) {
         Usuario usuario = usuarioService.findById(id);

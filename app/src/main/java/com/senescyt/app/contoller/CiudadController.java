@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/Ciudad")
+@RequestMapping("/ciudad")
 public class CiudadController {
     @Autowired
     private CiudadService ciudadService;
@@ -20,6 +20,11 @@ public class CiudadController {
     @GetMapping("/read")
     public ResponseEntity<List<Ciudad>> read() {
         return new ResponseEntity<>(ciudadService.findByAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/ciudadByProv/{id}")
+    public ResponseEntity<List<Ciudad>> ciudadByProv(@PathVariable Long id) {
+        return new ResponseEntity<>(ciudadService.ciudadByProv(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")

@@ -31,6 +31,12 @@ public class PersonaController {
         return new ResponseEntity<>(personaService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/cedulaUnica")
+    public ResponseEntity<Boolean> cedulaUnica(@RequestParam String ci) {
+        return new ResponseEntity<>(personaService.cedulaUnica(ci), HttpStatus.OK);
+    }
+
+
     @PostMapping("/create")
     public ResponseEntity<Persona> create(@RequestBody Persona p) {
         return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);

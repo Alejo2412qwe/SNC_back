@@ -21,9 +21,11 @@ public class PersonaService extends GenericServiceImpl<Persona, Long> implements
         return personaRepository;
     }
 
-    public boolean siExisteCedula(String cedula) {
-        int cedulas = personaRepository.contarCedulas(cedula);
-        if (cedulas > 0) {
+
+    public boolean cedulaUnica(String ci) {
+        int cont = personaRepository.cedulaUnica(ci.trim());
+
+        if (cont > 0) {
             return false;
         } else {
             return true;
