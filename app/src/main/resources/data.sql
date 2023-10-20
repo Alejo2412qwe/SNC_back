@@ -1,5 +1,11 @@
 INSERT INTO `rol`(`rol_id`, `rol_nombre`)
 VALUES (1, 'Administrador');
+INSERT INTO `rol`(`rol_id`, `rol_nombre`)
+VALUES (2, 'Administrativo,');
+INSERT INTO `rol`(`rol_id`, `rol_nombre`)
+VALUES (3, 'Docente');
+INSERT INTO `rol`(`rol_id`, `rol_nombre`)
+VALUES (4, 'Funcionario,');
 
 -- INSERT INTO `usuario`(`usu_contrasena`, `usu_nombre_usuario`, `rol_id`)
 -- VALUES ('$2a$10$IzjZvnKqq2TYfKz2SpVS2eATn/a2ycRhlemswPYs5DG0OnsntANly', 'admin', 1);
