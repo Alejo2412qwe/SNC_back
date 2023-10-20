@@ -15,7 +15,6 @@ import java.util.Map;
 
 
 //servicio para el envio del correo de recuperacion de contrasena
-//video: https://www.youtube.com/watch?v=jd0OUoXPcS8&t=133s&ab_channel=LuigiCode
 @Service
 public class EmailServiceImpl implements EmailService{
 

@@ -30,6 +30,7 @@ public class TipoInstitucion implements Serializable {
     @Column(name = "tipId")
     private Long tipId;
 
+    @Column(name = "tipNombre")
     private String tipNombre;
 
     @JsonIgnore

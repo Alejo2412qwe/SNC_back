@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
  * @author ALEJO PC
  */
 @Getter
@@ -35,15 +34,21 @@ public class Persona implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "perId")
     private Long perId;
 
     @Column(unique = true, name = "perCedula")
     private String perCedula;
 
+    @Column(name = "perNombre")
     private String perNombre;
+    @Column(name = "perApellido")
     private String perApellido;
+    @Column(name = "perDireccion")
     private String perDireccion;
+    @Column(name = "perTelefono")
     private String perTelefono;
+    @Column(name = "perFechaNacimiento")
     private Date perFechaNacimiento;
 
     @OneToOne(mappedBy = "usuPerId")

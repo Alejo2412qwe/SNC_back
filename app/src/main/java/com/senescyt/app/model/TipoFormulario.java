@@ -24,9 +24,12 @@ public class TipoFormulario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tiFoId")
     private Long tiFoId;
 
+    @Column(name = "tiFoNombre")
     private String tiFoNombre;
+    @Column(name = "tiFoDocumento")
     private String tiFoDocumento;
 
     @ManyToOne

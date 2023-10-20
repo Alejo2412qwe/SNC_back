@@ -25,13 +25,20 @@ public class Permisos implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "permId")
     private Long permId;
 
+    @Column(name = "permDocumento")
     private String permDocumento;
+    @Column(name = "permTipo")
     private String permTipo;
+    @Column(name = "permFecha")
     private Date permFecha;
+    @Column(name = "permEstado")
     private boolean permEstado;
+    @Column(name = "permCondicion")
     private String permCondicion;
+    @Column(name = "permNumHoras")
     private int permNumHoras;
 
     @ManyToOne

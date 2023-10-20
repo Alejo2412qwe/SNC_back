@@ -25,12 +25,18 @@ public class Horarios implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "horId")
     private Long horId;
 
+    @Column(name = "horNumHoras")
     private String horNumHoras;
+    @Column(name = "horHoraIngreso")
     private String horHoraIngreso;
+    @Column(name = "horHoraSalida")
     private String horHoraSalida;
+    @Column(name = "horHoraAlmuerzoInicio")
     private String horHoraAlmuerzoInicio;
+    @Column(name = "horHoraAlmuerzoFin")
     private String horHoraAlmuerzoFin;
 
 }

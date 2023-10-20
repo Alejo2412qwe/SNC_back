@@ -24,6 +24,7 @@ public class CargoUsuario implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "causId")
     private Long causId;
 
     @ManyToOne

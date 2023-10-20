@@ -27,8 +27,10 @@ public class Funciones implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "funId")
     private Long funId;
 
+    @Column(name = "funNombre")
     private String funNombre;
 
     @JsonIgnore
