@@ -18,4 +18,8 @@ public class SubprocesoService extends GenericServiceImpl<Subprocesos, Long> imp
     public CrudRepository<Subprocesos, Long> getDao() {
         return subprocesosRepository;
     }
+
+    public Subprocesos getSubprocesosByProcId(Long idSubproceso){
+        return subprocesosRepository.getSubprocesosByProcId(idSubproceso);
+    }
 }

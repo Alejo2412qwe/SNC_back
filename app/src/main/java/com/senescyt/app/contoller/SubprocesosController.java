@@ -22,6 +22,12 @@ public class SubprocesosController {
         return new ResponseEntity<>(subprocesosService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getSubprocesos/{id}")
+    public ResponseEntity<Subprocesos> getSubprocesosByProcesosId(@PathVariable Long id) {
+        return new ResponseEntity<>(subprocesosService.getSubprocesosByProcId(id), HttpStatus.OK);
+    }
+
+
     @PostMapping("/create")
     public ResponseEntity<Subprocesos> create(@RequestBody Subprocesos p) {
         return new ResponseEntity<>(subprocesosService.save(p), HttpStatus.CREATED);
