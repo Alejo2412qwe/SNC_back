@@ -39,7 +39,6 @@ public class InstitucionController {
                 institucion.setInsNombre(p.getInsNombre());
                 institucion.setIntDireccion(p.getIntDireccion());
                 institucion.setTipId(p.getTipId());
-                institucion.setIntDireccion(p.getIntDireccion());
 
 
                 return new ResponseEntity<>(  institucionService.save(institucion), HttpStatus.CREATED);
@@ -53,7 +52,7 @@ public class InstitucionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Rol> delete(@PathVariable Long id) {
+    public ResponseEntity<Institucion> delete(@PathVariable Long id) {
           institucionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
