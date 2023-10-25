@@ -48,7 +48,9 @@ public class Persona implements Serializable {
     private String perDireccion;
     @Column(name = "perTelefono")
     private String perTelefono;
+    
     @Column(name = "perFechaNacimiento")
+    @Temporal(TemporalType.DATE)
     private Date perFechaNacimiento;
 
     @OneToOne(mappedBy = "usuPerId")
