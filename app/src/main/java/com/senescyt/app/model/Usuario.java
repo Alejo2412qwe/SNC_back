@@ -33,11 +33,9 @@ public class Usuario implements UserDetails {
     private Long usuId;
 
     @Basic
-    @Column(nullable = false)
     private String usuNombreUsuario;
 
     @Basic
-    @Column(nullable = false)
     private String usuContrasena;
 
     @Column(name = "usuCorreo")
@@ -49,14 +47,18 @@ public class Usuario implements UserDetails {
     @Column(name = "usuFechaRegistro")
     private Timestamp usuFechaRegistro;
 
-    @OneToOne
-    @JoinColumn(name = "usuPerId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuPerId", referencedColumnName = "perId")
+//    @JsonIgnore // Esta anotación evita que se serialice el campo usuPerId
     private Persona usuPerId;
+
+
 
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((rolId.getRolNombre())));

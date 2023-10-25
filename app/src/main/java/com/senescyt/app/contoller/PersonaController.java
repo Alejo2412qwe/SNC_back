@@ -28,6 +28,7 @@ public class PersonaController {
 
     @GetMapping("/read")
     public ResponseEntity<List<Persona>> read() {
+        System.out.println("\n\n\n\n\n "+ personaService.findByAll().size()+ "\n\n\n\n");
         return new ResponseEntity<>(personaService.findByAll(), HttpStatus.OK);
     }
 
@@ -42,8 +43,8 @@ public class PersonaController {
         return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Persona> update(@PathVariable Long id, @RequestBody Persona p) {
+    @PutMapping("/update")
+    public ResponseEntity<Persona> update(@RequestParam Long id, @RequestBody Persona p) {
         Persona persona = personaService.findById(id);
         if (persona != null) {
             try {
@@ -65,8 +66,9 @@ public class PersonaController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Rol> delete(@PathVariable Long id) {
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Rol> delete(@RequestParam Long id) {
         personaService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
