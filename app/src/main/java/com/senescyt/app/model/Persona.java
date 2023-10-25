@@ -4,6 +4,7 @@
  */
 package com.senescyt.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -44,10 +45,16 @@ public class Persona implements Serializable {
     private String perApellido;
     private String perDireccion;
     private String perTelefono;
+
+    @Column(name = "perFechaNacimiento")
+    @Temporal(TemporalType.DATE)
     private Date perFechaNacimiento;
 
     @OneToOne(mappedBy = "usuPerId")
+    @JsonIgnore // Esta anotación evita que se serialice el campo usuario
     private Usuario usuario;
+
+
 
     @ManyToOne
     @JoinColumn(name = "ciuId", referencedColumnName = "ciuId")

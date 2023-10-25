@@ -21,7 +21,7 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsuNombreUsuario(), request.getUsuContrasena()));
-        UserDetails user=userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()).orElseThrow();
+        Usuario user=userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()).orElseThrow();
 //        System.out.println("PASSS = "+userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()));
 
         String token=jwtService.getToken(user);
@@ -32,9 +32,9 @@ public class AuthService {
 
     }
 
-    public AuthResponse register(RegisterRequest request) {
-        System.out.println(request.toString()+"\n\n\n\n\n\n");
+    public AuthResponse register(Usuario request) {
         Usuario user = Usuario.builder()
+                .usuId(request.getUsuId())
                 .usuNombreUsuario(request.getUsuNombreUsuario())
                 .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
                 .usuCorreo(request.getUsuCorreo())
@@ -42,6 +42,9 @@ public class AuthService {
                 .usuFechaRegistro(request.getUsuFechaRegistro())
                 .usuPerId(request.getUsuPerId())
                 .rolId(request.getRolId())
+                .funId(request.getFunId())
+                .insId(request.getInsId())
+                .procId(request.getProcId())
                 .build();
 
         userRepository.save(user);
@@ -51,7 +54,26 @@ public class AuthService {
                 .build();
 
     }
+    public Usuario update(Usuario request) {
+        Usuario user = Usuario.builder()
+                .usuId(request.getUsuId())
+                .usuNombreUsuario(request.getUsuNombreUsuario())
+                .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
+                .usuCorreo(request.getUsuCorreo())
+                .usuEstado(request.getUsuEstado())
+                .usuFechaRegistro(request.getUsuFechaRegistro())
+                .usuPerId(request.getUsuPerId())
+                .rolId(request.getRolId())
+                .funId(request.getFunId())
+                .insId(request.getInsId())
+                .procId(request.getProcId())
+                .build();
 
+        userRepository.save(user);
+
+        return userRepository.save(user);
+
+    }
     public boolean usuarioValido(String user) {
         int cont = userRepository.usuarioUnico(user.trim());
 

@@ -1,7 +1,6 @@
 package com.senescyt.app.Security.Auth;
 
-import com.senescyt.app.model.Persona;
-import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequest {
+    private Long usuId;
     private String usuNombreUsuario;
     private String usuContrasena;
     private String usuCorreo;
@@ -21,4 +21,8 @@ public class RegisterRequest {
     private Timestamp usuFechaRegistro;
     private Persona usuPerId;
     private Rol rolId;
+    private Funciones funId;
+    private Institucion insId;
+    private Procesos procId;
+
 }

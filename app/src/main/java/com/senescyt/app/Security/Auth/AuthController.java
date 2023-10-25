@@ -1,5 +1,6 @@
 package com.senescyt.app.Security.Auth;
 
+import com.senescyt.app.model.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request)
+    public ResponseEntity<AuthResponse> register(@RequestBody Usuario request)
     {
         return ResponseEntity.ok(authService.register(request));
     }

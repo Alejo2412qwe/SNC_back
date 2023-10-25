@@ -1,8 +1,9 @@
 package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Horarios;
+import com.senescyt.app.model.Institucion;
 import com.senescyt.app.model.Rol;
-import com.senescyt.app.service.HorariosService;
+import com.senescyt.app.service.InstitucionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,32 +15,34 @@ import java.util.List;
 @RestController
 @RequestMapping("/institucion")
 public class InstitucionController {
+
+
     @Autowired
-    private HorariosService horariosService;
+    private InstitucionService institucionService;
 
     @GetMapping("/read")
-    public ResponseEntity<List<Horarios>> read() {
-        return new ResponseEntity<>(horariosService.findByAll(), HttpStatus.OK);
+    public ResponseEntity<List<Institucion>> read() {
+        return new ResponseEntity<>(  institucionService.findByAll(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Horarios> create(@RequestBody Horarios p) {
-        return new ResponseEntity<>(horariosService.save(p), HttpStatus.CREATED);
+    public ResponseEntity<Institucion> create(@RequestBody Institucion p) {
+        return new ResponseEntity<>(  institucionService.save(p), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Horarios> update(@PathVariable Long id, @RequestBody Horarios p) {
-        Horarios Horarios = horariosService.findById(id);
-        if (Horarios != null) {
+    public ResponseEntity<Institucion> update(@PathVariable Long id, @RequestBody Institucion p) {
+        Institucion institucion =   institucionService.findById(id);
+        if (institucion != null) {
             try {
 
-                Horarios.setHorHoraIngreso(p.getHorHoraIngreso());
-                Horarios.setHorHoraSalida(p.getHorHoraSalida());
-                Horarios.setHorHoraAlmuerzoInicio(p.getHorHoraAlmuerzoInicio());
-                Horarios.setHorHoraAlmuerzoFin(p.getHorHoraAlmuerzoFin());
-                Horarios.setHorNumHoras(p.getHorNumHoras());
+                institucion.setInsNombre(p.getInsNombre());
+                institucion.setIntDireccion(p.getIntDireccion());
+                institucion.setTipId(p.getTipId());
+                institucion.setIntDireccion(p.getIntDireccion());
 
-                return new ResponseEntity<>(horariosService.save(Horarios), HttpStatus.CREATED);
+
+                return new ResponseEntity<>(  institucionService.save(institucion), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -51,7 +54,7 @@ public class InstitucionController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Rol> delete(@PathVariable Long id) {
-        horariosService.delete(id);
+          institucionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

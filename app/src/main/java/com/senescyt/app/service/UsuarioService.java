@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -17,13 +19,25 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Override
+    public CrudRepository<Usuario, Long> getDao() {
+        return usuarioRepository;
+    }
+
     public Usuario getByUsuarioOrEmail(String nombreOrEmail) {
         return usuarioRepository.findByUsernameOrEmail(nombreOrEmail, nombreOrEmail);
     }
 
-    @Override
-    public CrudRepository<Usuario, Long> getDao() {
-        return usuarioRepository;
+    public List<Object[]> allUsersData(int est) {
+        return usuarioRepository.allUsersData(est);
+    }
+
+    public  Usuario findByUsuId(Long id){
+        return usuarioRepository.findByUsuId(id);
+    }
+
+    public List<Object[]> searchUsersData(String search, int est) {
+        return usuarioRepository.searchUsersData(search, est);
     }
 
     public Usuario findByPersonaCorreo(String email){

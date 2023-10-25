@@ -1,5 +1,6 @@
 package com.senescyt.app.Security.Jwt;
 
+import com.senescyt.app.model.Usuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -21,11 +22,13 @@ public class JwtService {
 
     private static final String SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
-    public String getToken(UserDetails user) {
+    public String getToken(Usuario user) {
         return getTokenTime(new HashMap<>(), user);
     }
 
-    private String getTokenTime(Map<String,Object> extraClaims, UserDetails user) {
+    private String getTokenTime(Map<String,Object> extraClaims, Usuario user) {
+        extraClaims.put("rol", user.getAuthorities());
+
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

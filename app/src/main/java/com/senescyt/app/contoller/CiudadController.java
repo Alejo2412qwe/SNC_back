@@ -19,6 +19,8 @@ public class CiudadController {
 
     @GetMapping("/read")
     public ResponseEntity<List<Ciudad>> read() {
+        System.out.println("\n\n\n\n\n "+ ciudadService.findByAll().size()+ "\n\n\n\n");
+
         return new ResponseEntity<>(ciudadService.findByAll(), HttpStatus.OK);
     }
 
