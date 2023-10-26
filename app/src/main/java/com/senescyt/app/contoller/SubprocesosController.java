@@ -1,5 +1,6 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.model.Ciudad;
 import com.senescyt.app.model.Subprocesos;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.service.SubprocesoService;
@@ -22,11 +23,10 @@ public class SubprocesosController {
         return new ResponseEntity<>(subprocesosService.findByAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/getSubprocesos/{id}")
-    public ResponseEntity<Subprocesos> getSubprocesosByProcesosId(@PathVariable Long id) {
+    @GetMapping("/getSubprocesosByProcId/{id}")
+    public ResponseEntity<List<Subprocesos>> getSubprocesosByProcesosId(@PathVariable Long id) {
         return new ResponseEntity<>(subprocesosService.getSubprocesosByProcId(id), HttpStatus.OK);
     }
-
 
     @PostMapping("/create")
     public ResponseEntity<Subprocesos> create(@RequestBody Subprocesos p) {

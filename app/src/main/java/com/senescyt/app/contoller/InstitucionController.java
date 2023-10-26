@@ -3,6 +3,7 @@ package com.senescyt.app.contoller;
 import com.senescyt.app.model.Horarios;
 import com.senescyt.app.model.Institucion;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.Subprocesos;
 import com.senescyt.app.service.InstitucionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,11 @@ public class InstitucionController {
     @GetMapping("/read")
     public ResponseEntity<List<Institucion>> read() {
         return new ResponseEntity<>(  institucionService.findByAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getInstitucionByTipId/{id}")
+    public ResponseEntity<List<Institucion>> getInstitucionByTipId(@PathVariable Long id) {
+        return new ResponseEntity<>(institucionService.getInstitucionByTipId(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")

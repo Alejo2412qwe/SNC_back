@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SubprocesosRepository extends GenericRepository<Subprocesos, Long> {
 
-    @Query(value = "SELECT sub. FROM Subprocesos sub JOIN Procesos proc ON sub.procId = proc.procId WHERE proc.procId = :idSubproceso;", nativeQuery = true)
-    Subprocesos getSubprocesosByProcId(@Param("idSubproceso") Long idSubproceso);
+    @Query(value = "SELECT * FROM subprocesos where proc_id = :idSubproceso", nativeQuery = true)
+    List<Subprocesos> getSubprocesosByProcId(@Param("idSubproceso") Long idSubproceso);
 }
