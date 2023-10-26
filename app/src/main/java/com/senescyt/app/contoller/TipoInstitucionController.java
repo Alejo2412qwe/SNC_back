@@ -1,8 +1,6 @@
 package com.senescyt.app.contoller;
 
-import com.senescyt.app.model.TipoInstitucion;
-import com.senescyt.app.model.TipoPermiso;
-import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.*;
 import com.senescyt.app.service.TipoInstitucionService;
 import com.senescyt.app.service.TipoPermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,14 @@ public class TipoInstitucionController {
         return new ResponseEntity<>(tipoInstitucionService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getTipoInstitucionByEstado")
+    public ResponseEntity<List<TipoInstitucion>> getTipoInstitucionByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(tipoInstitucionService.getTipoInstitucionByEstado(est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<TipoInstitucion> create(@RequestBody TipoInstitucion ti) {
+        ti.setTipEstado(1);
         return new ResponseEntity<>(tipoInstitucionService.save(ti), HttpStatus.CREATED);
     }
 
@@ -39,6 +43,24 @@ public class TipoInstitucionController {
                 tipoInstitucion.setTipNombre(ti.getTipNombre());
 
                 return new ResponseEntity<>(tipoInstitucionService.save(tipoInstitucion), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<TipoInstitucion> updateEst(@RequestParam Long id, @RequestParam int est) {
+        TipoInstitucion tipoInstitucion = tipoInstitucionService.findById(id);
+        if (tipoInstitucion != null) {
+            try {
+
+                tipoInstitucion.setTipEstado(est);
+                tipoInstitucionService.save(tipoInstitucion);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

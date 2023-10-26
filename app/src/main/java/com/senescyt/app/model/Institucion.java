@@ -34,6 +34,8 @@ public class Institucion implements Serializable {
     private String instNombre;
     @Column(name = "intDireccion")
     private String instDireccion;
+    @Column(name = "instEstado")
+    private int instEstado;
 
     @ManyToOne
     @JoinColumn(name = "tipId", referencedColumnName = "tipId")
