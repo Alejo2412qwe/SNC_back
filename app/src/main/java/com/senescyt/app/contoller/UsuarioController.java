@@ -67,16 +67,16 @@ public class UsuarioController {
 
 //            Long funId = (Long) data[5];
 //            user.setFunId(funcionesService.findById(funId));
-//
-//            Long insId = (Long) data[6];
-//            user.setInsId(institucionService.findById(insId));
-//
-//            Long procId = (Long) data[7];
-//            user.setProcId(procesosService.findById(insId));
+
+            Long insId = (Long) data[6];
+            user.setInsId(institucionService.findById(insId));
+
+            Long procId = (Long) data[7];
+            user.setProcId(procesosService.findById(insId));
 
             user.setFunId((Funciones) data[5]);
-            user.setInsId((Institucion) data[6]);
-            user.setProcId((Procesos) data[7]);
+    //            user.setInsId((Institucion) data[6]);
+    //            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
@@ -104,15 +104,15 @@ public class UsuarioController {
 //            Long funId = (Long) data[5];
 //            user.setFunId(funcionesService.findById(funId));
 //
-//            Long insId = (Long) data[6];
-//            user.setInsId(institucionService.findById(insId));
-//
-//            Long procId = (Long) data[7];
-//            user.setProcId(procesosService.findById(insId));
+            Long insId = (Long) data[6];
+            user.setInsId(institucionService.findById(insId));
+
+            Long procId = (Long) data[7];
+            user.setProcId(procesosService.findById(insId));
 
             user.setFunId((Funciones) data[5]);
-            user.setInsId((Institucion) data[6]);
-            user.setProcId((Procesos) data[7]);
+//            user.setInsId((Institucion) data[6]);
+//            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
