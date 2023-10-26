@@ -1,6 +1,7 @@
 package com.senescyt.app.service;
 
 import com.senescyt.app.model.Horarios;
+import com.senescyt.app.model.Usuario;
 import com.senescyt.app.repository.HorariosRepository;
 import com.senescyt.app.service.genericService.GenericService;
 import com.senescyt.app.service.genericService.GenericServiceImpl;
@@ -43,5 +44,6 @@ public class HorariosService extends GenericServiceImpl<Horarios, Long> implemen
         // Ejecutar la consulta
         return horariosRepository.findAll(spec, sort);
     }
+
 
 }

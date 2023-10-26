@@ -2,6 +2,7 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Horarios;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.Usuario;
 import com.senescyt.app.service.HorariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,7 @@ public class HorariosController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
 
     @GetMapping("/searchByHour/{hora}")
     public ResponseEntity<List<Horarios>> searchByHour(@PathVariable String hora) {
