@@ -1,5 +1,6 @@
 package com.senescyt.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,5 +40,10 @@ public class Horarios implements Serializable {
     private String horHoraAlmuerzoInicio;
     @Column(name = "horHoraAlmuerzoFin")
     private String horHoraAlmuerzoFin;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "horId")
+    private List<Usuario> listaUsuarios;
 
 }
