@@ -42,8 +42,8 @@ public class InstitucionController {
         if (institucion != null) {
             try {
 
-                institucion.setInsNombre(p.getInsNombre());
-                institucion.setIntDireccion(p.getIntDireccion());
+                institucion.setInstNombre(p.getInstNombre());
+                institucion.setInstDireccion(p.getInstDireccion());
                 institucion.setTipId(p.getTipId());
 
 
