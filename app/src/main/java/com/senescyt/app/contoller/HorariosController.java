@@ -50,7 +50,7 @@ public class HorariosController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Rol> delete(@PathVariable Long id) {
+    public ResponseEntity<Horarios> delete(@PathVariable Long id) {
         horariosService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
