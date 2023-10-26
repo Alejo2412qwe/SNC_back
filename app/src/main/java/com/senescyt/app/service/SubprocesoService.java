@@ -9,6 +9,7 @@ import com.senescyt.app.service.genericService.GenericService;
 import com.senescyt.app.service.genericService.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class SubprocesoService extends GenericServiceImpl<Subprocesos, Long> imp
         return subprocesosRepository.getSubprocesosByProcId(idSubproceso);
     }
 
-    public List<Subprocesos> getSubprocesosByProcEstado(int est) {
-        return subprocesosRepository.getSubprocesosByProcEstado(est);
+    public List<Subprocesos> getSubprocesosByProcEstado(int estproc,int estsub) {
+        return subprocesosRepository.getSubprocesosByProcEstado(estproc,estsub);
     }
 }

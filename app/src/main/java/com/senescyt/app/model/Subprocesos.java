@@ -28,13 +28,14 @@ public class Subprocesos /*departamento*/ implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subId")
     private Long subId;
 
     @Column(name = "subNombre")
     private String subNombre;
 
     @Column(name = "subEstado")
-    private String subEstado;
+    private int subEstado;
 
     @ManyToOne
     @JoinColumn(name = "procId", referencedColumnName = "procId")
