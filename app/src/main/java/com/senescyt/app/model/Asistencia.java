@@ -25,13 +25,25 @@ public class Asistencia implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "asisId")
     private Long asisId;
 
+    @Column(name = "asisNombre")
     private String asisNombre;
+
+    @Column(name = "asisVerificacion")
     private String asisVerificacion;
+
+    @Column(name = "asisEstado")
     private boolean asisEstado;
+
+    @Column(name = "asisLector")
     private int asisLector;
+
+    @Column(name = "asisFecha")
     private String asisFecha;
+
+    @Column(name = "asisHoraMarcado")
     private String asisHoraMarcado;
 
     @ManyToOne

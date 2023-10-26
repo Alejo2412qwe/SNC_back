@@ -42,8 +42,11 @@ public class Rol implements Serializable {
     @Column(name = "rolId")
     private Long rolId;
 
+    @Column(name = "rolNombre")
     private String rolNombre;
+    @Column(name = "rolDescripcion")
     private String rolDescripcion;
+    @Column(name = "rolFechaRegistro")
     private Timestamp rolFechaRegistro;
 
     @JsonIgnore

@@ -53,7 +53,6 @@ public class Usuario implements UserDetails {
     private Persona usuPerId;
 
 
-
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
@@ -71,6 +70,10 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "insId", referencedColumnName = "insId")
     private Institucion insId;
+
+    @ManyToOne
+    @JoinColumn(name = "horId", referencedColumnName = "horId")
+    private Horarios horId;
 
     @ManyToOne
     @JoinColumn(name = "procId", referencedColumnName = "procId")

@@ -32,6 +32,7 @@ public class Procesos /*zona*/ implements Serializable {
     @Column(name = "procId")
     private Long procId;
 
+    @Column(name = "procNombre")
     private String procNombre;
 
     @JsonIgnore

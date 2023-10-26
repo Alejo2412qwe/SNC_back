@@ -31,6 +31,7 @@ public class Puesto /*cargo*/ implements Serializable {
     @Column(name = "pueId")
     private Long pueId;
 
+    @Column(name = "pueNombre")
     private String pueNombre;
 
     @JsonIgnore

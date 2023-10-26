@@ -30,7 +30,9 @@ public class EstadoAsistencia implements Serializable {
     @Column(name = "estId")
     private Long estId;
 
+    @Column(name = "estNombre")
     private String estNombre;
+    @Column(name = "estEstado")
     private boolean estEstado;
 
     @JsonIgnore

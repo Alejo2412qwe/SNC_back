@@ -3,6 +3,7 @@ package com.senescyt.app.contoller;
 import com.senescyt.app.model.Horarios;
 import com.senescyt.app.model.Institucion;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.Subprocesos;
 import com.senescyt.app.service.InstitucionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class InstitucionController {
         return new ResponseEntity<>(  institucionService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getInstitucionByTipId/{id}")
+    public ResponseEntity<List<Institucion>> getInstitucionByTipId(@PathVariable Long id) {
+        return new ResponseEntity<>(institucionService.getInstitucionByTipId(id), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Institucion> create(@RequestBody Institucion p) {
         return new ResponseEntity<>(  institucionService.save(p), HttpStatus.CREATED);
@@ -36,10 +42,9 @@ public class InstitucionController {
         if (institucion != null) {
             try {
 
-                institucion.setInsNombre(p.getInsNombre());
-                institucion.setIntDireccion(p.getIntDireccion());
+                institucion.setInstNombre(p.getInstNombre());
+                institucion.setInstDireccion(p.getInstDireccion());
                 institucion.setTipId(p.getTipId());
-                institucion.setIntDireccion(p.getIntDireccion());
 
 
                 return new ResponseEntity<>(  institucionService.save(institucion), HttpStatus.CREATED);
@@ -53,7 +58,7 @@ public class InstitucionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Rol> delete(@PathVariable Long id) {
+    public ResponseEntity<Institucion> delete(@PathVariable Long id) {
           institucionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

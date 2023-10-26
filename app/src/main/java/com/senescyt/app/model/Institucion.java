@@ -27,10 +27,13 @@ public class Institucion implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long insId;
+    @Column(name = "insId")
+    private Long instId;
 
-    private String insNombre;
-    private String intDireccion;
+    @Column(name = "insNombre")
+    private String instNombre;
+    @Column(name = "intDireccion")
+    private String instDireccion;
 
     @ManyToOne
     @JoinColumn(name = "tipId", referencedColumnName = "tipId")

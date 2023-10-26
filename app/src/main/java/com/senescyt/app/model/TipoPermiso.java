@@ -24,9 +24,12 @@ public class TipoPermiso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tiPeId")
     private Long tiPeId;
 
+    @Column(name = "tiPeNombre")
     private String tiPeNombre;
+    @Column(name = "tiPeEstado")
     private boolean tiPeEstado;
 
     @ManyToOne

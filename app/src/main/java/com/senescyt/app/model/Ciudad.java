@@ -24,8 +24,10 @@ public class Ciudad implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ciuId")
     private Long ciuId;
 
+    @Column(name = "ciuNombre")
     private String ciuNombre;
 
     @ManyToOne

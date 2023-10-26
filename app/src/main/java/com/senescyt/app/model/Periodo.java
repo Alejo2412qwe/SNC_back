@@ -24,9 +24,12 @@ public class Periodo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "periId")
     private Long periId;
 
+    @Column(name = "periActual")
     private String periActual;
+    @Column(name = "periAnterior")
     private String periAnterior;
 
     @ManyToOne

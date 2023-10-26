@@ -30,6 +30,7 @@ public class Subprocesos /*departamento*/ implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subId;
 
+    @Column(name = "subNombre")
     private String subNombre;
 
     @ManyToOne

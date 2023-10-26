@@ -25,15 +25,24 @@ public class Vacaciones implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "vacId")
     private Long vacId;
 
+    @Column(name = "vacDetalle")
     private String vacDetalle;
+    @Column(name = "vacSaldo")
     private double vacSaldo;
+    @Column(name = "vacDiasAnticipacion")
     private int vacDiasAnticipacion;
+    @Column(name = "vacDiasCaducados")
     private int vacDiasCaducados;
+    @Column(name = "vacTotalDiasDisponibles")
     private int vacTotalDiasDisponibles;
+    @Column(name = "vacDiasUsados")
     private double vacDiasUsados;
+    @Column(name = "vacDiasGanados")
     private double vacDiasGanados;
+    @Column(name = "vacFecha")
     private Date vacFecha;
 
     @ManyToOne

@@ -27,6 +27,7 @@ public class Provincia implements Serializable {
     @Column(name = "proId")
     private Long proId;
 
+    @Column(name = "proNombre")
     private String proNombre;
 
     @JsonIgnore
