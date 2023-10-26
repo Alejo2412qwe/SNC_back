@@ -49,7 +49,7 @@ public class HorariosController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
 
     @GetMapping("/searchByHour/{hora}")
     public ResponseEntity<List<Horarios>> searchByHour(@PathVariable String hora) {
