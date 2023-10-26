@@ -28,6 +28,7 @@ public class JwtService {
 
     private String getTokenTime(Map<String,Object> extraClaims, Usuario user) {
         extraClaims.put("rol", user.getAuthorities());
+        extraClaims.put("id", user.getUsuId());
 
         return Jwts
                 .builder()
