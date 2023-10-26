@@ -49,6 +49,16 @@ public class HorariosController {
         }
     }
 
+    @GetMapping("/searchByHour/{hora}")
+    public ResponseEntity<List<Horarios>> searchByHour(@PathVariable String hora) {
+        List<Horarios> horarios = horariosService.findByHora(hora);
+        if (horarios.isEmpty()) {
+            // Si no se encuentran horarios con la hora especificada, devuelve un HttpStatus.NOT_FOUND
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(horarios, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Horarios> delete(@PathVariable Long id) {
         horariosService.delete(id);
