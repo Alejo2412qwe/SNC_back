@@ -35,6 +35,9 @@ public class Procesos /*zona*/ implements Serializable {
     @Column(name = "procNombre")
     private String procNombre;
 
+    @Column(name = "procEstado")
+    private int procEstado;
+
     @JsonIgnore
     @OneToMany(mappedBy = "procId")
     private List<Subprocesos> listaSubprocesos;

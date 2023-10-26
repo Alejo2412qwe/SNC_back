@@ -33,6 +33,9 @@ public class Subprocesos /*departamento*/ implements Serializable {
     @Column(name = "subNombre")
     private String subNombre;
 
+    @Column(name = "subEstado")
+    private String subEstado;
+
     @ManyToOne
     @JoinColumn(name = "procId", referencedColumnName = "procId")
     private Procesos procId;

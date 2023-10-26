@@ -1,6 +1,7 @@
 package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Ciudad;
+import com.senescyt.app.model.Procesos;
 import com.senescyt.app.model.Subprocesos;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.service.SubprocesoService;
@@ -31,6 +32,11 @@ public class SubprocesosController {
     @PostMapping("/create")
     public ResponseEntity<Subprocesos> create(@RequestBody Subprocesos p) {
         return new ResponseEntity<>(subprocesosService.save(p), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getSubprocesosByProcEstado")
+    public ResponseEntity<List<Subprocesos>> getSubprocesosByProcEstado(@RequestParam int est) {
+        return new ResponseEntity<>(subprocesosService.getSubprocesosByProcEstado(est), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")

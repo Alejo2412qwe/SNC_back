@@ -1,11 +1,11 @@
 INSERT INTO rol(rol_id, rol_nombre)
 VALUES (1, 'Administrador');
 INSERT INTO rol(rol_id, rol_nombre)
-VALUES (2, 'Administrativo,');
+VALUES (2, 'Administrativo');
 INSERT INTO rol(rol_id, rol_nombre)
 VALUES (3, 'Docente');
 INSERT INTO rol(rol_id, rol_nombre)
-VALUES (4, 'Funcionario,');
+VALUES (4, 'Funcionario');
 
 
 

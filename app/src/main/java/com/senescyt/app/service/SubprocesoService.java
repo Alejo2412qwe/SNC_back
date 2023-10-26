@@ -2,6 +2,7 @@ package com.senescyt.app.service;
 
 import com.senescyt.app.model.Asistencia;
 import com.senescyt.app.model.Ciudad;
+import com.senescyt.app.model.Procesos;
 import com.senescyt.app.model.Subprocesos;
 import com.senescyt.app.repository.SubprocesosRepository;
 import com.senescyt.app.service.genericService.GenericService;
@@ -24,5 +25,9 @@ public class SubprocesoService extends GenericServiceImpl<Subprocesos, Long> imp
 
     public List<Subprocesos> getSubprocesosByProcId(Long idSubproceso){
         return subprocesosRepository.getSubprocesosByProcId(idSubproceso);
+    }
+
+    public List<Subprocesos> getSubprocesosByProcEstado(int est) {
+        return subprocesosRepository.getSubprocesosByProcEstado(est);
     }
 }
