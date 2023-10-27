@@ -1,6 +1,7 @@
 package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Horarios;
+import com.senescyt.app.model.Procesos;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.model.Usuario;
 import com.senescyt.app.service.HorariosService;
@@ -25,6 +26,7 @@ public class HorariosController {
 
     @PostMapping("/create")
     public ResponseEntity<Horarios> create(@RequestBody Horarios p) {
+        p.setProcEstado(1);
         return new ResponseEntity<>(horariosService.save(p), HttpStatus.CREATED);
     }
 
@@ -50,6 +52,23 @@ public class HorariosController {
         }
     }
 
+    @PutMapping("/updateEst")
+    public ResponseEntity<Horarios> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Horarios horarios = horariosService.findById(id);
+        if (horarios != null) {
+            try {
+
+                horarios.setProcEstado(est);
+                horariosService.save(horarios);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping("/searchByHour/{hora}")
     public ResponseEntity<List<Horarios>> searchByHour(@PathVariable String hora) {
@@ -59,6 +78,11 @@ public class HorariosController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(horarios, HttpStatus.OK);
+    }
+
+    @GetMapping("/getProcesosByHorarios")
+    public ResponseEntity<List<Horarios>> getProcesosByHorarios(@RequestParam int est) {
+        return new ResponseEntity<>(horariosService.getProcesosByHora(est), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
