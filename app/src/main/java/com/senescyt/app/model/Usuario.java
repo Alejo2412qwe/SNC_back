@@ -113,6 +113,10 @@ public class Usuario implements UserDetails {
     private List<Vacaciones> listaVacaciones;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "comId")
+    private List<Comision> listaComisiones;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "usuId", cascade = CascadeType.ALL)
     private List<Asistencia> listaAsistencia;
 
