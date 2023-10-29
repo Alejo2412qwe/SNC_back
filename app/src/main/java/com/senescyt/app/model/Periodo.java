@@ -31,6 +31,8 @@ public class Periodo implements Serializable {
     private String periActual;
     @Column(name = "periAnterior")
     private String periAnterior;
+    @Column(name = "periEstado")
+    private int periEstado;
 
     @ManyToOne
     @JoinColumn(name = "vacId", referencedColumnName = "vacId")
