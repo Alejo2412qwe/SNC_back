@@ -24,6 +24,7 @@ public class FuncionesController {
 
     @PostMapping("/create")
     public ResponseEntity<Funciones> create(@RequestBody Funciones p) {
+        p.setFunEstado(1);
         return new ResponseEntity<>(funcionesService.save(p), HttpStatus.CREATED);
     }
 
