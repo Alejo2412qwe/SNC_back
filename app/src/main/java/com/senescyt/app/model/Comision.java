@@ -39,6 +39,8 @@ public class Comision {
     private String comLugar;
     @Column(name = "comInforme")
     private String comInforme;
+    @Column(name = "comEstado")
+    private int comEstado;
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")

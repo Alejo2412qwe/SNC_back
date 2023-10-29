@@ -44,6 +44,8 @@ public class Vacaciones implements Serializable {
     private double vacDiasGanados;
     @Column(name = "vacFecha")
     private Date vacFecha;
+    @Column(name = "vacEstado")
+    private int vacEstado;
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")

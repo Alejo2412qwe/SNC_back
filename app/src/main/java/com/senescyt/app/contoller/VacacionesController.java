@@ -24,6 +24,7 @@ public class VacacionesController {
 
     @PostMapping("/create")
     public ResponseEntity<Vacaciones> create(@RequestBody Vacaciones p) {
+        p.setVacEstado(1);
         return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
     }
 
@@ -43,6 +44,24 @@ public class VacacionesController {
                 Vacaciones.setVacSaldo(p.getVacSaldo());
 
                 return new ResponseEntity<>(vacacioneService.save(Vacaciones), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Vacaciones> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Vacaciones vacaciones = vacacioneService.findById(id);
+        if (vacaciones != null) {
+            try {
+
+                vacaciones.setVacEstado(est);
+                vacacioneService.save(vacaciones);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

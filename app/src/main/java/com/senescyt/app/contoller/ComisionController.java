@@ -26,6 +26,7 @@ public class ComisionController {
 
     @PostMapping("/create")
     public ResponseEntity<Comision> create(@RequestBody Comision p) {
+        p.setComEstado(1);
         return new ResponseEntity<>(comisionService.save(p), HttpStatus.CREATED);
     }
 
@@ -43,6 +44,24 @@ public class ComisionController {
                 Comision.setComInforme(p.getComInforme());
 
                 return new ResponseEntity<>(comisionService.save(Comision), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Comision> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Comision comision = comisionService.findById(id);
+        if (comision != null) {
+            try {
+
+                comision.setComEstado(est);
+                comisionService.save(comision);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
