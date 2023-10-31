@@ -68,6 +68,7 @@ public class HorariosController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
     }
 
     @GetMapping("/searchByHour/{hora}")
