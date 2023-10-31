@@ -28,20 +28,38 @@ public class VacacionesController {
         return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Vacaciones> update(@PathVariable Long id, @RequestBody Vacaciones p) {
+    @PutMapping("/updatencabezado/{id}")
+    public ResponseEntity<Vacaciones> updateEnc(@PathVariable Long id, @RequestBody Vacaciones p) {
         Vacaciones Vacaciones = vacacioneService.findById(id);
         if (Vacaciones != null) {
             try {
 
-                Vacaciones.setVacDetalle(p.getVacDetalle());
-                Vacaciones.setVacFecha(p.getVacFecha());
                 Vacaciones.setVacDiasCaducados(p.getVacDiasCaducados());
-                Vacaciones.setVacDiasAnticipacion(p.getVacDiasAnticipacion());
-                Vacaciones.setVacDiasGanados(p.getVacDiasGanados());
-                Vacaciones.setVacDiasUsados(p.getVacDiasUsados());
                 Vacaciones.setVacTotalDiasDisponibles(p.getVacTotalDiasDisponibles());
-                Vacaciones.setVacSaldo(p.getVacSaldo());
+
+                return new ResponseEntity<>(vacacioneService.save(Vacaciones), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updatetabla/{id}")
+    public ResponseEntity<Vacaciones> updateTab(@PathVariable Long id, @RequestBody Vacaciones p) {
+        Vacaciones Vacaciones = vacacioneService.findById(id);
+        if (Vacaciones != null) {
+            try {
+
+                Vacaciones.setVacFecha(p.getVacFecha());
+                Vacaciones.setVacDetalle(p.getVacDetalle());
+                Vacaciones.setVacDias(p.getVacDias());
+                Vacaciones.setVacHoras(p.getVacHoras());
+                Vacaciones.setVacMinutos(p.getVacMinutos());
+                Vacaciones.setVacDiasGanados(p.getVacDiasGanados());
+                Vacaciones.setVacNoGozadas(p.getVacNoGozadas());
 
                 return new ResponseEntity<>(vacacioneService.save(Vacaciones), HttpStatus.CREATED);
             } catch (Exception e) {

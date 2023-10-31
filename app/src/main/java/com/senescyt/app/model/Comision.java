@@ -42,7 +42,7 @@ public class Comision {
     @Column(name = "comEstado")
     private int comEstado;
 
-    @ManyToOne
-    @JoinColumn(name = "usuId", referencedColumnName = "usuId")
-    private Usuario usuId;
+    @JsonIgnore
+    @OneToMany(mappedBy = "comId")
+    private List<Usuario> listaUsuarios;
 }
