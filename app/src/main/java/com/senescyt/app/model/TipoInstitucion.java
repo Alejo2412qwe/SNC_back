@@ -33,6 +33,9 @@ public class TipoInstitucion implements Serializable {
     @Column(name = "tipNombre")
     private String tipNombre;
 
+    @Column(name = "tipEstado")
+    private int tipEstado;
+
     @JsonIgnore
     @OneToMany(mappedBy = "tipId")
     private List<Institucion> listaInstituciones;

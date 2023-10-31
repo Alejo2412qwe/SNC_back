@@ -3,6 +3,7 @@ package com.senescyt.app.service;
 import com.senescyt.app.model.Institucion;
 import com.senescyt.app.model.Persona;
 import com.senescyt.app.model.Subprocesos;
+import com.senescyt.app.model.TipoInstitucion;
 import com.senescyt.app.repository.InsitucionRepository;
 import com.senescyt.app.service.genericService.GenericService;
 import com.senescyt.app.service.genericService.GenericServiceImpl;
@@ -26,5 +27,9 @@ public class InstitucionService extends GenericServiceImpl<Institucion, Long> im
 
     public List<Institucion> getInstitucionByTipId(Long tipId) {
         return insitucionRepository.getInstitucionByTipId(tipId);
+    }
+
+    public List<Institucion> getInstitucionesByTipId(int tipid, int instid) {
+        return insitucionRepository.getInstitucionesByTipId(tipid, instid);
     }
 }

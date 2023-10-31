@@ -1,9 +1,6 @@
 package com.senescyt.app.contoller;
 
-import com.senescyt.app.model.Horarios;
-import com.senescyt.app.model.Institucion;
-import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.Subprocesos;
+import com.senescyt.app.model.*;
 import com.senescyt.app.service.InstitucionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +20,7 @@ public class InstitucionController {
 
     @GetMapping("/read")
     public ResponseEntity<List<Institucion>> read() {
-        return new ResponseEntity<>(  institucionService.findByAll(), HttpStatus.OK);
+        return new ResponseEntity<>(institucionService.findByAll(), HttpStatus.OK);
     }
 
     @GetMapping("/getInstitucionByTipId/{id}")
@@ -31,14 +28,20 @@ public class InstitucionController {
         return new ResponseEntity<>(institucionService.getInstitucionByTipId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/getInstitucionesByTipId")
+    public ResponseEntity<List<Institucion>> getInstitucionesByTipId(@RequestParam int tipid, @RequestParam int instid) {
+        return new ResponseEntity<>(institucionService.getInstitucionesByTipId(tipid, instid), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Institucion> create(@RequestBody Institucion p) {
-        return new ResponseEntity<>(  institucionService.save(p), HttpStatus.CREATED);
+        p.setInstEstado(1);
+        return new ResponseEntity<>(institucionService.save(p), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Institucion> update(@PathVariable Long id, @RequestBody Institucion p) {
-        Institucion institucion =   institucionService.findById(id);
+        Institucion institucion = institucionService.findById(id);
         if (institucion != null) {
             try {
 
@@ -47,7 +50,7 @@ public class InstitucionController {
                 institucion.setTipId(p.getTipId());
 
 
-                return new ResponseEntity<>(  institucionService.save(institucion), HttpStatus.CREATED);
+                return new ResponseEntity<>(institucionService.save(institucion), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -59,7 +62,7 @@ public class InstitucionController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Institucion> delete(@PathVariable Long id) {
-          institucionService.delete(id);
+        institucionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
