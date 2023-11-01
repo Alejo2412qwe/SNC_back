@@ -42,10 +42,12 @@ public class AuthService {
                 .usuFechaRegistro(request.getUsuFechaRegistro())
                 .usuPerId(request.getUsuPerId())
                 .rolId(request.getRolId())
+                .foto(request.getFoto())
                 .funId(request.getFunId())
                 .insId(request.getInsId())
                 .procId(request.getProcId())
                 .build();
+        System.out.println("\n\n\n\n\n\n\n"+user.getFoto()+"\n\n\n\n\n\n\n");
 
         userRepository.save(user);
 
@@ -64,6 +66,7 @@ public class AuthService {
                 .usuFechaRegistro(request.getUsuFechaRegistro())
                 .usuPerId(request.getUsuPerId())
                 .rolId(request.getRolId())
+                .foto(request.getFoto())
                 .funId(request.getFunId())
                 .insId(request.getInsId())
                 .procId(request.getProcId())

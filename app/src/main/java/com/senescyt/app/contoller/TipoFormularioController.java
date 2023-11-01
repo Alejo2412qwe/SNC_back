@@ -1,7 +1,9 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.model.MotivoPermiso;
 import com.senescyt.app.model.TipoFormulario;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.TipoInstitucion;
 import com.senescyt.app.service.TipoFormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,14 @@ public class TipoFormularioController {
         return new ResponseEntity<>(tipFormularioService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getTipoFormularioByEstado")
+    public ResponseEntity<List<TipoFormulario>> getTipoFormularioByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(tipFormularioService.getTipoFormularioByEstado(est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<TipoFormulario> create(@RequestBody TipoFormulario p) {
+        p.setTiFoEstado(1);
         return new ResponseEntity<>(tipFormularioService.save(p), HttpStatus.CREATED);
     }
 
@@ -34,9 +42,26 @@ public class TipoFormularioController {
             try {
 
                 TipoFormulario.setTiFoNombre(p.getTiFoNombre());
-                TipoFormulario.setTiFoDocumento(p.getTiFoDocumento());
 
                 return new ResponseEntity<>(tipFormularioService.save(TipoFormulario), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<TipoFormulario> updateEst(@RequestParam Long id, @RequestParam int est) {
+        TipoFormulario tipoFormulario = tipFormularioService.findById(id);
+        if (tipoFormulario != null) {
+            try {
+
+                tipoFormulario.setTiFoEstado(est);
+                tipFormularioService.save(tipoFormulario);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

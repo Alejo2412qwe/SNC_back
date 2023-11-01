@@ -24,24 +24,27 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
+        p.setPermEstado('E');
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Permisos> update(@PathVariable Long id, @RequestBody Permisos p) {
-        Permisos Permisos = permisosService.findById(id);
-        if (Permisos != null) {
+        Permisos permisos = permisosService.findById(id);
+        if (permisos != null) {
             try {
 
-                Permisos.setPermCondicion(p.getPermCondicion());
-                Permisos.setPermEstado(p.isPermEstado());
-                Permisos.setPermDocumento(p.getPermDocumento());
-                Permisos.setPermFecha(p.getPermFecha());
-                Permisos.setPermNumHoras(p.getPermNumHoras());
-                Permisos.setPermTipo(p.getPermTipo());
-                Permisos.setPermDocumento(p.getPermDocumento());
+                permisos.setPermEstado(p.getPermEstado());
+                permisos.setPermFechaFin(p.getPermFechaFin());
+                permisos.setPermFechaInicio(p.getPermFechaInicio());
+                permisos.setPermHorasFin(p.getPermHorasFin());
+                permisos.setPermHorasInicio(p.getPermHorasInicio());
+                permisos.setPermObservacion(p.getPermObservacion());
+                permisos.setTiPeId(p.getTiPeId());
+                permisos.setMotId(p.getMotId());
+                permisos.setTiFoId(p.getTiFoId());
 
-                return new ResponseEntity<>(permisosService.save(Permisos), HttpStatus.CREATED);
+                return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

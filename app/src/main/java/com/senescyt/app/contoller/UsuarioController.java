@@ -81,6 +81,8 @@ public class UsuarioController {
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -117,6 +119,8 @@ public class UsuarioController {
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -136,7 +140,6 @@ public class UsuarioController {
 
     @PostMapping(value = "register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario request) {
-
         return ResponseEntity.ok(authService.register(request));
     }
 
@@ -152,6 +155,8 @@ public class UsuarioController {
                 usuario.setRolId(u.getRolId());
                 usuario.setUsuCorreo(u.getUsuCorreo());
                 usuario.setFunId(u.getFunId());
+                usuario.setFoto(u.getFoto());
+                usuario.setTitulo(u.getTitulo());
                 usuario.setInsId(u.getInsId());
                 usuario.setProcId(u.getProcId());
 

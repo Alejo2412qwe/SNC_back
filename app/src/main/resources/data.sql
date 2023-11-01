@@ -9,7 +9,9 @@ VALUES (4, 'Funcionario');
 
 
 
-
+-- REGIMEN
+INSERT INTO regimen(reg_estado,reg_nombre)
+VALUES(1,'LOSEP'),(1,'Código Del Trabajo');
 
 
 -- PROVINCIAS
