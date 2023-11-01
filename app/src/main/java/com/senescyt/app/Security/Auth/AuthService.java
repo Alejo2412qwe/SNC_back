@@ -47,7 +47,6 @@ public class AuthService {
                 .insId(request.getInsId())
                 .procId(request.getProcId())
                 .build();
-        System.out.println("\n\n\n\n\n\n\n"+user.getFoto()+"\n\n\n\n\n\n\n");
 
         userRepository.save(user);
 
