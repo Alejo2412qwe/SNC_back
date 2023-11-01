@@ -47,7 +47,7 @@ public class InstitucionController {
 
                 institucion.setInstNombre(p.getInstNombre());
                 institucion.setInstDireccion(p.getInstDireccion());
-                institucion.setTipId(p.getTipId());
+                institucion.setInstCodigo(p.getInstCodigo());
 
 
                 return new ResponseEntity<>(institucionService.save(institucion), HttpStatus.CREATED);
