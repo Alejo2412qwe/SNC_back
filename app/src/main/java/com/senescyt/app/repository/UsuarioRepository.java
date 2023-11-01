@@ -30,6 +30,14 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
     )
     List<Object[]> searchUsersData(@Param("search") String search, @Param("est") int est);
 
+
+    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_estado, u.usu_per_id " +
+            "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
+            "  WHERE u.usu_estado= :est  " +
+            "  AND  (p.per_cedula LIKE CONCAT ('%', :search, '%') " +
+            ") ORDER BY p.per_apellido, p.per_nombre"
+    )
+    List<Object[]> searchUsersCI(@Param("search") String search, @Param("est") int est);
     Usuario findByUsuId(Long id);
 
     @Query(value = "SELECT * FROM usuario u, Rol p WHERE u.usu_nombre_usuario = :usuario OR p.per_correo = :email", nativeQuery = true)

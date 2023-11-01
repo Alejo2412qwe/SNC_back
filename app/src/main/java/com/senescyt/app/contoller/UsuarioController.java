@@ -128,6 +128,34 @@ public class UsuarioController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping("/searchUsersCI")
+    public ResponseEntity<List<Usuario>> searchUsersCI(@RequestParam String search, @RequestParam int est) {
+        List<Object[]> userData = usuarioService.searchUsersCI(search, est);
+        List<Usuario> users = new ArrayList<>();
+
+        for (Object[] data : userData) {
+            Usuario user = new Usuario();
+            user.setUsuId((Long) data[0]);
+
+            user.setUsuEstado((int) data[1]);
+
+            Long perId = (Long) data[2];
+            Persona p= personaService.findById(perId);
+
+            Persona persona= new Persona();
+            persona.setPerNombre(p.getPerNombre());
+            persona.setPerApellido(p.getPerApellido());
+            persona.setPerFechaNacimiento(p.getPerFechaNacimiento());
+            persona.setCiuId(p.getCiuId());
+
+            user.setUsuPerId(persona);
+
+            users.add(user);
+        }
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
     @GetMapping("/usuarioUnico")
     public ResponseEntity<Boolean> usuarioUnico(@RequestParam String user) {
         return new ResponseEntity<>(usuarioService.usuarioUnico(user), HttpStatus.OK);
