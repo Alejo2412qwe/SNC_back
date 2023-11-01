@@ -14,6 +14,7 @@ INSERT INTO regimen(reg_estado,reg_nombre)
 VALUES(1,'LOSEP'),(1,'Código Del Trabajo');
 
 
+
 -- PROVINCIAS
     INSERT
 INTO provincia (pro_id, pro_nombre)
