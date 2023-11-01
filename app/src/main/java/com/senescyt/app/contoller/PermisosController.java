@@ -24,7 +24,7 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado(1);
+        p.setPermEstado('E');
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
     }
 
@@ -43,7 +43,6 @@ public class PermisosController {
                 permisos.setTiPeId(p.getTiPeId());
                 permisos.setMotId(p.getMotId());
                 permisos.setTiFoId(p.getTiFoId());
-                permisos.setUsuId(p.getUsuId());
 
                 return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
             } catch (Exception e) {
