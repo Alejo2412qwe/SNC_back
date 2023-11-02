@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -16,24 +15,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "TipoFormulario")
-public class TipoFormulario implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+@Table(name = "Regimen")
+public class Regimen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tiFoId")
-    private Long tiFoId;
+    @Column(name = "regId")
+    private Long regId;
 
-    @Column(name = "tiFoNombre")
-    private String tiFoNombre;
-    @Column(name = "tiFoEstado")
-    private int tiFoEstado;
+    @Column(name = "regNombre")
+    private String regNombre;
+
+    @Column(name = "regEstado")
+    private int regEstado;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tiFoId")
+    @OneToMany(mappedBy = "regId")
     private List<Permisos> listaPermisos;
-
 }

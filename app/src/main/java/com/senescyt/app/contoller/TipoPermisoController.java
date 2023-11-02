@@ -1,5 +1,7 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.model.MotivoPermiso;
+import com.senescyt.app.model.TipoInstitucion;
 import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.service.TipoPermisoService;
@@ -24,19 +26,43 @@ public class TipoPermisoController {
 
     @PostMapping("/create")
     public ResponseEntity<TipoPermiso> create(@RequestBody TipoPermiso p) {
+        p.setTiPeEstado(1);
         return new ResponseEntity<>(tipPermisoService.save(p), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getTipoPermisoByEstado")
+    public ResponseEntity<List<TipoPermiso>> getTipoPermisoByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(tipPermisoService.getTipoPermisoByEstado(est), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TipoPermiso> update(@PathVariable Long id, @RequestBody TipoPermiso p) {
-        TipoPermiso TipoPermiso = tipPermisoService.findById(id);
-        if (TipoPermiso != null) {
+        TipoPermiso tipoPermiso = tipPermisoService.findById(id);
+        if (tipoPermiso != null) {
             try {
 
-                TipoPermiso.setTiPeNombre(p.getTiPeNombre());
-                TipoPermiso.setTiPeEstado(p.isTiPeEstado());
+                tipoPermiso.setTiPeNombre(p.getTiPeNombre());
+                tipoPermiso.setTiPeDescripcion(p.getTiPeDescripcion());
 
-                return new ResponseEntity<>(tipPermisoService.save(TipoPermiso), HttpStatus.CREATED);
+                return new ResponseEntity<>(tipPermisoService.save(tipoPermiso), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<TipoPermiso> updateEst(@RequestParam Long id, @RequestParam int est) {
+        TipoPermiso tipoPermiso = tipPermisoService.findById(id);
+        if (tipoPermiso != null) {
+            try {
+
+                tipoPermiso.setTiPeEstado(est);
+                tipPermisoService.save(tipoPermiso);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

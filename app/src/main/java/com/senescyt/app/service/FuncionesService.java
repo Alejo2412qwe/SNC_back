@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FuncionesService extends GenericServiceImpl<Funciones, Long> implements GenericService<Funciones, Long> {
 
@@ -18,5 +20,9 @@ public class FuncionesService extends GenericServiceImpl<Funciones, Long> implem
     @Override
     public CrudRepository<Funciones, Long> getDao() {
         return funcionesRepository;
+    }
+
+    public List<Funciones> getFuncionesByEstado(int est) {
+        return funcionesRepository.getFuncionesByEstado(est);
     }
 }

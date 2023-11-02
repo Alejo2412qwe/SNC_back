@@ -33,6 +33,9 @@ public class Funciones implements Serializable {
     @Column(name = "funNombre")
     private String funNombre;
 
+
+    @Column(name = "funEstado")
+    private int funEstado;
     @JsonIgnore
     @OneToMany(mappedBy = "funId")
     private List<Usuario> listaUsuarios;

@@ -65,8 +65,8 @@ public class UsuarioController {
             user.setUsuFechaRegistro((Timestamp) data[3]);
             user.setUsuNombreUsuario((String) data[4]);
 
-//            Long funId = (Long) data[5];
-//            user.setFunId(funcionesService.findById(funId));
+            Long funId = (Long) data[5];
+            user.setFunId(funcionesService.findById(funId));
 
             Long insId = (Long) data[6];
             user.setInsId(institucionService.findById(insId));
@@ -74,7 +74,7 @@ public class UsuarioController {
             Long procId = (Long) data[7];
             user.setProcId(procesosService.findById(insId));
 
-            user.setFunId((Funciones) data[5]);
+//            user.setFunId((Funciones) data[5]);
     //            user.setInsId((Institucion) data[6]);
     //            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
@@ -101,8 +101,8 @@ public class UsuarioController {
             user.setUsuFechaRegistro((Timestamp) data[3]);
             user.setUsuNombreUsuario((String) data[4]);
 
-//            Long funId = (Long) data[5];
-//            user.setFunId(funcionesService.findById(funId));
+            Long funId = (Long) data[5];
+            user.setFunId(funcionesService.findById(funId));
 //
             Long insId = (Long) data[6];
             user.setInsId(institucionService.findById(insId));

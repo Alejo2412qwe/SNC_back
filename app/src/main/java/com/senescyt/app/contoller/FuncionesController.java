@@ -24,7 +24,31 @@ public class FuncionesController {
 
     @PostMapping("/create")
     public ResponseEntity<Funciones> create(@RequestBody Funciones p) {
+        p.setFunEstado(1);
         return new ResponseEntity<>(funcionesService.save(p), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getFuncionesByEstado")
+    public ResponseEntity<List<Funciones>> getFuncionesByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(funcionesService.getFuncionesByEstado(est), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateEstFuncion")
+    public ResponseEntity<Funciones> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Funciones funciones = funcionesService.findById(id);
+        if (funciones != null) {
+            try {
+
+                funciones.setFunEstado(est);
+                funcionesService.save(funciones);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/update/{id}")
