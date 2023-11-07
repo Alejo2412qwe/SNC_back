@@ -5,6 +5,7 @@
 package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,6 +41,12 @@ public class Usuario implements UserDetails {
 
     @Column(name = "usuCorreo")
     private String usuCorreo;
+
+    @Column(name = "foto", columnDefinition = "LONGTEXT")
+    private String foto;
+
+    @Column(name = "titulo", columnDefinition = "LONGTEXT")
+    private String titulo;
 
     @Column(name = "usuEstado")
     private int usuEstado;

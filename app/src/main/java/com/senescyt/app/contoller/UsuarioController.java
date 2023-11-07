@@ -81,6 +81,8 @@ public class UsuarioController {
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -117,7 +119,37 @@ public class UsuarioController {
             user.setRolId(rolService.findById(rolId));
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
+            users.add(user);
+        }
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchUsersCI")
+    public ResponseEntity<List<Usuario>> searchUsersCI(@RequestParam String search, @RequestParam int est) {
+        List<Object[]> userData = usuarioService.searchUsersCI(search, est);
+        List<Usuario> users = new ArrayList<>();
+
+        for (Object[] data : userData) {
+            Usuario user = new Usuario();
+            user.setUsuId((Long) data[0]);
+
+            user.setUsuEstado((int) data[1]);
+
+            Long perId = (Long) data[2];
+            Persona p= personaService.findById(perId);
+
+            Persona persona= new Persona();
+            persona.setPerNombre(p.getPerNombre());
+            persona.setPerApellido(p.getPerApellido());
+            persona.setPerFechaNacimiento(p.getPerFechaNacimiento());
+            persona.setCiuId(p.getCiuId());
+
+            user.setUsuPerId(persona);
+
             users.add(user);
         }
 
@@ -136,7 +168,6 @@ public class UsuarioController {
 
     @PostMapping(value = "register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario request) {
-
         return ResponseEntity.ok(authService.register(request));
     }
 
@@ -152,6 +183,8 @@ public class UsuarioController {
                 usuario.setRolId(u.getRolId());
                 usuario.setUsuCorreo(u.getUsuCorreo());
                 usuario.setFunId(u.getFunId());
+                usuario.setFoto(u.getFoto());
+                usuario.setTitulo(u.getTitulo());
                 usuario.setInsId(u.getInsId());
                 usuario.setProcId(u.getProcId());
 
