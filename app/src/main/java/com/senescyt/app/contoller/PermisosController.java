@@ -2,6 +2,8 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Permisos;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.TipoInstitucion;
+import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +26,13 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado('E');
+        p.setPermEstado("E");
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getPermisosByUsuId")
+    public ResponseEntity<List<Permisos>> getPermisosByUsuId(@RequestParam int id) {
+        return new ResponseEntity<>(permisosService.getPermisosByUsuId(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
@@ -38,6 +45,7 @@ public class PermisosController {
                 permisos.setPermFechaFin(p.getPermFechaFin());
                 permisos.setPermFechaInicio(p.getPermFechaInicio());
                 permisos.setPermHorasFin(p.getPermHorasFin());
+                permisos.setPermFechaEmision(p.getPermFechaEmision());
                 permisos.setPermHorasInicio(p.getPermHorasInicio());
                 permisos.setPermObservacion(p.getPermObservacion());
                 permisos.setTiPeId(p.getTiPeId());
@@ -45,6 +53,24 @@ public class PermisosController {
                 permisos.setTiFoId(p.getTiFoId());
 
                 return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam String est) {
+        Permisos permisos = permisosService.findById(id);
+        if (permisos != null) {
+            try {
+
+                permisos.setPermEstado(est);
+                permisosService.save(permisos);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
