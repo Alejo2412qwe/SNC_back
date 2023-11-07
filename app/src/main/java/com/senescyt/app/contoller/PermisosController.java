@@ -2,6 +2,7 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Permisos;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.TipoInstitucion;
 import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,24 @@ public class PermisosController {
                 permisos.setTiFoId(p.getTiFoId());
 
                 return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam String est) {
+        Permisos permisos = permisosService.findById(id);
+        if (permisos != null) {
+            try {
+
+                permisos.setPermEstado(est);
+                permisosService.save(permisos);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
