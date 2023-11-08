@@ -43,6 +43,9 @@ public class Permisos implements Serializable {
     private Timestamp permHorasInicio;
     @Column(name = "permHorasFin")
     private Timestamp permHorasFin;
+    @Column(name = "permDocumento", columnDefinition = "LONGTEXT")
+    private String permDocumento;
+
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
