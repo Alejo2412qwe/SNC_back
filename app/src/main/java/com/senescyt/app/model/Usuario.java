@@ -64,6 +64,10 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
 
+    @ManyToOne
+    @JoinColumn(name = "regId", referencedColumnName = "regId")
+    private Regimen regId;
+
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

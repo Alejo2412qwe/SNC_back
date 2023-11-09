@@ -34,6 +34,10 @@ public class UsuarioController {
     private InstitucionService institucionService;
     @Autowired
     private FuncionesService funcionesService;
+
+    @Autowired
+    private RegimenService regimenService;
+
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioController(AuthService authService, RolService rolService, PasswordEncoder passwordEncoder) {
@@ -72,17 +76,20 @@ public class UsuarioController {
             user.setInsId(institucionService.findById(insId));
 
             Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(insId));
+            user.setProcId(procesosService.findById(procId));
 
-//            user.setFunId((Funciones) data[5]);
-    //            user.setInsId((Institucion) data[6]);
-    //            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
+
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+
             user.setFoto((String) data[10]);
             user.setTitulo((String) data[11]);
+
+            Long regId = (Long) data[12];
+            user.setRegId(regimenService.findById(regId));
+
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -110,17 +117,20 @@ public class UsuarioController {
             user.setInsId(institucionService.findById(insId));
 
             Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(insId));
+            user.setProcId(procesosService.findById(procId));
 
-            user.setFunId((Funciones) data[5]);
-//            user.setInsId((Institucion) data[6]);
-//            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
+
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+
             user.setFoto((String) data[10]);
             user.setTitulo((String) data[11]);
+
+            Long regId = (Long) data[12];
+            user.setRegId(regimenService.findById(regId));
+
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -140,9 +150,9 @@ public class UsuarioController {
             user.setUsuEstado((int) data[1]);
 
             Long perId = (Long) data[2];
-            Persona p= personaService.findById(perId);
+            Persona p = personaService.findById(perId);
 
-            Persona persona= new Persona();
+            Persona persona = new Persona();
             persona.setPerNombre(p.getPerNombre());
             persona.setPerApellido(p.getPerApellido());
             persona.setPerFechaNacimiento(p.getPerFechaNacimiento());
@@ -187,6 +197,7 @@ public class UsuarioController {
                 usuario.setTitulo(u.getTitulo());
                 usuario.setInsId(u.getInsId());
                 usuario.setProcId(u.getProcId());
+                usuario.setRegId(u.getRegId());
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);

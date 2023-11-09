@@ -63,8 +63,4 @@ public class Permisos implements Serializable {
     @JoinColumn(name = "tiPeId", referencedColumnName = "tiPeId")
     private TipoPermiso tiPeId;
 
-    @ManyToOne
-    @JoinColumn(name = "regId", referencedColumnName = "regId")
-    private Regimen regId;
-
 }
