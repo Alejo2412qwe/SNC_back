@@ -25,7 +25,7 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado("E");
+        p.setPermEstado(3);
         Date date = new Date();
         Date fechahoy = new Date(date.getTime());
         p.setPermFechaEmision(fechahoy);
@@ -54,7 +54,7 @@ public class PermisosController {
     }
 
     @PutMapping("/updateEst")
-    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam String est) {
+    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam int est) {
         Permisos permisos = permisosService.findById(id);
         if (permisos != null) {
             try {

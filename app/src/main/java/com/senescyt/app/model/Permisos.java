@@ -39,7 +39,7 @@ public class Permisos implements Serializable {
     @Column(name = "permFechaFin")
     private Date permFechaFin;
     @Column(name = "permEstado")
-    private String permEstado;
+    private int permEstado;
     @Column(name = "permHorasInicio")
     private LocalTime permHorasInicio;
     @Column(name = "permHorasFin")

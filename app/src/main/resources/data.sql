@@ -6,6 +6,8 @@ INSERT INTO rol(rol_id, rol_nombre)
 VALUES (3, 'Docente');
 INSERT INTO rol(rol_id, rol_nombre)
 VALUES (4, 'Funcionario');
+INSERT INTO rol(rol_id, rol_nombre)
+VALUES (5, 'Jefe de Unidad');
 
 
 --motivo del permiso
