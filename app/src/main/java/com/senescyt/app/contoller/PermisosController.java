@@ -2,14 +2,13 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Permisos;
 import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.TipoInstitucion;
-import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -27,6 +26,9 @@ public class PermisosController {
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
         p.setPermEstado("E");
+        Date date = new Date();
+        Date fechahoy = new Date(date.getTime());
+        p.setPermFechaEmision(fechahoy);
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
     }
 
