@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -31,16 +32,21 @@ public class Permisos implements Serializable {
 
     @Column(name = "permObservacion", length = 1000)
     private String permObservacion;
+    @Column(name = "permFechaEmision")
+    private Date permFechaEmision;
     @Column(name = "permFechaInicio")
     private Date permFechaInicio;
     @Column(name = "permFechaFin")
     private Date permFechaFin;
     @Column(name = "permEstado")
-    private char permEstado;
+    private int permEstado;
     @Column(name = "permHorasInicio")
-    private Timestamp permHorasInicio;
+    private LocalTime permHorasInicio;
     @Column(name = "permHorasFin")
-    private Timestamp permHorasFin;
+    private LocalTime permHorasFin;
+    @Column(name = "permDocumento", columnDefinition = "LONGTEXT")
+    private String permDocumento;
+
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
@@ -57,9 +63,5 @@ public class Permisos implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tiPeId", referencedColumnName = "tiPeId")
     private TipoPermiso tiPeId;
-
-    @ManyToOne
-    @JoinColumn(name = "regId", referencedColumnName = "regId")
-    private Regimen regId;
 
 }
