@@ -2,14 +2,13 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Permisos;
 import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.TipoInstitucion;
-import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.service.PermisoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -26,7 +25,10 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado("E");
+        p.setPermEstado(3);
+        Date date = new Date();
+        Date fechahoy = new Date(date.getTime());
+        p.setPermFechaEmision(fechahoy);
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
     }
 
@@ -35,35 +37,24 @@ public class PermisosController {
         return new ResponseEntity<>(permisosService.getPermisosByUsuId(id), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Permisos> update(@PathVariable Long id, @RequestBody Permisos p) {
+    @PutMapping("/update")
+    public ResponseEntity<Permisos> update(@RequestParam Long id, @RequestParam String p) {
         Permisos permisos = permisosService.findById(id);
         if (permisos != null) {
             try {
-
-                permisos.setPermEstado(p.getPermEstado());
-                permisos.setPermFechaFin(p.getPermFechaFin());
-                permisos.setPermFechaInicio(p.getPermFechaInicio());
-                permisos.setPermHorasFin(p.getPermHorasFin());
-                permisos.setPermFechaEmision(p.getPermFechaEmision());
-                permisos.setPermHorasInicio(p.getPermHorasInicio());
-                permisos.setPermObservacion(p.getPermObservacion());
-                permisos.setTiPeId(p.getTiPeId());
-                permisos.setMotId(p.getMotId());
-                permisos.setTiFoId(p.getTiFoId());
-
-                return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
+                permisos.setPermDocumento(p);
+                permisosService.save(permisos);
+                return new ResponseEntity<>(permisos, HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/updateEst")
-    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam String est) {
+    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam int est) {
         Permisos permisos = permisosService.findById(id);
         if (permisos != null) {
             try {

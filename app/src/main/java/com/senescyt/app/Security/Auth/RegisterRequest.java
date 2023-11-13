@@ -24,5 +24,6 @@ public class RegisterRequest {
     private Funciones funId;
     private Institucion insId;
     private Procesos procId;
+    private Regimen regId;
 
 }

@@ -31,5 +31,5 @@ public class Regimen {
 
     @JsonIgnore
     @OneToMany(mappedBy = "regId")
-    private List<Permisos> listaPermisos;
+    private List<Usuario> listaUsuarios;
 }
