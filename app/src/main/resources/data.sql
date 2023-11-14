@@ -31,12 +31,11 @@ VALUES(1,'LOSEP'),(1,'Código Del Trabajo');
 
 
 -- PROVINCIAS
-    INSERT
-INTO provincia (pro_id, pro_nombre)
+INSERT INTO provincia (pro_id, pro_nombre)
 VALUES (1, 'AZUAY'), (2, 'BOLIVAR'), (3, 'CAÑAR'), (4, 'CARCHI'), (5, 'COTOPAXI'), (6, 'CHIMBORAZO'), (7, 'EL ORO'), (8, 'ESMERALDAS'), (9, 'GUAYAS'), (10, 'IMBABURA'), (11, 'LOJA'), (12, 'LOS RIOS'), (13, 'MANABI'), (14, 'MORONA SANTIAGO'), (15, 'NAPO'), (16, 'PASTAZA'), (17, 'PICHINCHA'), (18, 'TUNGURAHUA'), (19, 'ZAMORA CHINCHIPE'), (20, 'GALAPAGOS'), (21, 'SUCUMBIOS'), (22, 'ORELLANA'), (23, 'SANTO DOMINGO DE LOS TSACHILAS'), (24, 'SANTA ELENA'), (25, 'ZONAS NO DELIMITADAS');
 
 
---CIUDADES
+-- CIUDADES
 INSERT INTO ciudad(ciu_nombre, pro_id)
 VALUES ('CUENCA', 1),
        ('GIRÓN', 1),
@@ -265,5 +264,26 @@ VALUES ('CUENCA', 1),
 
 
 INSERT INTO persona(per_apellido, per_cedula, per_direccion, per_fecha_nacimiento, per_nombre,
-                      per_telefono, ciu_id)
+                    per_telefono, ciu_id)
 VALUES ('JARAMILLO', '012313123123', 'AV. DE LAS AMERICAS', '2002-08-22', 'JULIO', '098123123123', 1);
+
+
+INSERT INTO funciones(fun_id, fun_estado, fun_nombre)
+VALUES ('1', '1', 'www');
+
+INSERT INTO horarios(hor_id, hor_hora_almuerzo_fin, hor_hora_almuerzo_inicio, hor_hora_ingreso, hor_hora_salida,
+                     hor_num_horas)
+VALUES ('1', '2pm', '1pm', '7am', '6pm', '11h');
+
+INSERT INTO tipo_institucion(tip_id, tip_estado, tip_nombre)
+VALUES ('1', '1', 'Instituto');
+
+INSERT INTO institucion(ins_id, int_direccion, inst_estado, ins_nombre, tip_id)
+VALUES ('1', 'Parque Industrial', '1', 'ISTA', '1');
+
+INSERT INTO procesos(proc_id, proc_estado, proc_nombre)
+VALUES ('1', '1', 'ffff');
+
+INSERT INTO usuario(usu_id, usu_contrasena, usu_correo, usu_estado, usu_fecha_registro,
+                    usu_nombre_usuario, fun_id, hor_id, ins_id, proc_id, rol_id, usu_per_id)
+VALUES ('1', 'kawwbqtpbxyxpfcg', 'alejandro.coraspe.est@tecazuay.edu.ec', '1', '2023-10-22', 'Alejandro', '1','1','1','1','1','1');
