@@ -38,7 +38,8 @@ public class PermisosController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Permisos> update(@RequestParam Long id, @RequestParam String p) {
+    public ResponseEntity<Permisos> update(@RequestParam Long id, @RequestBody String p) {
+
         Permisos permisos = permisosService.findById(id);
         if (permisos != null) {
             try {
