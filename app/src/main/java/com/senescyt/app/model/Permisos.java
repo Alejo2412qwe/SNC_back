@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -28,29 +30,38 @@ public class Permisos implements Serializable {
     @Column(name = "permId")
     private Long permId;
 
-    @Column(name = "permDocumento")
-    private String permDocumento;
-    @Column(name = "permTipo")
-    private String permTipo;
-    @Column(name = "permFecha")
-    private Date permFecha;
+    @Column(name = "permObservacion", length = 1000)
+    private String permObservacion;
+    @Column(name = "permFechaEmision")
+    private Date permFechaEmision;
+    @Column(name = "permFechaInicio")
+    private String permFechaInicio;
+    @Column(name = "permFechaFin")
+    private String permFechaFin;
     @Column(name = "permEstado")
-    private boolean permEstado;
-    @Column(name = "permCondicion")
-    private String permCondicion;
-    @Column(name = "permNumHoras")
-    private int permNumHoras;
+    private int permEstado;
+    @Column(name = "permHorasInicio")
+    private String permHorasInicio;
+    @Column(name = "permHorasFin")
+    private String permHorasFin;
+    @Column(name = "permDocumento", columnDefinition = "LONGTEXT")
+    private String permDocumento;
+
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "permId")
-    private List<TipoFormulario> listaTipoFormulario;
+    @ManyToOne
+    @JoinColumn(name = "tiFoId", referencedColumnName = "tiFoId")
+    private TipoFormulario tiFoId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "permId")
-    private List<TipoPermiso> listTipoPermiso;
+    @ManyToOne
+    @JoinColumn(name = "motId", referencedColumnName = "motId")
+    private MotivoPermiso motId;
+
+    @ManyToOne
+    @JoinColumn(name = "tiPeId", referencedColumnName = "tiPeId")
+    private TipoPermiso tiPeId;
 
 }

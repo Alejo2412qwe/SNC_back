@@ -34,6 +34,10 @@ public class UsuarioController {
     private InstitucionService institucionService;
     @Autowired
     private FuncionesService funcionesService;
+
+    @Autowired
+    private RegimenService regimenService;
+
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioController(AuthService authService, RolService rolService, PasswordEncoder passwordEncoder) {
@@ -65,22 +69,27 @@ public class UsuarioController {
             user.setUsuFechaRegistro((Timestamp) data[3]);
             user.setUsuNombreUsuario((String) data[4]);
 
-//            Long funId = (Long) data[5];
-//            user.setFunId(funcionesService.findById(funId));
+            Long funId = (Long) data[5];
+            user.setFunId(funcionesService.findById(funId));
 
             Long insId = (Long) data[6];
             user.setInsId(institucionService.findById(insId));
 
             Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(insId));
+            user.setProcId(procesosService.findById(procId));
 
-            user.setFunId((Funciones) data[5]);
-    //            user.setInsId((Institucion) data[6]);
-    //            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
+
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
+
+            Long regId = (Long) data[12];
+            user.setRegId(regimenService.findById(regId));
+
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
@@ -101,23 +110,56 @@ public class UsuarioController {
             user.setUsuFechaRegistro((Timestamp) data[3]);
             user.setUsuNombreUsuario((String) data[4]);
 
-//            Long funId = (Long) data[5];
-//            user.setFunId(funcionesService.findById(funId));
+            Long funId = (Long) data[5];
+            user.setFunId(funcionesService.findById(funId));
 //
             Long insId = (Long) data[6];
             user.setInsId(institucionService.findById(insId));
 
             Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(insId));
+            user.setProcId(procesosService.findById(procId));
 
-            user.setFunId((Funciones) data[5]);
-//            user.setInsId((Institucion) data[6]);
-//            user.setProcId((Procesos) data[7]);
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
+
             Long personaId = (Long) data[9];
             user.setUsuPerId(personaService.findById(personaId));
+
+            user.setFoto((String) data[10]);
+            user.setTitulo((String) data[11]);
+
+            Long regId = (Long) data[12];
+            user.setRegId(regimenService.findById(regId));
+
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
+            users.add(user);
+        }
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchUsersCI")
+    public ResponseEntity<List<Usuario>> searchUsersCI(@RequestParam String search, @RequestParam int est) {
+        List<Object[]> userData = usuarioService.searchUsersCI(search, est);
+        List<Usuario> users = new ArrayList<>();
+
+        for (Object[] data : userData) {
+            Usuario user = new Usuario();
+            user.setUsuId((Long) data[0]);
+
+            user.setUsuEstado((int) data[1]);
+
+            Long perId = (Long) data[2];
+            Persona p = personaService.findById(perId);
+
+            Persona persona = new Persona();
+            persona.setPerNombre(p.getPerNombre());
+            persona.setPerApellido(p.getPerApellido());
+            persona.setPerFechaNacimiento(p.getPerFechaNacimiento());
+            persona.setCiuId(p.getCiuId());
+
+            user.setUsuPerId(persona);
+
             users.add(user);
         }
 
@@ -136,7 +178,6 @@ public class UsuarioController {
 
     @PostMapping(value = "register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario request) {
-
         return ResponseEntity.ok(authService.register(request));
     }
 
@@ -152,8 +193,11 @@ public class UsuarioController {
                 usuario.setRolId(u.getRolId());
                 usuario.setUsuCorreo(u.getUsuCorreo());
                 usuario.setFunId(u.getFunId());
+                usuario.setFoto(u.getFoto());
+                usuario.setTitulo(u.getTitulo());
                 usuario.setInsId(u.getInsId());
                 usuario.setProcId(u.getProcId());
+                usuario.setRegId(u.getRegId());
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
