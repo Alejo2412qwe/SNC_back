@@ -1,5 +1,6 @@
 package com.senescyt.app.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -28,34 +31,38 @@ public class Asistencia implements Serializable {
     @Column(name = "asisId")
     private Long asisId;
 
-    @Column(name = "asisNombre")
     private String asisNombre;
 
-    @Column(name = "asisVerificacion")
-    private String asisVerificacion;
+    private String asisDpto;
 
-    @Column(name = "asisEstado")
-    private boolean asisEstado;
+    private Long asisNoLector;
 
-    @Column(name = "asisLector")
-    private int asisLector;
+    private String asisFechaHora;
 
-    @Column(name = "asisFecha")
-    private String asisFecha;
+    private String asisEstado;
 
-    @Column(name = "asisHoraMarcado")
-    private String asisHoraMarcado;
+    private Long asisLocacionId;
 
-    @ManyToOne
-    @JoinColumn(name = "subId", referencedColumnName = "subId")
-    private Subprocesos subId;
+    private Long asisIdNumero;
+
+    private Long asisCodTrabajo;
+
+    private String asisVerificaCod;
+
+    private Long asisNoTarjeta;
+
+    private String asisNombreArchivo;
+
+    private Timestamp asisFechaArchivo;
+
+
 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;
 
-    @ManyToOne
-    @JoinColumn(name = "estId", referencedColumnName = "estId")
-    private EstadoAsistencia estadoAsistencia;
+//    @ManyToOne
+//    @JoinColumn(name = "estId", referencedColumnName = "estId")
+//    private EstadoAsistencia estadoAsistencia;
 
 }
