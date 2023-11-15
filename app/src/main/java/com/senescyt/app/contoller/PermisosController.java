@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -16,36 +17,58 @@ import java.util.List;
 public class PermisosController {
     @Autowired
     private PermisoService permisosService;
-
-    @GetMapping("/read")
-    public ResponseEntity<List<Permisos>> read() {
-        return new ResponseEntity<>(permisosService.findByAll(), HttpStatus.OK);
-    }
+    
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado(1);
+        p.setPermEstado(3);
+        Date date = new Date();
+        Date fechahoy = new Date(date.getTime());
+        p.setPermFechaEmision(fechahoy);
         return new ResponseEntity<>(permisosService.save(p), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Permisos> update(@PathVariable Long id, @RequestBody Permisos p) {
+    @GetMapping("/getPermisosByUsuId")
+    public ResponseEntity<List<Permisos>> getPermisosByUsuId(@RequestParam int id) {
+        return new ResponseEntity<>(permisosService.getPermisosByUsuId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPermisosByIdJefe")
+    public ResponseEntity<List<Permisos>> getPermisosByIdJefe(@RequestParam int id) {
+        return new ResponseEntity<>(permisosService.getPermisosByIdJefe(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPermisosForAdmin")
+    public ResponseEntity<List<Permisos>> getPermisosForAdmin(@RequestParam int est) {
+        return new ResponseEntity<>(permisosService.getPermisosForAdmin(est), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Permisos> update(@RequestParam Long id, @RequestBody String p) {
+
+        Permisos permisos = permisosService.findById(id);
+        if (permisos != null) {
+            try {
+                permisos.setPermDocumento(p);
+                permisosService.save(permisos);
+                return new ResponseEntity<>(permisos, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Permisos> updateEst(@RequestParam Long id, @RequestParam int est) {
         Permisos permisos = permisosService.findById(id);
         if (permisos != null) {
             try {
 
-                permisos.setPermEstado(p.getPermEstado());
-                permisos.setPermFechaFin(p.getPermFechaFin());
-                permisos.setPermFechaInicio(p.getPermFechaInicio());
-                permisos.setPermHorasFin(p.getPermHorasFin());
-                permisos.setPermHorasInicio(p.getPermHorasInicio());
-                permisos.setPermObservacion(p.getPermObservacion());
-                permisos.setTiPeId(p.getTiPeId());
-                permisos.setMotId(p.getMotId());
-                permisos.setTiFoId(p.getTiFoId());
-                permisos.setUsuId(p.getUsuId());
-
-                return new ResponseEntity<>(permisosService.save(permisos), HttpStatus.CREATED);
+                permisos.setPermEstado(est);
+                permisosService.save(permisos);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

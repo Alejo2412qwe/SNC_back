@@ -28,6 +28,12 @@ public class MotivoPermiso {
     @Column(name = "motEstado")
     private int motEstado;
 
+    @Column(name = "motDescripcionLarga",length = 2000000000)
+    private String motDescripcionLarga;
+
+    @Column(name = "motDescripcionCorta",length = 2000000000)
+    private String motDescripcionCorta;
+
     @JsonIgnore
     @OneToMany(mappedBy = "motId")
     private List<Permisos> listaPermisos;

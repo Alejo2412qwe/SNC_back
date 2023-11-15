@@ -1,6 +1,7 @@
 package com.senescyt.app.Security.Auth;
 
 import com.senescyt.app.model.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,5 +25,8 @@ public class RegisterRequest {
     private Funciones funId;
     private Institucion insId;
     private Procesos procId;
+    private Regimen regId;
+    private Long usuIdLector;
+    private Long usuIdJefe;
 
 }

@@ -21,10 +21,10 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsuNombreUsuario(), request.getUsuContrasena()));
-        Usuario user=userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()).orElseThrow();
+        Usuario user = userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()).orElseThrow();
 //        System.out.println("PASSS = "+userRepository.findByUsuNombreUsuario(request.getUsuNombreUsuario()));
 
-        String token=jwtService.getToken(user);
+        String token = jwtService.getToken(user);
 
         return AuthResponse.builder()
                 .token(token)
@@ -36,15 +36,19 @@ public class AuthService {
         Usuario user = Usuario.builder()
                 .usuId(request.getUsuId())
                 .usuNombreUsuario(request.getUsuNombreUsuario())
-                .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
+                .usuContrasena(passwordEncoder.encode(request.getUsuContrasena()))
                 .usuCorreo(request.getUsuCorreo())
                 .usuEstado(request.getUsuEstado())
                 .usuFechaRegistro(request.getUsuFechaRegistro())
                 .usuPerId(request.getUsuPerId())
                 .rolId(request.getRolId())
+                .foto(request.getFoto())
                 .funId(request.getFunId())
                 .insId(request.getInsId())
                 .procId(request.getProcId())
+                .regId(request.getRegId())
+                .usuIdLector(request.getUsuIdLector())
+                .usuIdJefe(request.getUsuIdJefe())
                 .build();
 
         userRepository.save(user);
@@ -54,19 +58,22 @@ public class AuthService {
                 .build();
 
     }
+
     public Usuario update(Usuario request) {
         Usuario user = Usuario.builder()
                 .usuId(request.getUsuId())
                 .usuNombreUsuario(request.getUsuNombreUsuario())
-                .usuContrasena(passwordEncoder.encode( request.getUsuContrasena()))
+                .usuContrasena(passwordEncoder.encode(request.getUsuContrasena()))
                 .usuCorreo(request.getUsuCorreo())
                 .usuEstado(request.getUsuEstado())
                 .usuFechaRegistro(request.getUsuFechaRegistro())
                 .usuPerId(request.getUsuPerId())
                 .rolId(request.getRolId())
+                .foto(request.getFoto())
                 .funId(request.getFunId())
                 .insId(request.getInsId())
                 .procId(request.getProcId())
+                .regId(request.getRegId())
                 .build();
 
         userRepository.save(user);
@@ -74,6 +81,7 @@ public class AuthService {
         return userRepository.save(user);
 
     }
+
     public boolean usuarioValido(String user) {
         int cont = userRepository.usuarioUnico(user.trim());
 

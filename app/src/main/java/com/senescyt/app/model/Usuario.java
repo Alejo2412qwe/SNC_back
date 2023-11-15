@@ -5,6 +5,7 @@
 package com.senescyt.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,12 @@ public class Usuario implements UserDetails {
     @Column(name = "usuId")
     private Long usuId;
 
+    @Column(name = "usuIdLector")
+    private Long usuIdLector;
+
+    @Column(name = "usuIdJefe")
+    private Long usuIdJefe;
+
     @Basic
     private String usuNombreUsuario;
 
@@ -40,6 +47,12 @@ public class Usuario implements UserDetails {
 
     @Column(name = "usuCorreo")
     private String usuCorreo;
+
+    @Column(name = "foto", columnDefinition = "LONGTEXT")
+    private String foto;
+
+    @Column(name = "titulo", columnDefinition = "LONGTEXT")
+    private String titulo;
 
     @Column(name = "usuEstado")
     private int usuEstado;
@@ -56,6 +69,10 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rolId;
+
+    @ManyToOne
+    @JoinColumn(name = "regId", referencedColumnName = "regId")
+    private Regimen regId;
 
     @JsonIgnore
     @Override

@@ -1,5 +1,6 @@
 package com.senescyt.app.repository;
 
+import com.senescyt.app.model.TipoPermiso;
 import com.senescyt.app.model.Usuario;
 import com.senescyt.app.repository.genericRepository.GenericRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,12 +14,12 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
 
-    @Query(value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id " +
-            "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id"+
+    @Query(value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id ,u.foto, u.titulo, u.reg_id,u.usu_id_jefe,u.usu_id_lector  " +
+            "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
             "  WHERE u.usu_estado= :est  ORDER BY p.per_apellido, p.per_nombre", nativeQuery = true)
     public List<Object[]> allUsersData(@Param("est") int est);
 
-    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id " +
+    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id,u.foto, u.titulo, u.reg_id,u.usu_id_jefe,u.usu_id_lector" +
             "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
             "  WHERE u.usu_estado= :est  " +
             "  AND  (p.per_cedula LIKE CONCAT ('%', :search, '%') " +
@@ -29,6 +30,15 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
             ") ORDER BY p.per_apellido, p.per_nombre"
     )
     List<Object[]> searchUsersData(@Param("search") String search, @Param("est") int est);
+
+
+    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_estado, u.usu_per_id " +
+            "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
+            "  WHERE u.usu_estado= :est  " +
+            "  AND  (p.per_cedula LIKE CONCAT ('%', :search, '%') " +
+            ") ORDER BY p.per_apellido, p.per_nombre"
+    )
+    List<Object[]> searchUsersCI(@Param("search") String search, @Param("est") int est);
 
     Usuario findByUsuId(Long id);
 
@@ -47,6 +57,9 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
 
     @Query(value = "SELECT COUNT(*) FROM `usuario` WHERE usu_nombre_usuario =:user", nativeQuery = true)
     int usuarioUnico(@Param("user") String user);
+
+    @Query(value = "SELECT u.* FROM bd_snc.usuario u JOIN bd_snc.rol r ON u.rol_id = r.rol_id WHERE r.rol_id = :id", nativeQuery = true)
+    List<Usuario> getJefesByRolId(@Param("id") Long id);
 
     Optional<Usuario> findByUsuNombreUsuario(String username);
 

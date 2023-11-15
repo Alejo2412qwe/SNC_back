@@ -35,8 +35,8 @@ public class EstadoAsistencia implements Serializable {
     @Column(name = "estEstado")
     private boolean estEstado;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "estadoAsistencia", cascade = CascadeType.ALL)
-    private List<Asistencia> listaAsistencia;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "estadoAsistencia", cascade = CascadeType.ALL)
+//    private List<Asistencia> listaAsistencia;
 
 }

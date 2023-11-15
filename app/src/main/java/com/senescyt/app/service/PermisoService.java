@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PermisoService extends GenericServiceImpl<Permisos, Long> implements GenericService<Permisos, Long> {
     @Autowired
@@ -18,4 +20,17 @@ public class PermisoService extends GenericServiceImpl<Permisos, Long> implement
     public CrudRepository<Permisos, Long> getDao() {
         return permisosRepository;
     }
+
+    public List<Permisos> getPermisosByUsuId(int id) {
+        return permisosRepository.getPermisosByUsuId(id);
+    }
+
+    public List<Permisos> getPermisosByIdJefe(int id) {
+        return permisosRepository.getPermisosByIdJefe(id);
+    }
+
+    public List<Permisos> getPermisosForAdmin(int est) {
+        return permisosRepository.getPermisosForAdmin(est);
+    }
+
 }
