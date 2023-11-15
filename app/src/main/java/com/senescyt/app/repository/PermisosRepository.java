@@ -16,4 +16,7 @@ public interface PermisosRepository extends GenericRepository<Permisos, Long> {
 
     @Query(value = "SELECT p.* FROM permisos p JOIN usuario u ON p.usu_id = u.usu_id WHERE u.usu_id_jefe = :id", nativeQuery = true)
     List<Permisos> getPermisosByIdJefe(@Param("id") int id);
+
+    @Query(value = "SELECT * FROM permisos WHERE perm_estado = :est", nativeQuery = true)
+    List<Permisos> getPermisosForAdmin(@Param("est") int est);
 }

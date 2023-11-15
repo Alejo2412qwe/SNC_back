@@ -17,11 +17,7 @@ import java.util.List;
 public class PermisosController {
     @Autowired
     private PermisoService permisosService;
-
-    @GetMapping("/read")
-    public ResponseEntity<List<Permisos>> read() {
-        return new ResponseEntity<>(permisosService.findByAll(), HttpStatus.OK);
-    }
+    
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
@@ -40,6 +36,11 @@ public class PermisosController {
     @GetMapping("/getPermisosByIdJefe")
     public ResponseEntity<List<Permisos>> getPermisosByIdJefe(@RequestParam int id) {
         return new ResponseEntity<>(permisosService.getPermisosByIdJefe(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getPermisosForAdmin")
+    public ResponseEntity<List<Permisos>> getPermisosForAdmin(@RequestParam int est) {
+        return new ResponseEntity<>(permisosService.getPermisosForAdmin(est), HttpStatus.OK);
     }
 
     @PutMapping("/update")
