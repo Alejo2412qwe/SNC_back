@@ -24,4 +24,8 @@ public class PermisoService extends GenericServiceImpl<Permisos, Long> implement
     public List<Permisos> getPermisosByUsuId(int id) {
         return permisosRepository.getPermisosByUsuId(id);
     }
+
+    public List<Permisos> getPermisosByIdJefe(int id) {
+        return permisosRepository.getPermisosByIdJefe(id);
+    }
 }

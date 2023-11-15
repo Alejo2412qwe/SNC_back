@@ -37,6 +37,11 @@ public class PermisosController {
         return new ResponseEntity<>(permisosService.getPermisosByUsuId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/getPermisosByIdJefe")
+    public ResponseEntity<List<Permisos>> getPermisosByIdJefe(@RequestParam int id) {
+        return new ResponseEntity<>(permisosService.getPermisosByIdJefe(id), HttpStatus.OK);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<Permisos> update(@RequestParam Long id, @RequestBody String p) {
 
