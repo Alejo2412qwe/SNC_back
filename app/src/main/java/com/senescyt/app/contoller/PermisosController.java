@@ -17,7 +17,7 @@ import java.util.List;
 public class PermisosController {
     @Autowired
     private PermisoService permisosService;
-    
+
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
