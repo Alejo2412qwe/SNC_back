@@ -51,6 +51,11 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getJefesByRolId")
+    public ResponseEntity<List<Usuario>> getJefesByRolId(@RequestParam Long id) {
+        return new ResponseEntity<>(usuarioService.getJefesByRolId(id), HttpStatus.OK);
+    }
+
     @GetMapping("/searchUserId")
     public ResponseEntity<Usuario> searchUserId(@RequestParam Long id) {
         return new ResponseEntity<>(usuarioService.findByUsuId(id), HttpStatus.OK);
@@ -89,6 +94,9 @@ public class UsuarioController {
 
             Long regId = (Long) data[12];
             user.setRegId(regimenService.findById(regId));
+
+            user.setUsuIdJefe((Long) data[13]);
+            user.setUsuIdLector((Long) data[14]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -130,6 +138,9 @@ public class UsuarioController {
 
             Long regId = (Long) data[12];
             user.setRegId(regimenService.findById(regId));
+
+            user.setUsuIdJefe((Long) data[13]);
+            user.setUsuIdLector((Long) data[14]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);

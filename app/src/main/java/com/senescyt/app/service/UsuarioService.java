@@ -28,6 +28,10 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
         return usuarioRepository.findByUsernameOrEmail(nombreOrEmail, nombreOrEmail);
     }
 
+    public List<Usuario> getJefesByRolId(Long id){
+        return usuarioRepository.getJefesByRolId(id);
+    }
+
     public List<Object[]> allUsersData(int est) {
         return usuarioRepository.allUsersData(est);
     }
