@@ -1,9 +1,7 @@
 package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Horarios;
-import com.senescyt.app.model.Procesos;
 import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.Usuario;
 import com.senescyt.app.service.HorariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +24,6 @@ public class HorariosController {
 
     @PostMapping("/create")
     public ResponseEntity<Horarios> create(@RequestBody Horarios p) {
-        p.setProcEstado(1);
         return new ResponseEntity<>(horariosService.save(p), HttpStatus.CREATED);
     }
 
@@ -52,42 +49,8 @@ public class HorariosController {
         }
     }
 
-    @PutMapping("/updateEst")
-    public ResponseEntity<Horarios> updateEst(@RequestParam Long id, @RequestParam int est) {
-        Horarios horarios = horariosService.findById(id);
-        if (horarios != null) {
-            try {
-
-                horarios.setProcEstado(est);
-                horariosService.save(horarios);
-                return new ResponseEntity<>(HttpStatus.OK);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
-
-    @GetMapping("/searchByHour/{hora}")
-    public ResponseEntity<List<Horarios>> searchByHour(@PathVariable String hora) {
-        List<Horarios> horarios = horariosService.findByHora(hora);
-        if (horarios.isEmpty()) {
-            // Si no se encuentran horarios con la hora especificada, devuelve un HttpStatus.NOT_FOUND
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(horarios, HttpStatus.OK);
-    }
-
-    @GetMapping("/getProcesosByHorarios")
-    public ResponseEntity<List<Horarios>> getProcesosByHorarios(@RequestParam int est) {
-        return new ResponseEntity<>(horariosService.getProcesosByHora(est), HttpStatus.OK);
-    }
-
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Horarios> delete(@PathVariable Long id) {
+    public ResponseEntity<Rol> delete(@PathVariable Long id) {
         horariosService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

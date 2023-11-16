@@ -41,8 +41,6 @@ public class Horarios implements Serializable {
     @Column(name = "horHoraAlmuerzoFin")
     private String horHoraAlmuerzoFin;
 
-    @Column(name = "procEstado")
-    private int procEstado;
 
     @JsonIgnore
     @OneToMany(mappedBy = "horId")
