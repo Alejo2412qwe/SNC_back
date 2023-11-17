@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class AsistenciaService extends GenericServiceImpl<Asistencia, Long> implements GenericService<Asistencia, Long> {
 
@@ -18,5 +21,13 @@ public class AsistenciaService extends GenericServiceImpl<Asistencia, Long> impl
     @Override
     public CrudRepository<Asistencia, Long> getDao() {
         return asistenciaRepository;
+    }
+
+    public List<Asistencia> saveAll(List<Asistencia> asistencias) {
+        return (List<Asistencia>) asistenciaRepository.saveAll(asistencias);
+    }
+
+    public List<Object[]> historialArchivos() {
+        return asistenciaRepository.historialArchivos();
     }
 }

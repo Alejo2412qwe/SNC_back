@@ -19,4 +19,7 @@ public interface InsitucionRepository extends GenericRepository<Institucion,Long
 
     @Query(value = "SELECT i.* FROM institucion i JOIN tipo_institucion t ON i.tip_id = t.tip_id WHERE t.tip_estado = :tipid AND i.inst_estado = :instid ", nativeQuery = true)
     public List<Institucion> getInstitucionesByTipId(@Param("tipid") int tipid, @Param("instid") int instid);
+
+    @Query(value = "SELECT * FROM bd_snc.institucion WHERE inst_estado = :est", nativeQuery = true)
+    List<Institucion> getInstitucionesByEstado(@Param("est") int est);
 }

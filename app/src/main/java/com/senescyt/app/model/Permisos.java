@@ -38,6 +38,13 @@ public class Permisos implements Serializable {
     private String permFechaInicio;
     @Column(name = "permFechaFin")
     private String permFechaFin;
+
+    /*estados del permiso
+     * 1: Aprobado por Jefe General
+     * 2: Aprobado por Jefe De Unidad
+     * 3: En Espera
+     * 4: Rechazado
+     * */
     @Column(name = "permEstado")
     private int permEstado;
     @Column(name = "permHorasInicio")

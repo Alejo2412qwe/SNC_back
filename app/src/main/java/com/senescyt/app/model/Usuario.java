@@ -33,6 +33,12 @@ public class Usuario implements UserDetails {
     @Column(name = "usuId")
     private Long usuId;
 
+    @Column(name = "usuIdLector")
+    private Long usuIdLector;
+
+    @Column(name = "usuIdJefe")
+    private Long usuIdJefe;
+
     @Basic
     private String usuNombreUsuario;
 

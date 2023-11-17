@@ -41,7 +41,4 @@ public class Subprocesos /*departamento*/ implements Serializable {
     @JoinColumn(name = "procId", referencedColumnName = "procId")
     private Procesos procId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "subId", cascade = CascadeType.ALL)
-    private List<Asistencia> listaAsistencia;
 }

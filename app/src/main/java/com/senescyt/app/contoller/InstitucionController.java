@@ -33,6 +33,11 @@ public class InstitucionController {
         return new ResponseEntity<>(institucionService.getInstitucionesByTipId(tipid, instid), HttpStatus.OK);
     }
 
+    @GetMapping("/getInstitucionesByEstado")
+    public ResponseEntity<List<Institucion>> getInstitucionesByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(institucionService.getInstitucionesByEstado(est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Institucion> create(@RequestBody Institucion p) {
         p.setInstEstado(1);
@@ -51,6 +56,24 @@ public class InstitucionController {
                 institucion.setInstReferencia(p.getInstReferencia());
 
                 return new ResponseEntity<>(institucionService.save(institucion), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateEst")
+    public ResponseEntity<Institucion> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Institucion institucion = institucionService.findById(id);
+        if (institucion != null) {
+            try {
+
+                institucion.setInstEstado(est);
+                institucionService.save(institucion);
+                return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
