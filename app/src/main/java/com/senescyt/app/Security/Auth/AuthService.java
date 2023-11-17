@@ -47,6 +47,7 @@ public class AuthService {
                 .insId(request.getInsId())
                 .procId(request.getProcId())
                 .regId(request.getRegId())
+                .zonId(request.getZonId())
                 .usuIdLector(request.getUsuIdLector())
                 .usuIdJefe(request.getUsuIdJefe())
                 .build();
