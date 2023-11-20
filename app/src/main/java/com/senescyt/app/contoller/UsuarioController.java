@@ -31,6 +31,9 @@ public class UsuarioController {
     private ProcesosService procesosService;
 
     @Autowired
+    private ZonalesService zonalesService;
+
+    @Autowired
     private InstitucionService institucionService;
     @Autowired
     private FuncionesService funcionesService;
@@ -95,8 +98,11 @@ public class UsuarioController {
             Long regId = (Long) data[12];
             user.setRegId(regimenService.findById(regId));
 
-            user.setUsuIdJefe((Long) data[13]);
-            user.setUsuIdLector((Long) data[14]);
+            Long zonId = (Long) data[13];
+            user.setZonId(zonalesService.findById(zonId));
+
+            user.setUsuIdJefe((Long) data[14]);
+            user.setUsuIdLector((Long) data[15]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -139,8 +145,11 @@ public class UsuarioController {
             Long regId = (Long) data[12];
             user.setRegId(regimenService.findById(regId));
 
-            user.setUsuIdJefe((Long) data[13]);
-            user.setUsuIdLector((Long) data[14]);
+            Long zonId = (Long) data[13];
+            user.setZonId(zonalesService.findById(zonId));
+
+            user.setUsuIdJefe((Long) data[14]);
+            user.setUsuIdLector((Long) data[15]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -209,6 +218,7 @@ public class UsuarioController {
                 usuario.setInsId(u.getInsId());
                 usuario.setProcId(u.getProcId());
                 usuario.setRegId(u.getRegId());
+                usuario.setZonId(u.getZonId());
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);

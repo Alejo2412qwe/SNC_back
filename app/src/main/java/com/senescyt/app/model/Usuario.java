@@ -96,6 +96,10 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "procId", referencedColumnName = "procId")
     private Procesos procId;
 
+    @ManyToOne
+    @JoinColumn(name = "zonId", referencedColumnName = "zonId")
+    private Zonales zonId;
+
     @Override
     public String getPassword() {
         return this.getUsuContrasena();
