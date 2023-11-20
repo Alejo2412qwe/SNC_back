@@ -62,28 +62,6 @@ public class Vacaciones implements Serializable {
     @Column(name = "vacDiasGanados")
     private double vacDiasGanados;
 
-    @PrePersist
-    protected void onCreate() {
-        vacFechaHoy = new Date();
-
-        // Realizar el cálculo y asignarlo a vacTotalenDias
-        double horasEnDias = vacHoras / 8.0; // Dividir horas por 8 para obtener días
-        double minutosEnDias = vacMinutos / 480.0; // Dividir minutos por 480 para obtener días
-        double totalDias = horasEnDias + minutosEnDias + vacDias;
-        vacTotalenDias = (int) totalDias; // Convertir a int si es necesario
-
-        // Realizar el cálculo para vacSaldo
-        double nuevoSaldo = (vacSaldo + vacDiasGanados) - vacTotalenDias;
-        vacSaldo = nuevoSaldo;
-
-        // Establecer vacDiasUsados con el mismo valor que vacTotalenDias
-        if (vacTotalenDias>=0){
-            vacDiasUsados = vacTotalenDias;
-        } else {
-            vacDiasUsados = vacTotalenDias*(-1);
-        }
-    }
-
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;

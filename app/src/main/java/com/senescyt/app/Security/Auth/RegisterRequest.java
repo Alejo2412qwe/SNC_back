@@ -26,6 +26,7 @@ public class RegisterRequest {
     private Institucion insId;
     private Procesos procId;
     private Regimen regId;
+    private Zonales zonId;
     private Long usuIdLector;
     private Long usuIdJefe;
 

@@ -261,12 +261,3 @@ VALUES ('CUENCA', 1),
        ('LAS GOLONDRINAS', 25),
        ('MANGA DEL CURA', 25),
        ('EL PIEDRERO', 25);
-
-
-INSERT INTO persona(per_apellido, per_cedula, per_direccion, per_fecha_nacimiento, per_nombre,
-                    per_telefono, ciu_id)
-VALUES ('JARAMILLO', '012313123123', 'AV. DE LAS AMERICAS', '2002-08-22', 'JULIO', '098123123123', 1);
-
-INSERT INTO usuario(usu_id, usu_contrasena, usu_correo, usu_estado, usu_fecha_registro,
-                    usu_nombre_usuario, rol_id, usu_per_id)
-VALUES ('1', '1234', 'alejandro.coraspe.est@tecazuay.edu.ec', '1', '2023-10-22', 'Alejandro', '1','1');

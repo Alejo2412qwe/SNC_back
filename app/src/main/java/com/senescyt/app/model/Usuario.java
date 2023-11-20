@@ -96,6 +96,10 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "procId", referencedColumnName = "procId")
     private Procesos procId;
 
+    @ManyToOne
+    @JoinColumn(name = "zonId", referencedColumnName = "zonId")
+    private Zonales zonId;
+
     @Override
     public String getPassword() {
         return this.getUsuContrasena();
@@ -128,11 +132,7 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "usuId")
     private List<Vacaciones> listaVacaciones;
-/*
-    @JsonIgnore
-    @OneToMany(mappedBy = "comId", cascade = CascadeType.ALL)
-    private List<Comision> listaComisiones;
-*/
+
     @JsonIgnore
     @OneToMany(mappedBy = "usuId", cascade = CascadeType.ALL)
     private List<Asistencia> listaAsistencia;
