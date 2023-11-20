@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VacacionesRepository extends GenericRepository<Vacaciones,Long> {
-    @Query(value = "SELECT * FROM horarios where vacEstado = :est", nativeQuery = true)
+public interface VacacionesRepository extends GenericRepository<Vacaciones, Long> {
+    @Query(value = "SELECT * FROM vacaciones where vac_estado = :est", nativeQuery = true)
     public List<Vacaciones> getVacacionesByEstado(@Param("est") int est);
 }

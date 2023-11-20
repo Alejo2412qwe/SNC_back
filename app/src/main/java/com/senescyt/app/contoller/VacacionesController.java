@@ -2,6 +2,7 @@ package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.Vacaciones;
 import com.senescyt.app.model.Rol;
+import com.senescyt.app.model.ValorHora;
 import com.senescyt.app.service.VacacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,30 @@ public class VacacionesController {
         return new ResponseEntity<>(vacacioneService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/getVacacionesByEstado")
+    public ResponseEntity<List<Vacaciones>> getVacacionesByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(vacacioneService.getVacacionesByEst(est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Vacaciones> create(@RequestBody Vacaciones p) {
         p.setVacEstado(1);
+        // Realizar el cálculo y asignarlo a vacTotalenDias
+        double horasEnDias = p.getVacHoras() / 8.0; // Dividir horas por 8 para obtener días
+        double minutosEnDias = p.getVacMinutos() / 480.0; // Dividir minutos por 480 para obtener días
+        double totalDias = horasEnDias + minutosEnDias + p.getVacDias();
+        p.setVacTotalenDias(totalDias);
+
+        // Realizar el cálculo para vacSaldo
+        double nuevoSaldo = (p.getVacSaldo() + p.getVacDiasGanados()) - p.getVacTotalenDias();
+        p.setVacSaldo(nuevoSaldo);
+
+        // Establecer vacDiasUsados con el mismo valor que vacTotalenDias
+        if (p.getVacTotalenDias() >= 0) {
+            p.setVacDiasUsados(p.getVacTotalenDias());
+        } else {
+            p.setVacDiasUsados(p.getVacTotalenDias() * (-1));
+        }
         return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
     }
 
