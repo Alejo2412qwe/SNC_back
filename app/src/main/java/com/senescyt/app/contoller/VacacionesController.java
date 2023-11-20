@@ -1,8 +1,10 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.model.Usuario;
 import com.senescyt.app.model.Vacaciones;
 import com.senescyt.app.model.Rol;
 import com.senescyt.app.model.ValorHora;
+import com.senescyt.app.service.UsuarioService;
 import com.senescyt.app.service.VacacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,28 +21,46 @@ public class VacacionesController {
     @Autowired
     private VacacionesService vacacioneService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/read")
     public ResponseEntity<List<Vacaciones>> read() {
         return new ResponseEntity<>(vacacioneService.findByAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/getVacacionesByEstado")
-    public ResponseEntity<List<Vacaciones>> getVacacionesByEstado(@RequestParam int est) {
-        return new ResponseEntity<>(vacacioneService.getVacacionesByEst(est), HttpStatus.OK);
+    @GetMapping("/getVacacionesByUsuId")
+    public ResponseEntity<List<Vacaciones>> getVacacionesByEstado(@RequestParam Long id) {
+        return new ResponseEntity<>(vacacioneService.getVacacionesByUsuId(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Vacaciones> create(@RequestBody Vacaciones p) {
+    public ResponseEntity<Vacaciones> create(@RequestParam Long id, @RequestBody Vacaciones p) {
         p.setVacEstado(1);
+
         // Realizar el cálculo y asignarlo a vacTotalenDias
         double horasEnDias = p.getVacHoras() / 8.0; // Dividir horas por 8 para obtener días
         double minutosEnDias = p.getVacMinutos() / 480.0; // Dividir minutos por 480 para obtener días
         double totalDias = horasEnDias + minutosEnDias + p.getVacDias();
         p.setVacTotalenDias(totalDias);
 
-        // Realizar el cálculo para vacSaldo
-        double nuevoSaldo = (p.getVacSaldo() + p.getVacDiasGanados()) - p.getVacTotalenDias();
-        p.setVacSaldo(nuevoSaldo);
+        Usuario usuario = usuarioService.findById(id);
+
+        Double ultimoRegistro = vacacioneService.getSaldoUltimoRegistroPorUsuario(usuario.getUsuId());
+        double nuevoSaldo;
+
+        if (ultimoRegistro != null) {
+
+            // Realizar el cálculo para vacSaldo
+            nuevoSaldo = (ultimoRegistro + p.getVacDiasGanados()) - p.getVacTotalenDias();
+            p.setVacSaldo(nuevoSaldo);
+
+        } else {
+
+            // Realizar el cálculo para vacSaldo
+            nuevoSaldo = (0 + p.getVacDiasGanados()) - p.getVacTotalenDias();
+            p.setVacSaldo(nuevoSaldo);
+        }
 
         // Establecer vacDiasUsados con el mismo valor que vacTotalenDias
         if (p.getVacTotalenDias() >= 0) {
@@ -48,6 +68,8 @@ public class VacacionesController {
         } else {
             p.setVacDiasUsados(p.getVacTotalenDias() * (-1));
         }
+
+
         return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
     }
 

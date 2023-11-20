@@ -21,8 +21,8 @@ public class VacacionesService extends GenericServiceImpl<Vacaciones, Long> impl
         return vacacionesRepository;
     }
 
-    public List<Vacaciones> getVacacionesByEst(int est) {
-        return vacacionesRepository.getVacacionesByEstado(est);
+    public List<Vacaciones> getVacacionesByUsuId(Long id) {
+        return vacacionesRepository.getVacacionesByUsuId(id);
     }
 
     public Double getSaldoUltimoRegistroPorUsuario(Long userId) {
