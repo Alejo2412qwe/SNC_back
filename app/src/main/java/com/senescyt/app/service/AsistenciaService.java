@@ -30,4 +30,8 @@ public class AsistenciaService extends GenericServiceImpl<Asistencia, Long> impl
     public List<Object[]> historialArchivos() {
         return asistenciaRepository.historialArchivos();
     }
+
+    public List<Object[]> historialArchivosSearch(String fechaMin, String fechaMax, String nombre) {
+        return asistenciaRepository.historialArchivosSearch(fechaMin, fechaMax, nombre);
+    }
 }

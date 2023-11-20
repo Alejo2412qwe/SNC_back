@@ -24,4 +24,18 @@ public interface AsistenciaRepository extends GenericRepository<Asistencia, Long
             "GROUP BY asis_fecha_archivo , asis_nombre_archivo, usu_id"
     )
     List<Object[]> historialArchivos();
+
+
+    @Query(nativeQuery = true, value = "SELECT  " +
+            "    ROW_NUMBER() OVER (ORDER BY asis_fecha_archivo, asis_nombre_archivo, usu_id) as indice,  " +
+            "    asis_nombre_archivo,  " +
+            "    asis_fecha_archivo,  " +
+            "    COUNT(*) as cantidad_registros,  " +
+            "    usu_id  " +
+            "FROM bd_snc.asistencia  " +
+            "WHERE LOWER(asis_nombre_archivo) LIKE LOWER(CONCAT('%', :nombre ,'%'))   " +
+            "    AND (asis_fecha_archivo >= :fechaMin AND asis_fecha_archivo <= :fechaMax )  " +
+            "GROUP BY asis_fecha_archivo, asis_nombre_archivo, usu_id"
+    )
+    List<Object[]> historialArchivosSearch(@Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax, @Param("nombre") String nombre);
 }

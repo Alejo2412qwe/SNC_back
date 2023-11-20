@@ -54,6 +54,29 @@ public class AsistenciaController {
         return new ResponseEntity<>(hist, HttpStatus.OK);
     }
 
+    @GetMapping("/historialArchivosSearch")
+    public ResponseEntity<List<Map<String, Object>>> historialArchivosSearch(@RequestParam String fechaMin, @RequestParam String fechaMax, @RequestParam String nombre) {
+        List<Map<String, Object>> hist = new ArrayList<>();
+        List<Object[]> objs= asistenciaService.historialArchivosSearch(fechaMin, fechaMax, nombre);
+
+        for (Object[] data : objs) {
+            Map<String, Object> obj = new HashMap<>();
+
+            obj.put("indice", data[0]);
+            obj.put("nombreArchivo", data[1]);
+            obj.put("fechaArchivo", data[2]);
+            obj.put("cantidadRegistros", data[3]);
+            Long usuId = (Long) data[4];
+            Usuario user = usuarioService.findByUsuId(usuId);
+            user.setUsuContrasena("");
+            obj.put("userId",user);
+
+            hist.add(obj);
+        }
+
+        return new ResponseEntity<>(hist, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Asistencia> create(@RequestBody Asistencia p) {
         return new ResponseEntity<>(asistenciaService.save(p), HttpStatus.CREATED);
