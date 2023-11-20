@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -37,8 +38,14 @@ public class VacacionesController {
         double totalDias = horasEnDias + minutosEnDias + p.getVacDias();
         p.setVacTotalenDias(totalDias);
 
+        // Obtener el último registro de vacaciones para el mismo usuario
+        Double ultimoSaldo = vacacioneService.getSaldoUltimoRegistroPorUsuario(p.getUsuId().getUsuId());
+
+        // Obtener el saldo del último registro o establecerlo en 0 si no hay registros anteriores
+        double saldoAnterior = (ultimoSaldo != null) ? ultimoSaldo : 0;
+
         // Realizar el cálculo para vacSaldo
-        double nuevoSaldo = (p.getVacSaldo() + p.getVacDiasGanados()) - p.getVacTotalenDias();
+        double nuevoSaldo = ultimoSaldo + p.getVacDiasGanados() - p.getVacTotalenDias();
         p.setVacSaldo(nuevoSaldo);
 
         // Establecer vacDiasUsados con el mismo valor que vacTotalenDias
@@ -47,26 +54,21 @@ public class VacacionesController {
         } else {
             p.setVacDiasUsados(p.getVacTotalenDias() * (-1));
         }
-        return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
-    }
 
-    @PutMapping("/updatencabezado/{id}")
-    public ResponseEntity<Vacaciones> updateEnc(@PathVariable Long id, @RequestBody Vacaciones p) {
-        Vacaciones Vacaciones = vacacioneService.findById(id);
-        if (Vacaciones != null) {
-            try {
+        int diasVacacionesAnuales = 30;
+        Calendar calHoy = Calendar.getInstance();
+        calHoy.setTime(p.getVacFechaHoy());
 
-                Vacaciones.setVacDiasCaducados(p.getVacDiasCaducados());
-                Vacaciones.setVacTotalDiasDisponibles(p.getVacTotalDiasDisponibles());
+        Calendar calFechaInicio = Calendar.getInstance();
+        calFechaInicio.setTime(p.getUsuId().getUsuFechaRegistro()); // la fecha de inicio del usuario
 
-                return new ResponseEntity<>(vacacioneService.save(Vacaciones), HttpStatus.CREATED);
-            } catch (Exception e) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        int diasDesdeInicio = (int) ((calHoy.getTimeInMillis() - calFechaInicio.getTimeInMillis()) / (1000 * 60 * 60 * 24));
 
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (diasDesdeInicio >= 365) {
+            // Se ha pasado un año desde el inicio, acumular 30 días al saldo del próximo año
+            p.setVacDiasGanados(p.getVacDiasGanados() + diasVacacionesAnuales);
         }
+        return new ResponseEntity<>(vacacioneService.save(p), HttpStatus.CREATED);
     }
 
     @PutMapping("/updatetabla/{id}")
@@ -75,7 +77,6 @@ public class VacacionesController {
         if (Vacaciones != null) {
             try {
 
-                Vacaciones.setVacFecha(p.getVacFecha());
                 Vacaciones.setVacDetalle(p.getVacDetalle());
                 Vacaciones.setVacDias(p.getVacDias());
                 Vacaciones.setVacHoras(p.getVacHoras());

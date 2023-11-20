@@ -13,4 +13,7 @@ import java.util.List;
 public interface VacacionesRepository extends GenericRepository<Vacaciones, Long> {
     @Query(value = "SELECT * FROM vacaciones where vac_estado = :est", nativeQuery = true)
     public List<Vacaciones> getVacacionesByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT vac_saldo FROM vacaciones WHERE usu_id = :userId ORDER BY vac_fecha DESC LIMIT 1", nativeQuery = true)
+    public Double getSaldoUltimoRegistroPorUsuario(@Param("userId") Long userId);
 }
