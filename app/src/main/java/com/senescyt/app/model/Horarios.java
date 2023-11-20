@@ -21,6 +21,7 @@ public class Horarios implements Serializable {
     /**
      *
      */
+    /*.................*/
     private static final long serialVersionUID = 1L;
     /**
      *
@@ -41,6 +42,8 @@ public class Horarios implements Serializable {
     @Column(name = "horHoraAlmuerzoFin")
     private String horHoraAlmuerzoFin;
 
+    @Column(name = "procEstado")
+    private int procEstado;
 
     @JsonIgnore
     @OneToMany(mappedBy = "horId")

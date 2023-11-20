@@ -24,7 +24,31 @@ public class PeriodoController {
 
     @PostMapping("/create")
     public ResponseEntity<Periodo> create(@RequestBody Periodo p) {
+        p.setPeriEstado(1);
         return new ResponseEntity<>(periodoService.save(p), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getPeriodoByEstado")
+    public ResponseEntity<List<Periodo>> getPeriodoByEstado(@RequestParam int est) {
+        return new ResponseEntity<>(periodoService.getPeriodoByEstado(est), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateEstPeriodo")
+    public ResponseEntity<Periodo> updateEst(@RequestParam Long id, @RequestParam int est) {
+        Periodo periodo = periodoService.findById(id);
+        if (periodo != null) {
+            try {
+
+                periodo.setPeriEstado(est);
+                periodoService.save(periodo);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/update/{id}")
