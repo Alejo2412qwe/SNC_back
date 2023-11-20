@@ -14,12 +14,12 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
 
-    @Query(value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id ,u.foto, u.titulo, u.reg_id,u.usu_id_jefe,u.usu_id_lector  " +
+    @Query(value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id ,u.foto, u.titulo, u.reg_id,u.zon_id,u.usu_id_jefe,u.usu_id_lector  " +
             "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
             "  WHERE u.usu_estado= :est  ORDER BY p.per_apellido, p.per_nombre", nativeQuery = true)
     public List<Object[]> allUsersData(@Param("est") int est);
 
-    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id,u.foto, u.titulo, u.reg_id,u.usu_id_jefe,u.usu_id_lector" +
+    @Query(nativeQuery = true, value = "SELECT u.usu_id, u.usu_correo, u.usu_estado, u.usu_fecha_registro, u.usu_nombre_usuario, u.fun_id, u.ins_id, u.proc_id, u.rol_id, u.usu_per_id,u.foto, u.titulo, u.reg_id,u.zon_id,u.usu_id_jefe,u.usu_id_lector" +
             "FROM usuario u JOIN persona p ON u.usu_per_id = p.per_id" +
             "  WHERE u.usu_estado= :est  " +
             "  AND  (p.per_cedula LIKE CONCAT ('%', :search, '%') " +

@@ -100,6 +100,10 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "comId", referencedColumnName = "comId")
     private Comision comId;
 
+    @JoinColumn(name = "zonId", referencedColumnName = "zonId")
+    private Zonales zonId;
+
+
     @Override
     public String getPassword() {
         return this.getUsuContrasena();
