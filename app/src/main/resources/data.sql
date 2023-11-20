@@ -267,23 +267,6 @@ INSERT INTO persona(per_apellido, per_cedula, per_direccion, per_fecha_nacimient
                     per_telefono, ciu_id)
 VALUES ('JARAMILLO', '012313123123', 'AV. DE LAS AMERICAS', '2002-08-22', 'JULIO', '098123123123', 1);
 
-
-INSERT INTO funciones(fun_id, fun_estado, fun_nombre)
-VALUES ('1', '1', 'www');
-
-INSERT INTO horarios(hor_id, hor_hora_almuerzo_fin, hor_hora_almuerzo_inicio, hor_hora_ingreso, hor_hora_salida,
-                     hor_num_horas)
-VALUES ('1', '2pm', '1pm', '7am', '6pm', '11h');
-
-INSERT INTO tipo_institucion(tip_id, tip_estado, tip_nombre)
-VALUES ('1', '1', 'Instituto');
-
-INSERT INTO institucion(ins_id, int_direccion, inst_estado, ins_nombre, tip_id)
-VALUES ('1', 'Parque Industrial', '1', 'ISTA', '1');
-
-INSERT INTO procesos(proc_id, proc_estado, proc_nombre)
-VALUES ('1', '1', 'ffff');
-
 INSERT INTO usuario(usu_id, usu_contrasena, usu_correo, usu_estado, usu_fecha_registro,
-                    usu_nombre_usuario, fun_id, hor_id, ins_id, proc_id, rol_id, usu_per_id)
-VALUES ('1', 'kawwbqtpbxyxpfcg', 'alejandro.coraspe.est@tecazuay.edu.ec', '1', '2023-10-22', 'Alejandro', '1','1','1','1','1','1');
+                    usu_nombre_usuario, rol_id, usu_per_id)
+VALUES ('1', '1234', 'alejandro.coraspe.est@tecazuay.edu.ec', '1', '2023-10-22', 'Alejandro', '1','1');
