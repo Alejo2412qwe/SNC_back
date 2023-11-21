@@ -33,5 +33,9 @@ public class PermisoService extends GenericServiceImpl<Permisos, Long> implement
         return permisosRepository.getPermisosForAdmin(est);
     }
 
+    public List<Permisos> searchPermisos(String search) {
+        return permisosRepository.searchPermisos(search);
+    }
+
 
 }
