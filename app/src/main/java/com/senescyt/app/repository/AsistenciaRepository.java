@@ -38,4 +38,21 @@ public interface AsistenciaRepository extends GenericRepository<Asistencia, Long
             "GROUP BY asis_fecha_archivo, asis_nombre_archivo, usu_id"
     )
     List<Object[]> historialArchivosSearch(@Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax, @Param("nombre") String nombre);
+
+
+    @Query(nativeQuery = true, value = "SELECT   " +
+            "    a.asis_id,   " +
+            "    u.usu_id,   " +
+            "    p.per_id  " +
+            "FROM bd_snc.asistencia a  " +
+            "JOIN bd_snc.usuario u ON (a.asis_no_lector = u.usu_id_lector)  " +
+            "JOIN bd_snc.persona p ON (p.per_id = u.usu_per_id)  " +
+            "WHERE (STR_TO_DATE(a.asis_fecha_hora, '%d/%m/%Y %T') BETWEEN :fechaMin AND :fechaMax)  " +
+            "AND (p.per_cedula LIKE CONCAT ('%', :search, '%') " +
+            "  OR CONCAT(LOWER(p.per_apellido), ' ', LOWER(p.per_nombre)) LIKE LOWER (CONCAT('%', :search ,'%'))" +
+            "  OR CONCAT(LOWER(p.per_nombre), ' ', LOWER(p.per_apellido)) LIKE LOWER (CONCAT('%', :search ,'%'))" +
+            "  OR LOWER(u.usu_nombre_usuario) LIKE LOWER (CONCAT('%', :search ,'%'))" +
+            ") ORDER BY a.asis_fecha_hora, p.per_apellido, p.per_nombre"
+    )
+    List<Object[]> asistenciaSearch(@Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax, @Param("search") String search);
 }
