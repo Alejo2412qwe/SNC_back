@@ -22,6 +22,11 @@ public class PeriodoController {
         return new ResponseEntity<>(periodoService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/searchPeriodos")
+    public ResponseEntity<List<Periodo>> searchPeriodos(String search,int est) {
+        return new ResponseEntity<>(periodoService.searchPeriodos(search,est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Periodo> create(@RequestBody Periodo p) {
         p.setPeriEstado(1);

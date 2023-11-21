@@ -25,9 +25,9 @@ public class HorariosController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Horarios> create(@RequestBody Horarios p) {
-        p.setProcEstado(1);
-        return new ResponseEntity<>(horariosService.save(p), HttpStatus.CREATED);
+    public ResponseEntity<Horarios> create(@RequestBody Horarios h) {
+        h.setHorEstado(1);
+        return new ResponseEntity<>(horariosService.save(h), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
@@ -36,10 +36,15 @@ public class HorariosController {
         if (Horarios != null) {
             try {
 
-                Horarios.setHorHoraIngreso(p.getHorHoraIngreso());
-                Horarios.setHorHoraSalida(p.getHorHoraSalida());
-                Horarios.setHorHoraAlmuerzoInicio(p.getHorHoraAlmuerzoInicio());
-                Horarios.setHorHoraAlmuerzoFin(p.getHorHoraAlmuerzoFin());
+                Horarios.setHorHoraIngresoDia(p.getHorHoraIngresoDia());
+                Horarios.setHorHoraSalidaDia(p.getHorHoraSalidaDia());
+                Horarios.setHorEstado(p.getHorEstado());
+                Horarios.setHorNumHoras(p.getHorNumHoras());
+                Horarios.setHorHorasParaAlmuerzo(p.getHorHorasParaAlmuerzo());
+                Horarios.setHorHoraIngresoTarde(p.getHorHoraIngresoTarde());
+                Horarios.setHorHoraSalidaTarde(p.getHorHoraSalidaTarde());
+
+
                 Horarios.setHorNumHoras(p.getHorNumHoras());
 
                 return new ResponseEntity<>(horariosService.save(Horarios), HttpStatus.CREATED);
@@ -58,7 +63,7 @@ public class HorariosController {
         if (horarios != null) {
             try {
 
-                horarios.setProcEstado(est);
+                horarios.setHorEstado(est);
                 horariosService.save(horarios);
                 return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {
