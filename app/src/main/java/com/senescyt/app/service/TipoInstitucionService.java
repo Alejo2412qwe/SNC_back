@@ -27,5 +27,9 @@ public class TipoInstitucionService extends GenericServiceImpl<TipoInstitucion, 
         return tipoInstitucionRepository.getTipoInstitucionByEstado(est);
     }
 
+    public List<TipoInstitucion> searchTipoInstitucion(String search,int est) {
+        return tipoInstitucionRepository.searchTipoInstitucion(search,est);
+    }
+
 }
 

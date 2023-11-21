@@ -31,4 +31,8 @@ public class SubprocesoService extends GenericServiceImpl<Subprocesos, Long> imp
     public List<Subprocesos> getSubprocesosByProcEstado(int estproc,int estsub) {
         return subprocesosRepository.getSubprocesosByProcEstado(estproc,estsub);
     }
+
+    public List<Subprocesos> searchSubprocesos(String search,int est) {
+        return subprocesosRepository.searchSubprocesos(search,est);
+    }
 }

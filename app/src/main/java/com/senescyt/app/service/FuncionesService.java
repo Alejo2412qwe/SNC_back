@@ -25,4 +25,8 @@ public class FuncionesService extends GenericServiceImpl<Funciones, Long> implem
     public List<Funciones> getFuncionesByEstado(int est) {
         return funcionesRepository.getFuncionesByEstado(est);
     }
+
+    public List<Funciones> searchFunciones(String search, int est) {
+        return funcionesRepository.searchFunciones(search, est);
+    }
 }

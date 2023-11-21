@@ -29,6 +29,11 @@ public class ProcesosController {
         return new ResponseEntity<>(procesosService.getProcesosByEstado(est), HttpStatus.OK);
     }
 
+    @GetMapping("/searchProcesos")
+    public ResponseEntity<List<Procesos>> searchProcesos(@RequestParam String search, @RequestParam int est) {
+        return new ResponseEntity<>(procesosService.searchProcesos(search, est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Procesos> create(@RequestBody Procesos p) {
         p.setProcEstado(1);

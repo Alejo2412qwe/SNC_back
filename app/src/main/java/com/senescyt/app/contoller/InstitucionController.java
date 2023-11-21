@@ -43,6 +43,11 @@ public class InstitucionController {
         return new ResponseEntity<>(institucionService.getInstitucionById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/searchInstitucion")
+    public ResponseEntity<List<Institucion>> searchInstitucion(@RequestParam String search,@RequestParam int est) {
+        return new ResponseEntity<>(institucionService.searchInstitucion(search,est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Institucion> create(@RequestBody Institucion p) {
         p.setInstEstado(1);
