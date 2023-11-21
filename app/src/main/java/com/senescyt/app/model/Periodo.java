@@ -45,22 +45,4 @@ public class Periodo implements Serializable {
     @JoinColumn(name = "vacId", referencedColumnName = "vacId")
     private Vacaciones vacId;
 
-    // Añadir un método para calcular la diferencia en días y actualizar diasAnticipacion
-    @PrePersist
-    @PreUpdate
-    private void actualizarDiasAnticipacion() {
-        if (periActual != null && periAnterior != null) {
-            // Convertir Date a LocalDate
-            LocalDate fechaActual = periActual.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate fechaAnterior = periAnterior.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            // Calcular la diferencia en días
-            diasAnticipacion = Math.abs(ChronoUnit.DAYS.between(fechaAnterior, fechaActual));
-        }
-    }
-    @GetMapping("/diasAnticipacion")
-    public double getDiasAnticipacion() {
-        actualizarDiasAnticipacion();
-        return diasAnticipacion;
-    }
 }
