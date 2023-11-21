@@ -15,4 +15,7 @@ public interface TipoPermisoRepository extends GenericRepository<TipoPermiso, Lo
 
     @Query(value = "SELECT * FROM tipo_permiso WHERE ti_pe_estado = :est", nativeQuery = true)
     public List<TipoPermiso> getTipoPermisoByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * FROM tipo_permiso WHERE ti_pe_estado = :est AND (LOWER(ti_pe_nombre) LIKE CONCAT('%', :search, '%') OR UPPER(ti_pe_nombre) LIKE CONCAT('%', :search, '%'))", nativeQuery = true)
+    public List<TipoPermiso> searchTipopermiso(@Param("search") String search, @Param("est") int est);
 }
