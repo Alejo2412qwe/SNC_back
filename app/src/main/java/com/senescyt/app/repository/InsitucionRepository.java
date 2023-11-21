@@ -22,4 +22,7 @@ public interface InsitucionRepository extends GenericRepository<Institucion,Long
 
     @Query(value = "SELECT * FROM bd_snc.institucion WHERE inst_estado = :est", nativeQuery = true)
     List<Institucion> getInstitucionesByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * FROM institucion where ins_id = :id", nativeQuery = true)
+    Institucion getInstitucionById(@Param("id") Long id);
 }
