@@ -13,6 +13,7 @@ import java.util.Map;
 @Repository
 public interface AsistenciaRepository extends GenericRepository<Asistencia, Long> {
 
+    Asistencia findByAsisId(Long id);
 
     @Query(nativeQuery = true, value = "SELECT   " +
             "    ROW_NUMBER() OVER (ORDER BY asis_fecha_archivo , asis_nombre_archivo, usu_id ) as indice,  " +
@@ -55,4 +56,17 @@ public interface AsistenciaRepository extends GenericRepository<Asistencia, Long
             ") ORDER BY a.asis_fecha_hora, p.per_apellido, p.per_nombre"
     )
     List<Object[]> asistenciaSearch(@Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax, @Param("search") String search);
+
+    @Query(nativeQuery = true, value = "SELECT   " +
+            "    a.asis_id,   " +
+            "    u.usu_id,   " +
+            "    p.per_id  " +
+            "FROM bd_snc.asistencia a  " +
+            "JOIN bd_snc.usuario u ON (a.asis_no_lector = u.usu_id_lector)  " +
+            "JOIN bd_snc.persona p ON (p.per_id = u.usu_per_id)  " +
+            "WHERE (STR_TO_DATE(a.asis_fecha_hora, '%d/%m/%Y %T') BETWEEN :fechaMin AND :fechaMax)  " +
+            "AND (u.usu_id= :usuId" +
+            ") ORDER BY a.asis_fecha_hora, p.per_apellido, p.per_nombre"
+    )
+    List<Object[]> miAsistencia(@Param("usuId") Long usuId, @Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax);
 }

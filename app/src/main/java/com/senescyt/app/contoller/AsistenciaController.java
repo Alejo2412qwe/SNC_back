@@ -34,7 +34,7 @@ public class AsistenciaController {
     @GetMapping("/historialArchivos")
     public ResponseEntity<List<Map<String, Object>>> historialArchivos() {
         List<Map<String, Object>> hist = new ArrayList<>();
-        List<Object[]> objs= asistenciaService.historialArchivos();
+        List<Object[]> objs = asistenciaService.historialArchivos();
 
         for (Object[] data : objs) {
             Map<String, Object> obj = new HashMap<>();
@@ -45,8 +45,8 @@ public class AsistenciaController {
             obj.put("cantidadRegistros", data[3]);
             Long usuId = (Long) data[4];
             Usuario user = usuarioService.findByUsuId(usuId);
-            user.setUsuContrasena("");
-            obj.put("userId",user);
+//            user.setUsuContrasena("");
+            obj.put("userId", user);
 
             hist.add(obj);
         }
@@ -57,7 +57,7 @@ public class AsistenciaController {
     @GetMapping("/historialArchivosSearch")
     public ResponseEntity<List<Map<String, Object>>> historialArchivosSearch(@RequestParam String fechaMin, @RequestParam String fechaMax, @RequestParam String nombre) {
         List<Map<String, Object>> hist = new ArrayList<>();
-        List<Object[]> objs= asistenciaService.historialArchivosSearch(fechaMin, fechaMax, nombre);
+        List<Object[]> objs = asistenciaService.historialArchivosSearch(fechaMin, fechaMax, nombre);
 
         for (Object[] data : objs) {
             Map<String, Object> obj = new HashMap<>();
@@ -68,8 +68,52 @@ public class AsistenciaController {
             obj.put("cantidadRegistros", data[3]);
             Long usuId = (Long) data[4];
             Usuario user = usuarioService.findByUsuId(usuId);
-            user.setUsuContrasena("");
-            obj.put("userId",user);
+//            user.setUsuContrasena("");
+            obj.put("userId", user);
+
+            hist.add(obj);
+        }
+
+        return new ResponseEntity<>(hist, HttpStatus.OK);
+    }
+
+    @GetMapping("/asistenciaSearch")
+    public ResponseEntity<List<Map<String, Object>>> asistenciaSearch(@RequestParam String fechaMin, @RequestParam String fechaMax, @RequestParam String search) {
+        List<Map<String, Object>> hist = new ArrayList<>();
+        List<Object[]> objs = asistenciaService.asistenciaSearch(fechaMin, fechaMax, search);
+
+        for (Object[] data : objs) {
+            Map<String, Object> obj = new HashMap<>();
+            Long asisId = (Long) data[0];
+            Asistencia asistencia = asistenciaService.findById(asisId);
+            obj.put("asisId", asistencia);
+
+            Long usuId = (Long) data[1];
+            Usuario user = usuarioService.findByUsuId(usuId);
+//            user.setUsuContrasena("");
+            obj.put("userId", user);
+
+            hist.add(obj);
+        }
+
+        return new ResponseEntity<>(hist, HttpStatus.OK);
+    }
+
+    @GetMapping("/miAsistencia")
+    public ResponseEntity<List<Map<String, Object>>> miAsistencia(@RequestParam Long usuId, @RequestParam String fechaMin, @RequestParam String fechaMax) {
+        List<Map<String, Object>> hist = new ArrayList<>();
+        List<Object[]> objs = asistenciaService.miAsistencia(usuId, fechaMin, fechaMax);
+
+        for (Object[] data : objs) {
+            Map<String, Object> obj = new HashMap<>();
+            Long asisId = (Long) data[0];
+            Asistencia asistencia = asistenciaService.findById(asisId);
+            obj.put("asisId", asistencia);
+
+            Long userId = (Long) data[1];
+            Usuario user = usuarioService.findByUsuId(userId);
+//            user.setUsuContrasena("");
+            obj.put("userId", user);
 
             hist.add(obj);
         }
