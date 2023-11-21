@@ -14,7 +14,13 @@ import java.util.List;
 @Repository
 public interface TipoInstitucionRepository extends GenericRepository<TipoInstitucion, Long> {
 
-    @Query(value = "SELECT * FROM bd_snc.tipo_institucion where tip_estado = :est", nativeQuery = true)
+    @Query(value = "SELECT * FROM tipo_institucion where tip_estado = :est", nativeQuery = true)
     public List<TipoInstitucion> getTipoInstitucionByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * \n" +
+            "FROM tipo_institucion \n" +
+            "WHERE tip_estado = :est \n" +
+            "  AND (LOWER(tip_nombre) LIKE CONCAT('%', :search, '%') OR UPPER(tip_nombre) LIKE CONCAT('%', :search, '%'))", nativeQuery = true)
+    List<TipoInstitucion> searchTipoInstitucion(@Param("search") String search, @Param("est") int est);
 
 }

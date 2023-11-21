@@ -13,4 +13,15 @@ public interface ZonalesRepository extends GenericRepository<Zonales, Long> {
 
     @Query(value = "SELECT * FROM zonales WHERE zon_estado = :est", nativeQuery = true)
     List<Zonales> getZonalesByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * \n" +
+            "FROM zonales \n" +
+            "WHERE zon_estado = :est \n" +
+            "  AND (\n" +
+            "    LOWER(zon_nombre) LIKE CONCAT('%', :search, '%') \n" +
+            "    OR UPPER(zon_nombre) LIKE CONCAT('%', :search, '%')\n" +
+            "    OR LOWER(zon_codigo) LIKE CONCAT('%', :search, '%') \n" +
+            "    OR UPPER(zon_codigo) LIKE CONCAT('%', :search, '%')\n" +
+            "  );", nativeQuery = true)
+    List<Zonales> searchZonales(@Param("search") String search, @Param("est") int est);
 }

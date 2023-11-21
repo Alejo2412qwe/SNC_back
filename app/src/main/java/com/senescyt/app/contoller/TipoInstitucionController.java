@@ -28,6 +28,11 @@ public class TipoInstitucionController {
         return new ResponseEntity<>(tipoInstitucionService.getTipoInstitucionByEstado(est), HttpStatus.OK);
     }
 
+    @GetMapping("/searchTipoInstitucion")
+    public ResponseEntity<List<TipoInstitucion>> searchTipoInstitucion(@RequestParam String search,@RequestParam int est) {
+        return new ResponseEntity<>(tipoInstitucionService.searchTipoInstitucion(search,est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<TipoInstitucion> create(@RequestBody TipoInstitucion ti) {
         ti.setTipEstado(1);
