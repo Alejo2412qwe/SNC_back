@@ -38,7 +38,6 @@ public class HorariosController {
 
                 Horarios.setHorHoraIngresoDia(p.getHorHoraIngresoDia());
                 Horarios.setHorHoraSalidaDia(p.getHorHoraSalidaDia());
-                Horarios.setHorEstado(p.getHorEstado());
                 Horarios.setHorNumHoras(p.getHorNumHoras());
                 Horarios.setHorHorasParaAlmuerzo(p.getHorHorasParaAlmuerzo());
                 Horarios.setHorHoraIngresoTarde(p.getHorHoraIngresoTarde());
