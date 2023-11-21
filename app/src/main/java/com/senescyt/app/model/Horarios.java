@@ -31,16 +31,20 @@ public class Horarios implements Serializable {
     private Long horId;
 
     @Column(name = "horNumHoras")
-    private String horNumHoras;
-    @Column(name = "horHoraIngreso")
-    private String horHoraIngreso;
-    @Column(name = "horHoraSalida")
-    private String horHoraSalida;
-    @Column(name = "horHoraAlmuerzoInicio")
-    private String horHoraAlmuerzoInicio;
-    @Column(name = "horHoraAlmuerzoFin")
-    private String horHoraAlmuerzoFin;
+    private int horNumHoras;
+    @Column(name = "horHoraIngresoDia")
+    private String horHoraIngresoDia;
+    @Column(name = "horHoraSalidaDia")
+    private String horHoraSalidaDia;
+    @Column(name = "horHorasParaAlmuerzo")
+    private int horHorasParaAlmuerzo;
+    @Column(name = "horHoraIngresoTarde")
+    private String horHoraIngresoTarde;
+    @Column(name = "horHoraSalidaTarde")
+    private String horHoraSalidaTarde;
 
+    @Column(name = "horEstado")
+    private int horEstado;
 
     @JsonIgnore
     @OneToMany(mappedBy = "horId")

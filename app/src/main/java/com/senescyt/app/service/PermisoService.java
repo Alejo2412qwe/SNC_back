@@ -33,8 +33,5 @@ public class PermisoService extends GenericServiceImpl<Permisos, Long> implement
         return permisosRepository.getPermisosForAdmin(est);
     }
 
-    public List<Permisos> getParametrosParaVacaciones(int id, int est) {
-        return permisosRepository.getParametrosParaVacaciones(id, est);
-    }
 
 }
