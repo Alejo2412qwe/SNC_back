@@ -29,6 +29,11 @@ public class SubprocesosController {
         return new ResponseEntity<>(subprocesosService.getSubprocesosByProcId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/searchSubprocesos")
+    public ResponseEntity<List<Subprocesos>> searchSubprocesos(@RequestParam String search, @RequestParam int est) {
+        return new ResponseEntity<>(subprocesosService.searchSubprocesos(search, est), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Subprocesos> create(@RequestBody Subprocesos p) {
         p.setSubEstado(1);
@@ -37,7 +42,7 @@ public class SubprocesosController {
 
     @GetMapping("/getSubprocesosByProcEstado")
     public ResponseEntity<List<Subprocesos>> getSubprocesosByProcEstado(@RequestParam int estproc, @RequestParam int estsub) {
-        return new ResponseEntity<>(subprocesosService.getSubprocesosByProcEstado(estproc,estsub), HttpStatus.OK);
+        return new ResponseEntity<>(subprocesosService.getSubprocesosByProcEstado(estproc, estsub), HttpStatus.OK);
     }
 
     @PutMapping("/updateEst")

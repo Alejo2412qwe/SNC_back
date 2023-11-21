@@ -19,4 +19,7 @@ public interface SubprocesosRepository extends GenericRepository<Subprocesos, Lo
 
     @Query(value = "SELECT s.* FROM subprocesos s JOIN procesos p ON s.proc_id = p.proc_id WHERE p.proc_estado = :estproc AND s.sub_estado = :estsub", nativeQuery = true)
     public List<Subprocesos> getSubprocesosByProcEstado(@Param("estproc") int estproc, @Param("estsub") int estsub);
+
+    @Query(value = "SELECT * FROM bd_snc.subprocesos WHERE sub_estado = :est AND (LOWER(sub_nombre) LIKE CONCAT('%', :search, '%') OR UPPER(sub_nombre) LIKE CONCAT('%', :search, '%'))", nativeQuery = true)
+    List<Subprocesos> searchSubprocesos(@Param("search") String search,@Param("est") int est);
 }

@@ -13,5 +13,8 @@ import java.util.List;
 public interface ProcesosRepository extends GenericRepository<Procesos, Long> {
 
     @Query(value = "SELECT * FROM procesos where proc_estado = :est", nativeQuery = true)
-    public List<Procesos> getProcesosByEstado(@Param("est") int est);
+    List<Procesos> getProcesosByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * FROM procesos WHERE proc_estado = :est AND (LOWER(proc_nombre) LIKE CONCAT('%', :search, '%') OR UPPER(proc_nombre) LIKE CONCAT('%', :search, '%'))", nativeQuery = true)
+    List<Procesos> searchProcesos(@Param("search") String search, @Param("est") int est);
 }
