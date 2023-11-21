@@ -33,9 +33,9 @@ public class PermisosController {
         return new ResponseEntity<>(permisosService.getPermisosByUsuId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/getParametrosParaVacaciones")
-    public ResponseEntity<List<Permisos>> getParametrosParaVacaciones(@RequestParam int id, @RequestParam int est) {
-        return new ResponseEntity<>(permisosService.getParametrosParaVacaciones(id, est), HttpStatus.OK);
+    @GetMapping("/searchPermisos")
+    public ResponseEntity<List<Permisos>> searchPermisos(@RequestParam String search) {
+        return new ResponseEntity<>(permisosService.searchPermisos(search), HttpStatus.OK);
     }
 
     @GetMapping("/getPermisosByIdJefe")

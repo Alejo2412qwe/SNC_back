@@ -48,6 +48,7 @@ public class AuthService {
                 .procId(request.getProcId())
                 .regId(request.getRegId())
                 .zonId(request.getZonId())
+                .horId(request.getHorId())
                 .usuIdLector(request.getUsuIdLector())
                 .usuIdJefe(request.getUsuIdJefe())
                 .build();
@@ -75,6 +76,10 @@ public class AuthService {
                 .insId(request.getInsId())
                 .procId(request.getProcId())
                 .regId(request.getRegId())
+                .zonId(request.getZonId())
+                .horId(request.getHorId())
+                .usuIdLector(request.getUsuIdLector())
+                .usuIdJefe(request.getUsuIdJefe())
                 .build();
 
         userRepository.save(user);

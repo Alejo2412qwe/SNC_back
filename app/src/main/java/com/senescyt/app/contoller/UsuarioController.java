@@ -41,6 +41,9 @@ public class UsuarioController {
     @Autowired
     private RegimenService regimenService;
 
+    @Autowired
+    private HorariosService horariosService;
+
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioController(AuthService authService, RolService rolService, PasswordEncoder passwordEncoder) {
@@ -101,8 +104,11 @@ public class UsuarioController {
             Long zonId = (Long) data[13];
             user.setZonId(zonalesService.findById(zonId));
 
-            user.setUsuIdJefe((Long) data[14]);
-            user.setUsuIdLector((Long) data[15]);
+            Long horId = (Long) data[14];
+            user.setHorId(horariosService.findById(horId));
+
+            user.setUsuIdJefe((Long) data[15]);
+            user.setUsuIdLector((Long) data[16]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -148,8 +154,11 @@ public class UsuarioController {
             Long zonId = (Long) data[13];
             user.setZonId(zonalesService.findById(zonId));
 
-            user.setUsuIdJefe((Long) data[14]);
-            user.setUsuIdLector((Long) data[15]);
+            Long horId = (Long) data[14];
+            user.setHorId(horariosService.findById(horId));
+
+            user.setUsuIdJefe((Long) data[15]);
+            user.setUsuIdLector((Long) data[16]);
 
             user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -219,6 +228,7 @@ public class UsuarioController {
                 usuario.setProcId(u.getProcId());
                 usuario.setRegId(u.getRegId());
                 usuario.setZonId(u.getZonId());
+                usuario.setHorId(u.getHorId());
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);

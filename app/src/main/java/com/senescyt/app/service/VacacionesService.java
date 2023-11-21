@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VacacionesService extends GenericServiceImpl<Vacaciones, Long> implements GenericService<Vacaciones, Long> {
     @Autowired
@@ -18,4 +20,13 @@ public class VacacionesService extends GenericServiceImpl<Vacaciones, Long> impl
     public CrudRepository<Vacaciones, Long> getDao() {
         return vacacionesRepository;
     }
+
+    public List<Vacaciones> getVacacionesByUsuId(Long id) {
+        return vacacionesRepository.getVacacionesByUsuId(id);
+    }
+
+    public Double getSaldoUltimoRegistroPorUsuario(Long userId) {
+        return vacacionesRepository.getSaldoUltimoRegistroPorUsuario(userId);
+    }
+
 }

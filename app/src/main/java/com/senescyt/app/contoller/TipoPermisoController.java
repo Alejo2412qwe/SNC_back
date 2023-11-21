@@ -35,6 +35,11 @@ public class TipoPermisoController {
         return new ResponseEntity<>(tipPermisoService.getTipoPermisoByEstado(est), HttpStatus.OK);
     }
 
+    @GetMapping("/searchTipopermiso")
+    public ResponseEntity<List<TipoPermiso>> searchTipopermiso(@RequestParam String search, @RequestParam int est) {
+        return new ResponseEntity<>(tipPermisoService.searchTipopermiso(search, est), HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<TipoPermiso> update(@PathVariable Long id, @RequestBody TipoPermiso p) {
         TipoPermiso tipoPermiso = tipPermisoService.findById(id);

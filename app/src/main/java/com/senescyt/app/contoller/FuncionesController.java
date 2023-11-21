@@ -33,6 +33,11 @@ public class FuncionesController {
         return new ResponseEntity<>(funcionesService.getFuncionesByEstado(est), HttpStatus.OK);
     }
 
+    @GetMapping("/searchFunciones")
+    public ResponseEntity<List<Funciones>> searchFunciones(@RequestParam String search, @RequestParam int est) {
+        return new ResponseEntity<>(funcionesService.searchFunciones(search, est), HttpStatus.OK);
+    }
+
     @PutMapping("/updateEstFuncion")
     public ResponseEntity<Funciones> updateEst(@RequestParam Long id, @RequestParam int est) {
         Funciones funciones = funcionesService.findById(id);

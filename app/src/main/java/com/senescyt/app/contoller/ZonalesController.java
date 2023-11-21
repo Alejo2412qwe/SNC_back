@@ -33,6 +33,11 @@ public class ZonalesController {
         return new ResponseEntity<>(zonalesService.getZonalesByEstado(est), HttpStatus.OK);
     }
 
+    @GetMapping("/searchZonales")
+    public ResponseEntity<List<Zonales>> searchZonales(@RequestParam String search, @RequestParam int est) {
+        return new ResponseEntity<>(zonalesService.searchZonales(search, est), HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Zonales> update(@PathVariable Long id, @RequestBody Zonales z) {
         Zonales zonal = zonalesService.findById(id);

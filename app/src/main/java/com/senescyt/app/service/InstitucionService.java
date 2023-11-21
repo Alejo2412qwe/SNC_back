@@ -33,4 +33,12 @@ public class InstitucionService extends GenericServiceImpl<Institucion, Long> im
     public List<Institucion> getInstitucionesByEstado(int est){
         return insitucionRepository.getInstitucionesByEstado(est);
     }
+
+    public Institucion getInstitucionById(Long id){
+        return insitucionRepository.getInstitucionById(id);
+    }
+
+    public List<Institucion> searchInstitucion(String search,int est){
+        return insitucionRepository.searchInstitucion(search,est);
+    }
 }

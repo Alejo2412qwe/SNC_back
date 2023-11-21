@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface InsitucionRepository extends GenericRepository<Institucion,Long> {
+public interface InsitucionRepository extends GenericRepository<Institucion, Long> {
 
     @Query(value = "SELECT * FROM institucion where tip_id = :tipId", nativeQuery = true)
     List<Institucion> getInstitucionByTipId(@Param("tipId") Long tipId);
@@ -22,4 +22,17 @@ public interface InsitucionRepository extends GenericRepository<Institucion,Long
 
     @Query(value = "SELECT * FROM bd_snc.institucion WHERE inst_estado = :est", nativeQuery = true)
     List<Institucion> getInstitucionesByEstado(@Param("est") int est);
+
+    @Query(value = "SELECT * FROM institucion where ins_id = :id", nativeQuery = true)
+    Institucion getInstitucionById(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM bd_snc.institucion \n" +
+            "WHERE inst_estado = :est \n" +
+            "AND (\n" +
+            "    LOWER(inst_codigo) LIKE CONCAT('%', :search, '%') OR UPPER(inst_codigo) LIKE CONCAT('%', :search, '%')\n" +
+            "    OR LOWER(int_direccion) LIKE CONCAT('%', :search, '%') OR UPPER(int_direccion) LIKE CONCAT('%', :search, '%')\n" +
+            "    OR LOWER(ins_nombre) LIKE CONCAT('%', :search, '%') OR UPPER(ins_nombre) LIKE CONCAT('%', :search, '%')\n" +
+            "    OR LOWER(inst_referencia) LIKE CONCAT('%', :search, '%') OR UPPER(inst_referencia) LIKE CONCAT('%', :search, '%')\n" +
+            ")", nativeQuery = true)
+    List<Institucion> searchInstitucion(@Param("search") String search, @Param("est") int est);
 }

@@ -23,4 +23,8 @@ public class ProcesosService extends GenericServiceImpl<Procesos, Long> implemen
     public List<Procesos> getProcesosByEstado(int est) {
         return procesosRepository.getProcesosByEstado(est);
     }
+
+    public List<Procesos> searchProcesos(String search, int est) {
+        return procesosRepository.searchProcesos(search, est);
+    }
 }
