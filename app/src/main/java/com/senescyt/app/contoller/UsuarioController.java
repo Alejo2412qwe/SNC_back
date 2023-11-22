@@ -110,7 +110,7 @@ public class UsuarioController {
             user.setUsuIdJefe((Long) data[15]);
             user.setUsuIdLector((Long) data[16]);
 
-            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
+//            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
 
@@ -160,7 +160,7 @@ public class UsuarioController {
             user.setUsuIdJefe((Long) data[15]);
             user.setUsuIdLector((Long) data[16]);
 
-            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
+//            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
         }
 
