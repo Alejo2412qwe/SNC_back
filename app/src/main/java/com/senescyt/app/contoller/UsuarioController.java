@@ -107,8 +107,10 @@ public class UsuarioController {
             Long horId = (Long) data[14];
             user.setHorId(horariosService.findById(horId));
 
-            user.setUsuIdJefe((Long) data[15]);
-            user.setUsuIdLector((Long) data[16]);
+            user.setUsuSaldoVacacional((double) data[15]);
+
+            user.setUsuIdJefe((Long) data[16]);
+            user.setUsuIdLector((Long) data[17]);
 
 //            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -157,8 +159,10 @@ public class UsuarioController {
             Long horId = (Long) data[14];
             user.setHorId(horariosService.findById(horId));
 
-            user.setUsuIdJefe((Long) data[15]);
-            user.setUsuIdLector((Long) data[16]);
+            user.setUsuSaldoVacacional((double) data[15]);
+
+            user.setUsuIdJefe((Long) data[16]);
+            user.setUsuIdLector((Long) data[17]);
 
 //            user.setUsuContrasena(""); // Establecer contrasena como cadena vacía
             users.add(user);
@@ -229,6 +233,7 @@ public class UsuarioController {
                 usuario.setRegId(u.getRegId());
                 usuario.setZonId(u.getZonId());
                 usuario.setHorId(u.getHorId());
+                usuario.setUsuSaldoVacacional(u.getUsuSaldoVacacional());
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
@@ -249,6 +254,24 @@ public class UsuarioController {
 //                usuario.setUsuEstado(est);
 //                return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
                 usuario.setUsuEstado(est);
+                usuarioService.save(usuario);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateSaldo")
+    public ResponseEntity<Usuario> updateEst(@RequestParam Long id, @RequestParam double saldo) {
+        Usuario usuario = usuarioService.findById(id);
+        if (usuario != null) {
+            try {
+
+                usuario.setUsuSaldoVacacional(saldo);
                 usuarioService.save(usuario);
                 return new ResponseEntity<>(HttpStatus.OK);
             } catch (Exception e) {

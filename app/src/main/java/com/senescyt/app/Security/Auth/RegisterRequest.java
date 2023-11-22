@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
@@ -19,7 +20,8 @@ public class RegisterRequest {
     private String usuContrasena;
     private String usuCorreo;
     private int usuEstado;
-    private Timestamp usuFechaRegistro;
+    private double usuSaldoVacacional;
+    private Date usuFechaRegistro;
     private Persona usuPerId;
     private Rol rolId;
     private Funciones funId;
