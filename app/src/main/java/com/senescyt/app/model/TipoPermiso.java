@@ -31,7 +31,7 @@ public class TipoPermiso implements Serializable {
     private String tiPeNombre;
     @Column(name = "tiPeEstado")
     private int tiPeEstado;
-    @Column(name = "tiPeDescripcion")
+    @Column(name = "tiPeDescripcion",length = 2000000000)
     private String tiPeDescripcion;
 
     @JsonIgnore

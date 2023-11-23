@@ -30,4 +30,8 @@ public class ZonalesService extends GenericServiceImpl<Zonales, Long> implements
     public List<Zonales> searchZonales(String search, int est) {
         return zonalesRepository.searchZonales(search, est);
     }
+
+    public Zonales getZonalById(Long id) {
+        return zonalesRepository.getZonalById(id);
+    }
 }
