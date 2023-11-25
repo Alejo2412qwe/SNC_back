@@ -37,5 +37,9 @@ public class PermisoService extends GenericServiceImpl<Permisos, Long> implement
         return permisosRepository.searchPermisos(search);
     }
 
+    public Permisos getPermisoById(Long id) {
+        return permisosRepository.getPermisoById(id);
+    }
+
 
 }
