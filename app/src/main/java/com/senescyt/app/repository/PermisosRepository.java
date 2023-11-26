@@ -27,4 +27,7 @@ public interface PermisosRepository extends GenericRepository<Permisos, Long> {
             "WHERE (LOWER(pe.per_cedula) LIKE LOWER(CONCAT('%', :search ,'%')) OR UPPER(pe.per_cedula) LIKE UPPER(CONCAT('%', :search, '%')))" +
             "AND (p.perm_estado = 2 OR p.perm_estado = 3)", nativeQuery = true)
     List<Permisos> searchPermisos(@Param("search") String search);
+
+    @Query(value = "SELECT * FROM permisos WHERE perm_id = :id", nativeQuery = true)
+    Permisos getPermisoById(@Param("id") Long id);
 }

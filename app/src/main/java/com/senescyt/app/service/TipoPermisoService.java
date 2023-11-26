@@ -29,4 +29,8 @@ public class TipoPermisoService extends GenericServiceImpl<TipoPermiso, Long> im
     public List<TipoPermiso> searchTipopermiso(String search, int est) {
         return tipoPermisoRepository.searchTipopermiso(search, est);
     }
+
+    public TipoPermiso getTipoPermsioById(Long id) {
+        return tipoPermisoRepository.getTipoPermsioById(id);
+    }
 }

@@ -51,6 +51,7 @@ public class AuthService {
                 .horId(request.getHorId())
                 .usuIdLector(request.getUsuIdLector())
                 .usuIdJefe(request.getUsuIdJefe())
+                .usuSaldoVacacional(request.getUsuSaldoVacacional())
                 .build();
 
         userRepository.save(user);
@@ -80,6 +81,7 @@ public class AuthService {
                 .horId(request.getHorId())
                 .usuIdLector(request.getUsuIdLector())
                 .usuIdJefe(request.getUsuIdJefe())
+                .usuSaldoVacacional(request.getUsuSaldoVacacional())
                 .build();
 
         userRepository.save(user);

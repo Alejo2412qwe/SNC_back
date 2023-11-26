@@ -1,5 +1,6 @@
 package com.senescyt.app.contoller;
 
+import com.senescyt.app.model.Horarios;
 import com.senescyt.app.model.ValorHora;
 import com.senescyt.app.model.Zonales;
 import com.senescyt.app.service.ValorHoraService;
@@ -31,6 +32,11 @@ public class ZonalesController {
     @GetMapping("/getZonalesByEstado")
     public ResponseEntity<List<Zonales>> getZonalesByEstado(@RequestParam int est) {
         return new ResponseEntity<>(zonalesService.getZonalesByEstado(est), HttpStatus.OK);
+    }
+
+    @GetMapping("/getZonalById")
+    public ResponseEntity<Zonales> getZonalById(@RequestParam Long id) {
+        return new ResponseEntity<>(zonalesService.getZonalById(id), HttpStatus.OK);
     }
 
     @GetMapping("/searchZonales")

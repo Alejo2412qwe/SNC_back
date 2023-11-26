@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,8 +58,11 @@ public class Usuario implements UserDetails {
     @Column(name = "usuEstado")
     private int usuEstado;
 
+    @Column(name = "usuSaldoVacacional")
+    private double usuSaldoVacacional;
+
     @Column(name = "usuFechaRegistro")
-    private Timestamp usuFechaRegistro;
+    private Date usuFechaRegistro;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuPerId", referencedColumnName = "perId")

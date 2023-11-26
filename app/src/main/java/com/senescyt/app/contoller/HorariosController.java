@@ -1,9 +1,6 @@
 package com.senescyt.app.contoller;
 
-import com.senescyt.app.model.Horarios;
-import com.senescyt.app.model.Procesos;
-import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.Usuario;
+import com.senescyt.app.model.*;
 import com.senescyt.app.service.HorariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +25,11 @@ public class HorariosController {
     public ResponseEntity<Horarios> create(@RequestBody Horarios h) {
         h.setHorEstado(1);
         return new ResponseEntity<>(horariosService.save(h), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getHorarioById")
+    public ResponseEntity<Horarios> getHorarioById(@RequestParam Long id) {
+        return new ResponseEntity<>(horariosService.getHorarioById(id), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")

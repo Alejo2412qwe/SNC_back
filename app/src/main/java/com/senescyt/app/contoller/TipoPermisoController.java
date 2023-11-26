@@ -40,6 +40,11 @@ public class TipoPermisoController {
         return new ResponseEntity<>(tipPermisoService.searchTipopermiso(search, est), HttpStatus.OK);
     }
 
+    @GetMapping("/getTipoPermsioById")
+    public ResponseEntity <TipoPermiso> getTipoPermsioById(@RequestParam Long id) {
+        return new ResponseEntity<>(tipPermisoService.getTipoPermsioById(id), HttpStatus.OK);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<TipoPermiso> update(@PathVariable Long id, @RequestBody TipoPermiso p) {
         TipoPermiso tipoPermiso = tipPermisoService.findById(id);

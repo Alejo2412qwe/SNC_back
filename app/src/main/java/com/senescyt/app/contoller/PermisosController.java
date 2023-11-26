@@ -43,6 +43,11 @@ public class PermisosController {
         return new ResponseEntity<>(permisosService.getPermisosByIdJefe(id), HttpStatus.OK);
     }
 
+        @GetMapping("/getPermisoById")
+    public ResponseEntity<Permisos> getPermisoById(@RequestParam Long id) {
+        return new ResponseEntity<>(permisosService.getPermisoById(id), HttpStatus.OK);
+    }
+
     @GetMapping("/getPermisosForAdmin")
     public ResponseEntity<List<Permisos>> getPermisosForAdmin(@RequestParam int est) {
         return new ResponseEntity<>(permisosService.getPermisosForAdmin(est), HttpStatus.OK);

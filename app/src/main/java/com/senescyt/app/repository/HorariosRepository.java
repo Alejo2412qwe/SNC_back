@@ -15,4 +15,7 @@ public interface HorariosRepository extends GenericRepository<Horarios,Long> {
     @Query(value = "SELECT * FROM horarios where hor_estado = :est", nativeQuery = true)
     public List<Horarios> getProcesosByHorario(@Param("est") int est);
 
+    @Query(value = "SELECT * FROM horarios where hor_id = :id", nativeQuery = true)
+    Horarios getHorarioById(@Param("id") Long id);
+
 }

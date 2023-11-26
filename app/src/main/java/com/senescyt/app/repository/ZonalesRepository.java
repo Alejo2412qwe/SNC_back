@@ -24,4 +24,7 @@ public interface ZonalesRepository extends GenericRepository<Zonales, Long> {
             "    OR UPPER(zon_codigo) LIKE CONCAT('%', :search, '%')\n" +
             "  );", nativeQuery = true)
     List<Zonales> searchZonales(@Param("search") String search, @Param("est") int est);
+
+    @Query(value = "SELECT * FROM zonales WHERE zon_id = :id", nativeQuery = true)
+    Zonales getZonalById(@Param("id") Long id);
 }

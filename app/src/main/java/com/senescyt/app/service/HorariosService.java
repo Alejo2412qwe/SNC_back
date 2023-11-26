@@ -50,4 +50,8 @@ public class HorariosService extends GenericServiceImpl<Horarios, Long> implemen
         return horariosRepository.getProcesosByHorario(est);
     }
 
+    public Horarios getHorarioById(Long id) {
+        return horariosRepository.getHorarioById(id);
+    }
+
 }
