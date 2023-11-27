@@ -1,20 +1,18 @@
 package com.senescyt.app.contoller;
 
-import com.senescyt.app.model.Asistencia;
-import com.senescyt.app.model.Persona;
-import com.senescyt.app.model.Rol;
-import com.senescyt.app.model.Usuario;
+import com.senescyt.app.model.*;
 import com.senescyt.app.service.AsistenciaService;
+import com.senescyt.app.service.HorariosService;
 import com.senescyt.app.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.*;
 
 @CrossOrigin("*")
 @RestController
@@ -25,6 +23,11 @@ public class AsistenciaController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private HorariosService horariosService;
+    // Crear un nuevo formato para obtener solo la hora
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
 
     @GetMapping("/read")
     public ResponseEntity<List<Asistencia>> read() {
@@ -129,7 +132,79 @@ public class AsistenciaController {
     @PostMapping("/saveList")
     public ResponseEntity<List<Asistencia>> createList(@RequestBody List<Asistencia> asistencias) {
 
+        for (Asistencia asistencia : asistencias ){
+            Long id = Long.valueOf(10);
+            Horarios horarios =horariosService.findById((Long) usuarioService.horarioUser(id)[0]);
+
+            LocalTime horaAsistencia = LocalTime.parse(obtenerHora(asistencia.getAsisFechaHora()));
+            LocalTime ingresoDia = LocalTime.parse(horarios.getHorHoraIngresoDia());
+            LocalTime salidaDia = LocalTime.parse(horarios.getHorHoraIngresoDia());
+            LocalTime ingresoTarde = LocalTime.parse(horarios.getHorHoraIngresoDia());
+            LocalTime salidaTarde = LocalTime.parse(horarios.getHorHoraIngresoDia());
+
+
+            switch (asistencia.getAsisEstado().trim()) {
+                case "M/Ent":
+                    if (horaAsistencia.isAfter(ingresoDia)) {
+                        asistencia.setAsisEstadoStr("Ingreso Atrasado");
+                    } else if (horaAsistencia.equals(ingresoDia)) {
+                        asistencia.setAsisEstadoStr("Ingreso Anticipado");
+                    } else {
+                        asistencia.setAsisEstadoStr("Ingreso Puntual");
+                    }
+                    break;
+                case "M/Sal":
+                    // Comparar las horas de salida y asistencia
+                    if (horaAsistencia.isAfter(salidaDia)) {
+                        asistencia.setAsisEstadoStr("Salida Retrasada");
+                    } else if (horaAsistencia.equals(salidaDia)) {
+                        asistencia.setAsisEstadoStr("Salida Puntual");
+                    } else {
+                        asistencia.setAsisEstadoStr("Salida Temprana");
+                    }
+                    break;
+                case "T/Ent":
+
+                    break;
+                case "Sal":
+//                case "T/Sal":
+                    if (horaAsistencia.isAfter(salidaDia)) {
+                        asistencia.setAsisEstadoStr("Salida Retrasada");
+                    } else if (horaAsistencia.equals(salidaDia)) {
+                        asistencia.setAsisEstadoStr("Salida Puntual");
+                    } else {
+                        asistencia.setAsisEstadoStr("Salida Temprana");
+                    }
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+            }
+
+        }
+
         return new ResponseEntity<>(asistenciaService.saveAll(asistencias), HttpStatus.CREATED);
+    }
+
+    public String obtenerHora(String fechaHoraStr) {
+
+        // Crear un objeto SimpleDateFormat para parsear la cadena
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        try {
+            // Parsear la cadena a un objeto Date
+            Date fechaHora = sdf.parse(fechaHoraStr);
+
+            // Crear un nuevo formato para obtener solo la hora
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+
+            // Obtener la hora como cadena
+            return formatoHora.format(fechaHora);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Manejar la excepción en caso de un formato de fecha y hora incorrecto
+            return null; // o lanzar una excepción personalizada según tu necesidad
+        }
     }
 
     @PutMapping("/update/{id}")
@@ -148,6 +223,7 @@ public class AsistenciaController {
                 Asistencia.setAsisCodTrabajo(p.getAsisCodTrabajo());
                 Asistencia.setAsisVerificaCod(p.getAsisVerificaCod());
                 Asistencia.setAsisNoTarjeta(p.getAsisNoTarjeta());
+                Asistencia.setAsisEstadoStr(p.getAsisEstadoStr());
 
                 return new ResponseEntity<>(asistenciaService.save(Asistencia), HttpStatus.CREATED);
             } catch (Exception e) {

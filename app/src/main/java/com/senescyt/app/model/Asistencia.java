@@ -51,6 +51,8 @@ public class Asistencia implements Serializable {
 
     private Long asisNoTarjeta;
 
+    private String asisEstadoStr;// Puntual o Retraso
+
     private String asisNombreArchivo;
 
     private Timestamp asisFechaArchivo;
