@@ -58,10 +58,12 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Long> {
     @Query(value = "SELECT COUNT(*) FROM `usuario` WHERE usu_nombre_usuario =:user", nativeQuery = true)
     int usuarioUnico(@Param("user") String user);
 
+
     @Query(value = "SELECT u.* FROM bd_snc.usuario u JOIN bd_snc.rol r ON u.rol_id = r.rol_id WHERE r.rol_id = :id", nativeQuery = true)
     List<Usuario> getJefesByRolId(@Param("id") Long id);
 
     Optional<Usuario> findByUsuNombreUsuario(String username);
 
-
+    @Query(nativeQuery = true, value = "SELECT u.hor_id FROM bd_snc.usuario u where u.usu_id_lector= :id")
+    Object[] horarioUser(@Param("id") Long id);
 }

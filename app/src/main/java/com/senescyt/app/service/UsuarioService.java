@@ -36,6 +36,10 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Long> implements
         return usuarioRepository.allUsersData(est);
     }
 
+    public Object[] horarioUser(Long id) {
+        return usuarioRepository.horarioUser(id);
+    }
+
 
     public List<Object[]> searchUsersCI(String search, int est) {
         return usuarioRepository.searchUsersCI(search,est);
