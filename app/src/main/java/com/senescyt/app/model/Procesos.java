@@ -42,7 +42,7 @@ public class Procesos /*zona*/ implements Serializable {
     @OneToMany(mappedBy = "procId")
     private List<Subprocesos> listaSubprocesos;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "procId")
-    private List<Usuario> listaUsuarios;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "procId")
+//    private List<Usuario> listaUsuarios;
 }

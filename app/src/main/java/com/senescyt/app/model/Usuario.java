@@ -97,8 +97,8 @@ public class Usuario implements UserDetails {
     private Horarios horId;
 
     @ManyToOne
-    @JoinColumn(name = "procId", referencedColumnName = "procId")
-    private Procesos procId;
+    @JoinColumn(name = "subId", referencedColumnName = "subId")
+    private Subprocesos subId;
 
     @ManyToOne
     @JoinColumn(name = "zonId", referencedColumnName = "zonId")
