@@ -88,7 +88,6 @@ public class UsuarioController {
 
 
             Long subProcId = (Long) data[7];
-            System.out.println("\n\n\n\n\n\n\n\n\n\n"+subProcId+ "\n\n\n\n\n\n");
             user.setSubId(subprocesoService.findById(subProcId));
 
             Long rolId = (Long) data[8];
