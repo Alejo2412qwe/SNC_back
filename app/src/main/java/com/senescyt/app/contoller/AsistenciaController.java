@@ -151,9 +151,9 @@ public class AsistenciaController {
                         if (horaAsistencia.isAfter(ingresoDia)) {
                             asistencia.setAsisEstadoStr("Ingreso Atrasado");
                         } else if (horaAsistencia.equals(ingresoDia)) {
-                            asistencia.setAsisEstadoStr("Ingreso Anticipado");
-                        } else {
                             asistencia.setAsisEstadoStr("Ingreso Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Ingreso Anticipado");
                         }
                         break;
                     case "M/Sal":
@@ -167,13 +167,19 @@ public class AsistenciaController {
                         }
                         break;
                     case "T/Ent":
-
+                        if (horaAsistencia.isAfter(ingresoTarde)) {
+                            asistencia.setAsisEstadoStr("Ingreso Atrasado");
+                        } else if (horaAsistencia.equals(ingresoTarde)) {
+                            asistencia.setAsisEstadoStr("Ingreso Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Ingreso Anticipado");
+                        }
                         break;
-                    case "Sal":
+                    case "T/Sal":
 //                case "T/Sal":
-                        if (horaAsistencia.isAfter(salidaDia)) {
+                        if (horaAsistencia.isAfter(salidaTarde)) {
                             asistencia.setAsisEstadoStr("Salida Retrasada");
-                        } else if (horaAsistencia.equals(salidaDia)) {
+                        } else if (horaAsistencia.equals(salidaTarde)) {
                             asistencia.setAsisEstadoStr("Salida Puntual");
                         } else {
                             asistencia.setAsisEstadoStr("Salida Temprana");
