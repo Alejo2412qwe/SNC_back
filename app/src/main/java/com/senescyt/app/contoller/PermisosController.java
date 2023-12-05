@@ -21,7 +21,6 @@ public class PermisosController {
 
     @PostMapping("/create")
     public ResponseEntity<Permisos> create(@RequestBody Permisos p) {
-        p.setPermEstado(3);
         Date date = new Date();
         Date fechahoy = new Date(date.getTime());
         p.setPermFechaEmision(fechahoy);

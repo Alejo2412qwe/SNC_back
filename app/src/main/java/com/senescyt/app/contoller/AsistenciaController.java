@@ -133,52 +133,63 @@ public class AsistenciaController {
     public ResponseEntity<List<Asistencia>> createList(@RequestBody List<Asistencia> asistencias) {
 
         for (Asistencia asistencia : asistencias ){
-            Long id = Long.valueOf(10);
-            Horarios horarios =horariosService.findById((Long) usuarioService.horarioUser(id)[0]);
-
-            LocalTime horaAsistencia = LocalTime.parse(obtenerHora(asistencia.getAsisFechaHora()));
-            LocalTime ingresoDia = LocalTime.parse(horarios.getHorHoraIngresoDia());
-            LocalTime salidaDia = LocalTime.parse(horarios.getHorHoraIngresoDia());
-            LocalTime ingresoTarde = LocalTime.parse(horarios.getHorHoraIngresoDia());
-            LocalTime salidaTarde = LocalTime.parse(horarios.getHorHoraIngresoDia());
 
 
-            switch (asistencia.getAsisEstado().trim()) {
-                case "M/Ent":
-                    if (horaAsistencia.isAfter(ingresoDia)) {
-                        asistencia.setAsisEstadoStr("Ingreso Atrasado");
-                    } else if (horaAsistencia.equals(ingresoDia)) {
-                        asistencia.setAsisEstadoStr("Ingreso Anticipado");
-                    } else {
-                        asistencia.setAsisEstadoStr("Ingreso Puntual");
-                    }
-                    break;
-                case "M/Sal":
-                    // Comparar las horas de salida y asistencia
-                    if (horaAsistencia.isAfter(salidaDia)) {
-                        asistencia.setAsisEstadoStr("Salida Retrasada");
-                    } else if (horaAsistencia.equals(salidaDia)) {
-                        asistencia.setAsisEstadoStr("Salida Puntual");
-                    } else {
-                        asistencia.setAsisEstadoStr("Salida Temprana");
-                    }
-                    break;
-                case "T/Ent":
+            if(usuarioService.horarioUser(asistencia.getAsisNoLector()).length != 0){
 
-                    break;
-                case "Sal":
+                Horarios horarios =horariosService.findById((Long) usuarioService.horarioUser(asistencia.getAsisNoLector())[0]);
+
+                LocalTime horaAsistencia = LocalTime.parse(obtenerHora(asistencia.getAsisFechaHora()));
+                LocalTime ingresoDia = LocalTime.parse(horarios.getHorHoraIngresoDia()).plusMinutes(30);
+                LocalTime salidaDia = LocalTime.parse(horarios.getHorHoraIngresoDia());
+                LocalTime ingresoTarde = LocalTime.parse(horarios.getHorHoraIngresoDia()).plusMinutes(30);
+                LocalTime salidaTarde = LocalTime.parse(horarios.getHorHoraIngresoDia());
+
+
+                switch (asistencia.getAsisEstado().trim()) {
+                    case "M/Ent":
+                        if (horaAsistencia.isAfter(ingresoDia)) {
+                            asistencia.setAsisEstadoStr("Ingreso Atrasado");
+                        } else if (horaAsistencia.equals(ingresoDia)) {
+                            asistencia.setAsisEstadoStr("Ingreso Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Ingreso Anticipado");
+                        }
+                        break;
+                    case "M/Sal":
+                        // Comparar las horas de salida y asistencia
+                        if (horaAsistencia.isAfter(salidaDia)) {
+                            asistencia.setAsisEstadoStr("Salida Retrasada");
+                        } else if (horaAsistencia.equals(salidaDia)) {
+                            asistencia.setAsisEstadoStr("Salida Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Salida Temprana");
+                        }
+                        break;
+                    case "T/Ent":
+                        if (horaAsistencia.isAfter(ingresoTarde)) {
+                            asistencia.setAsisEstadoStr("Ingreso Atrasado");
+                        } else if (horaAsistencia.equals(ingresoTarde)) {
+                            asistencia.setAsisEstadoStr("Ingreso Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Ingreso Anticipado");
+                        }
+                        break;
+                    case "T/Sal":
 //                case "T/Sal":
-                    if (horaAsistencia.isAfter(salidaDia)) {
-                        asistencia.setAsisEstadoStr("Salida Retrasada");
-                    } else if (horaAsistencia.equals(salidaDia)) {
-                        asistencia.setAsisEstadoStr("Salida Puntual");
-                    } else {
-                        asistencia.setAsisEstadoStr("Salida Temprana");
-                    }
-                    break;
-                default:
-                    System.out.println("Opción no válida");
+                        if (horaAsistencia.isAfter(salidaTarde)) {
+                            asistencia.setAsisEstadoStr("Salida Retrasada");
+                        } else if (horaAsistencia.equals(salidaTarde)) {
+                            asistencia.setAsisEstadoStr("Salida Puntual");
+                        } else {
+                            asistencia.setAsisEstadoStr("Salida Temprana");
+                        }
+                        break;
+                    default:
+                        System.out.println("Opción no válida");
+                }
             }
+
 
         }
 

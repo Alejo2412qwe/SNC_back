@@ -28,7 +28,7 @@ public class UsuarioController {
     @Autowired
     private PersonaService personaService;
     @Autowired
-    private ProcesosService procesosService;
+    private SubprocesoService subprocesoService;
 
     @Autowired
     private ZonalesService zonalesService;
@@ -86,8 +86,9 @@ public class UsuarioController {
             Long insId = (Long) data[6];
             user.setInsId(institucionService.findById(insId));
 
-            Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(procId));
+
+            Long subProcId = (Long) data[7];
+            user.setSubId(subprocesoService.findById(subProcId));
 
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
@@ -139,7 +140,7 @@ public class UsuarioController {
             user.setInsId(institucionService.findById(insId));
 
             Long procId = (Long) data[7];
-            user.setProcId(procesosService.findById(procId));
+            user.setSubId(subprocesoService.findById(procId));
 
             Long rolId = (Long) data[8];
             user.setRolId(rolService.findById(rolId));
@@ -222,18 +223,20 @@ public class UsuarioController {
 
                 usuario.setUsuEstado(u.getUsuEstado());
                 usuario.setUsuNombreUsuario(u.getUsuNombreUsuario());
-                usuario.setUsuContrasena(passwordEncoder.encode(u.getUsuContrasena()));
                 usuario.setRolId(u.getRolId());
                 usuario.setUsuCorreo(u.getUsuCorreo());
                 usuario.setFunId(u.getFunId());
                 usuario.setFoto(u.getFoto());
                 usuario.setTitulo(u.getTitulo());
                 usuario.setInsId(u.getInsId());
-                usuario.setProcId(u.getProcId());
+                usuario.setSubId(u.getSubId());
                 usuario.setRegId(u.getRegId());
                 usuario.setZonId(u.getZonId());
                 usuario.setHorId(u.getHorId());
                 usuario.setUsuSaldoVacacional(u.getUsuSaldoVacacional());
+                if(!u.getUsuContrasena().isEmpty()){
+                    usuario.setUsuContrasena(passwordEncoder.encode(u.getUsuContrasena()));
+                }
 
 
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
