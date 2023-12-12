@@ -14,9 +14,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/zonales")
+@RequestMapping("/snc/zonales")
 public class ZonalesController {
 
     @Autowired

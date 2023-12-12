@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/permisos")
+@RequestMapping("/snc/permisos")
 public class PermisosController {
     @Autowired
     private PermisoService permisosService;

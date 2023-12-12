@@ -18,9 +18,9 @@ import java.util.List;
  *
  * @author ALEJO PC
  */
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/persona")
+@RequestMapping("/snc/persona")
 public class PersonaController {
 
     @Autowired

@@ -14,9 +14,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/asistencia")
+@RequestMapping("/snc/asistencia")
 public class AsistenciaController {
     @Autowired
     private AsistenciaService asistenciaService;
