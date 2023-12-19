@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/tipoformulario")
+@RequestMapping("/snc/tipoformulario")
 public class TipoFormularioController {
     @Autowired
     private TipoFormularioService tipFormularioService;

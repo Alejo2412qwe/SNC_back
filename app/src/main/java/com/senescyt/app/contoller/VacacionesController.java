@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Calendar;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/vacaciones")
+@RequestMapping("/snc/vacaciones")
 public class VacacionesController {
     @Autowired
     private VacacionesService vacacioneService;
