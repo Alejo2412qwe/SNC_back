@@ -52,7 +52,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://apps.tecazuay.edu.ec/","https://apps.tecazuay.edu.ec:9090"));
+        configuration.setAllowedOrigins(List.of("https://apps.tecazuay.edu.ec/","https://apps.tecazuay.edu.ec:9090","http://localhost:4200"));
         configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.addExposedHeader("Message");
