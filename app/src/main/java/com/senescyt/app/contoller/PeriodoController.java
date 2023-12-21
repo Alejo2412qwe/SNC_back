@@ -64,6 +64,7 @@ public class PeriodoController {
 
                 Periodo.setPeriActual(p.getPeriActual());
                 Periodo.setPeriAnterior(p.getPeriAnterior());
+                Periodo.setDiasAnticipacion(p.getDiasAnticipacion());
 
                 return new ResponseEntity<>(periodoService.save(Periodo), HttpStatus.CREATED);
             } catch (Exception e) {
