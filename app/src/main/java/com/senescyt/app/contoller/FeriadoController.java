@@ -1,7 +1,6 @@
 package com.senescyt.app.contoller;
 
 import com.senescyt.app.model.*;
-import com.senescyt.app.service.CiudadService;
 import com.senescyt.app.service.FeriadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +21,13 @@ public class FeriadoController {
     public ResponseEntity<List<Feriado>> read() {
         return new ResponseEntity<>(feriadoService.findByAll(), HttpStatus.OK);
     }
+
+    @GetMapping("/isFeriado")
+    public ResponseEntity<Boolean> isFeriado(@RequestParam String fecha) {
+        return new ResponseEntity<Boolean>(feriadoService.isFeriado(fecha), HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/create")
     public ResponseEntity<Feriado> create(@RequestBody Feriado f) {

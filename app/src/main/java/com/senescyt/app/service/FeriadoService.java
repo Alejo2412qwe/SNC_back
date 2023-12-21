@@ -30,4 +30,13 @@ public class FeriadoService extends GenericServiceImpl<Feriado, Long> implements
     public Feriado getFeriadosById(Long id) {
         return feriadoRepository.getFeriadosById(id);
     }
+
+    public boolean isFeriado(String fecha) {
+        int feriado= feriadoRepository.isFeriado(fecha);
+        if(feriado!=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

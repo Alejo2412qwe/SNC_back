@@ -29,9 +29,11 @@ public class Feriado {
     private Long ferId;
 
     @Column(name = "ferFechaInicio")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ferFechaInicio;
 
     @Column(name = "ferFechaFin")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ferFechaFin;
 
     @Column(name = "ferEstado")
