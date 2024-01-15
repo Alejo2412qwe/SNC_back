@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/procesos")
+@RequestMapping("/snc/procesos")
 public class ProcesosController {
     @Autowired
     private ProcesosService procesosService;

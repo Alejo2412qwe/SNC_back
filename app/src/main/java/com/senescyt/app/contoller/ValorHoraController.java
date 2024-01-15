@@ -13,9 +13,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/valorhora")
+@RequestMapping("/snc/valorhora")
 public class ValorHoraController {
 
     @Autowired

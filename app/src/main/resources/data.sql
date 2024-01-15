@@ -1,17 +1,13 @@
-INSERT INTO rol(rol_id, rol_nombre)
-VALUES (1, 'Administrador');
-INSERT INTO rol(rol_id, rol_nombre)
-VALUES (2, 'Administrativo');
-INSERT INTO rol(rol_id, rol_nombre)
-VALUES (3, 'Docente');
-INSERT INTO rol(rol_id, rol_nombre)
-VALUES (4, 'Funcionario');
-INSERT INTO rol(rol_id, rol_nombre)
-VALUES (5, 'Jefe de Unidad');
+INSERT IGNORE INTO rol(rol_id, rol_nombre)
+VALUES (1, 'Administrador'),
+(2, 'Administrativo'),
+(3, 'Docente'),
+(4, 'Funcionario'),
+(5, 'Jefe de Unidad');
 
 
 --motivo del permiso
-INSERT INTO motivo_permiso(mot_estado,mot_nombre,mot_descripcion_corta,mot_descripcion_larga)
+INSERT IGNORE INTO motivo_permiso(mot_estado,mot_nombre,mot_descripcion_corta,mot_descripcion_larga)
 VALUES(1,'LICENCIA POR CALAMIDAD DOMÉSTICA','HASTA 8 DÍAS; SEGÚN EL CASO','Por calamidad doméstica, entendida como tal, al fallecimiento, accidente o enfermedad grave del cónyuge o conviviente en unión de hecho legalmente reconocida o de los parientes hasta el segundo grado de consanguinidad o segundo de afinidad de las servidoras o servidores públicos. Para el caso del cónyuge o conviviente en unión de hecho legalmente reconocida, del padre, madre o hijos, la máxima autoridad, su delegado o las Unidades de Administración del Talento Humano deberán conceder licencia hasta por ocho días, al igual que para el caso de siniestros que afecten gravemente la propiedad o los bienes de la servidora o servidor. Para el resto de parientes contemplados en este literal, se concederá la licencia hasta por tres días y, en caso de requerir tiempo adicional, se lo contabilizará con cargo a vacaciones;'),
 (1,'LICENCIA POR ENFERMEDAD','PUEDE SER DE HASTA TRES MESES - SEIS MESES SEGÚN SEA EL CASO','Por enfermedad que determine imposibilidad física o psicológica, debidamente comprobada, para la realización de sus labores, hasta por tres meses; e, igual período podrá aplicarse para su rehabilitación; Por enfermedad catastrófica o accidente grave debidamente certificado, hasta por seis meses; así como el uso de dos horas diarias para su rehabilitación en caso de prescripción médica;'),
 (1,'LICENCIA POR MATERNIDAD','84 DÍAS','Por maternidad, toda servidora pública tiene derecho a una licencia con remuneración de doce (12) semanas por el nacimiento de su hija o hijo; en caso de nacimiento múltiple el plazo se extenderá por diez días adicionales. La ausencia se justificará mediante la presentación del certificado médico otorgado por un facultativo del Instituto Ecuatoriano de Seguridad Social; y, a falta de éste, por otro profesional de los centros de salud pública. En dicho certificado se hará constar la fecha probable del parto o en la que tal hecho se produjo;'),
@@ -25,18 +21,18 @@ VALUES(1,'LICENCIA POR CALAMIDAD DOMÉSTICA','HASTA 8 DÍAS; SEGÚN EL CASO','Po
 
 
 -- REGIMEN
-INSERT INTO regimen(reg_estado,reg_nombre)
+INSERT IGNORE INTO regimen(reg_estado,reg_nombre)
 VALUES(1,'LOSEP'),(1,'Código Del Trabajo');
 
 
 
 -- PROVINCIAS
-INSERT INTO provincia (pro_id, pro_nombre)
+INSERT IGNORE INTO provincia (pro_id, pro_nombre)
 VALUES (1, 'AZUAY'), (2, 'BOLIVAR'), (3, 'CAÑAR'), (4, 'CARCHI'), (5, 'COTOPAXI'), (6, 'CHIMBORAZO'), (7, 'EL ORO'), (8, 'ESMERALDAS'), (9, 'GUAYAS'), (10, 'IMBABURA'), (11, 'LOJA'), (12, 'LOS RIOS'), (13, 'MANABI'), (14, 'MORONA SANTIAGO'), (15, 'NAPO'), (16, 'PASTAZA'), (17, 'PICHINCHA'), (18, 'TUNGURAHUA'), (19, 'ZAMORA CHINCHIPE'), (20, 'GALAPAGOS'), (21, 'SUCUMBIOS'), (22, 'ORELLANA'), (23, 'SANTO DOMINGO DE LOS TSACHILAS'), (24, 'SANTA ELENA'), (25, 'ZONAS NO DELIMITADAS');
 
 
 -- CIUDADES
-INSERT INTO ciudad(ciu_nombre, pro_id)
+INSERT IGNORE INTO ciudad(ciu_nombre, pro_id)
 VALUES ('CUENCA', 1),
        ('GIRÓN', 1),
        ('GUALACEO', 1),
