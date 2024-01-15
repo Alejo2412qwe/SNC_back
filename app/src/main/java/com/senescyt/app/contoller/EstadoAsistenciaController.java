@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/estadoasistencia")
+@RequestMapping("/snc/estadoasistencia")
 public class EstadoAsistenciaController {
     @Autowired
     private EstadoAsistenciaService estadoAsistenciaService;

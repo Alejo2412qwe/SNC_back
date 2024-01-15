@@ -15,9 +15,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/snc/usuario")
 public class UsuarioController {
 
     @Autowired

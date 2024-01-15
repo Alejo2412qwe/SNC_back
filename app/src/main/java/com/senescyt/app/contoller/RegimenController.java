@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/regimen")
+@RequestMapping("/snc/regimen")
 public class RegimenController {
 
     @Autowired

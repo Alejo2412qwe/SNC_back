@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = { "https://apps.tecazuay.edu.ec" })
 @RestController
-@RequestMapping("/periodo")
+@RequestMapping("/snc/periodo")
 public class PeriodoController {
     @Autowired
     private PeriodoService periodoService;
@@ -64,6 +64,7 @@ public class PeriodoController {
 
                 Periodo.setPeriActual(p.getPeriActual());
                 Periodo.setPeriAnterior(p.getPeriAnterior());
+                Periodo.setDiasAnticipacion(p.getDiasAnticipacion());
 
                 return new ResponseEntity<>(periodoService.save(Periodo), HttpStatus.CREATED);
             } catch (Exception e) {

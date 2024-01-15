@@ -48,7 +48,7 @@ public interface AsistenciaRepository extends GenericRepository<Asistencia, Long
             "FROM bd_snc.asistencia a  " +
             "JOIN bd_snc.usuario u ON (a.asis_no_lector = u.usu_id_lector)  " +
             "JOIN bd_snc.persona p ON (p.per_id = u.usu_per_id)  " +
-            "WHERE (STR_TO_DATE(a.asis_fecha_hora, '%d/%m/%Y %T') BETWEEN :fechaMin AND :fechaMax)  " +
+            "WHERE (STR_TO_DATE(a.asis_fecha_hora, '%d/%m/%Y') BETWEEN :fechaMin AND :fechaMax)  " +
             "AND (p.per_cedula LIKE CONCAT ('%', :search, '%') " +
             "  OR CONCAT(LOWER(p.per_apellido), ' ', LOWER(p.per_nombre)) LIKE LOWER (CONCAT('%', :search ,'%'))" +
             "  OR CONCAT(LOWER(p.per_nombre), ' ', LOWER(p.per_apellido)) LIKE LOWER (CONCAT('%', :search ,'%'))" +
@@ -56,6 +56,8 @@ public interface AsistenciaRepository extends GenericRepository<Asistencia, Long
             ") ORDER BY a.asis_fecha_hora, p.per_apellido, p.per_nombre"
     )
     List<Object[]> asistenciaSearch(@Param("fechaMin") String fechaMin,@Param("fechaMax") String fechaMax, @Param("search") String search);
+
+
 
     @Query(nativeQuery = true, value = "SELECT   " +
             "    a.asis_id,   " +
