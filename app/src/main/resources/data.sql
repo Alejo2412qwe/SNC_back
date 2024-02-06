@@ -1,38 +1,129 @@
-INSERT IGNORE INTO rol(rol_id, rol_nombre)
-VALUES (1, 'Administrador'),
-(2, 'Administrativo'),
-(3, 'Docente'),
-(4, 'Funcionario'),
-(5, 'Jefe de Unidad');
+INSERT INTO rol (rol_id, rol_nombre)
+SELECT * FROM (
+                  SELECT 1, 'Administrador' AS rol_nombre
+                  UNION ALL
+                  SELECT 2, 'Administrativo'
+                  UNION ALL
+                  SELECT 3, 'Docente'
+                  UNION ALL
+                  SELECT 4, 'Funcionario'
+                  UNION ALL
+                  SELECT 5, 'Jefe de Unidad'
+              ) AS datos
+WHERE NOT EXISTS (
+    SELECT 1 FROM rol WHERE rol_id IN (1, 2, 3, 4, 5)
+);
 
 
 --motivo del permiso
-INSERT IGNORE INTO motivo_permiso(mot_estado,mot_nombre,mot_descripcion_corta,mot_descripcion_larga)
-VALUES(1,'LICENCIA POR CALAMIDAD DOMÉSTICA','HASTA 8 DÍAS; SEGÚN EL CASO','Por calamidad doméstica, entendida como tal, al fallecimiento, accidente o enfermedad grave del cónyuge o conviviente en unión de hecho legalmente reconocida o de los parientes hasta el segundo grado de consanguinidad o segundo de afinidad de las servidoras o servidores públicos. Para el caso del cónyuge o conviviente en unión de hecho legalmente reconocida, del padre, madre o hijos, la máxima autoridad, su delegado o las Unidades de Administración del Talento Humano deberán conceder licencia hasta por ocho días, al igual que para el caso de siniestros que afecten gravemente la propiedad o los bienes de la servidora o servidor. Para el resto de parientes contemplados en este literal, se concederá la licencia hasta por tres días y, en caso de requerir tiempo adicional, se lo contabilizará con cargo a vacaciones;'),
-(1,'LICENCIA POR ENFERMEDAD','PUEDE SER DE HASTA TRES MESES - SEIS MESES SEGÚN SEA EL CASO','Por enfermedad que determine imposibilidad física o psicológica, debidamente comprobada, para la realización de sus labores, hasta por tres meses; e, igual período podrá aplicarse para su rehabilitación; Por enfermedad catastrófica o accidente grave debidamente certificado, hasta por seis meses; así como el uso de dos horas diarias para su rehabilitación en caso de prescripción médica;'),
-(1,'LICENCIA POR MATERNIDAD','84 DÍAS','Por maternidad, toda servidora pública tiene derecho a una licencia con remuneración de doce (12) semanas por el nacimiento de su hija o hijo; en caso de nacimiento múltiple el plazo se extenderá por diez días adicionales. La ausencia se justificará mediante la presentación del certificado médico otorgado por un facultativo del Instituto Ecuatoriano de Seguridad Social; y, a falta de éste, por otro profesional de los centros de salud pública. En dicho certificado se hará constar la fecha probable del parto o en la que tal hecho se produjo;'),
-(1,'LICENCIA POR MATRIMONIO O UNIÓN DE HECHO','3 DÍAS LABORABLES (HÁBILES)','La servidora o el servidor que contraiga matrimonio o unión de hecho, tendrá derecho a una licencia con remuneración de tres días hábiles continuos en total, pudiendo solicitarla antes o después de la celebración del matrimonio.'),
-(1,'LICENCIA POR PATERNIDAD','10 DÍAS (NORMAL), 15DÍAS (CESAREA) Y 8 DÍAS MÁS PREMATURO, y 25 días Enfermedades Degenerativas etc.','Por paternidad, el servidor público tiene derecho a licencia con remuneración por el plazo de diez días contados desde el nacimiento de su hija o hijo cuando el parto es normal; en los casos de nacimiento múltiple o por cesárea se ampliará por cinco días más; En los casos de nacimientos prematuros o en condiciones de cuidado especial, se prolongará la licencia por paternidad con remuneración por ocho días más; y, cuando hayan nacido con una enfermedad degenerativa, terminal o irreversible o con un grado de discapacidad severa, el padre podrá tener licencia con remuneración por veinte y cinco días, hecho que se justificará con la presentación de un certificado médico, otorgado por un facultativo del Instituto Ecuatoriano de Seguridad Social y a falta de éste, por otro profesional médico debidamente avalado por los centros de salud pública; En caso de fallecimiento de la madre, durante el parto o mientras goza de la licencia por maternidad, el padre podrá hacer uso de la totalidad, o en su caso de la parte que reste del período de licencia que le hubiere correspondido a la madre;'),
-(1,'PERMISO PARA ESTUDIOS REGULARES','HASTA DOS HORAS RECUPERABLES','En el caso de contratos de servicios ocasionales se podrá otorgar este permiso de conformidad con las necesidades institucionales siempre que la servidora o el servidor recupere el tiempo solicitado.'),
-(1,'PERMISO POR DÍAS CON CARGO A','Tomar en cuenta que los días de vacaciones son en un numero de 30 días (22 laborales, 8 sábados y domingos), después de 11 meses laborados, el cálculo se lo realiza multiplicando el tiempo laboral solicitado por 1,36363636363636','Podrán concederse permisos imputables a vacaciones, siempre que éstos no excedan los días de vacación a los que la servidora o el servidor tenga derecho al momento de la solicitud.  (se suman horas, fracciones de horas y días)'),
-(1,'PERMISO POR ASUNTOS OFICIALES','NO IMPUTABLE A VACACIONES','Esta licencia se hará efectiva siempre y cuando exista la disposición por su jefe inmediato de realizar labores innherentes a su puesto o a la Institución, o a su vez sea dispuesto por la máxima autoridad.'),
-(1,'PERMISO POR ATENCIÓN MÉDICA','HASTA POR 2 HORAS','Las y los servidores/as tendrán derecho a permiso para atención médica hasta por dos horas, siempre que se justifique con certificado médico correspondiente otorgado por el Instituto Ecuatoriano de Seguridad Social o abalizado por los centros de salud pública.'),
-(1,'OTROS','SEGÚN EL DETALLE SE LE ASIGNARÁ LA CATEGORÍA Y EL PERIODO','Los demás que contempla la ley Orgánica del Servicio Público, su Reglamento, y el Reglamento Interno de la Institución.');
-
+INSERT INTO motivo_permiso(mot_estado, mot_nombre, mot_descripcion_corta, mot_descripcion_larga)
+SELECT * FROM (
+                  SELECT 1 AS mot_estado, 'LICENCIA POR CALAMIDAD DOMÉSTICA' AS mot_nombre, 'HASTA 8 DÍAS; SEGÚN EL CASO' AS mot_descripcion_corta, 'Por calamidad doméstica, entendida como tal, al fallecimiento, accidente o enfermedad grave del cónyuge o conviviente en unión de hecho legalmente reconocida o de los parientes hasta el segundo grado de consanguinidad o segundo de afinidad de las servidoras o servidores públicos. Para el caso del cónyuge o conviviente en unión de hecho legalmente reconocida, del padre, madre o hijos, la máxima autoridad, su delegado o las Unidades de Administración del Talento Humano deberán conceder licencia hasta por ocho días, al igual que para el caso de siniestros que afecten gravemente la propiedad o los bienes de la servidora o servidor. Para el resto de parientes contemplados en este literal, se concederá la licencia hasta por tres días y, en caso de requerir tiempo adicional, se lo contabilizará con cargo a vacaciones;' AS mot_descripcion_larga
+                  UNION ALL
+                  SELECT 1, 'LICENCIA POR ENFERMEDAD', 'PUEDE SER DE HASTA TRES MESES - SEIS MESES SEGÚN SEA EL CASO', 'Por enfermedad que determine imposibilidad física o psicológica, debidamente comprobada, para la realización de sus labores, hasta por tres meses; e, igual período podrá aplicarse para su rehabilitación; Por enfermedad catastrófica o accidente grave debidamente certificado, hasta por seis meses; así como el uso de dos horas diarias para su rehabilitación en caso de prescripción médica;'
+                  UNION ALL
+                  SELECT 1, 'LICENCIA POR MATERNIDAD', '84 DÍAS', 'Por maternidad, toda servidora pública tiene derecho a una licencia con remuneración de doce (12) semanas por el nacimiento de su hija o hijo; en caso de nacimiento múltiple el plazo se extenderá por diez días adicionales. La ausencia se justificará mediante la presentación del certificado médico otorgado por un facultativo del Instituto Ecuatoriano de Seguridad Social; y, a falta de éste, por otro profesional de los centros de salud pública. En dicho certificado se hará constar la fecha probable del parto o en la que tal hecho se produjo;'
+                  UNION ALL
+                  SELECT 1, 'LICENCIA POR MATRIMONIO O UNIÓN DE HECHO', '3 DÍAS LABORABLES (HÁBILES)', 'La servidora o el servidor que contraiga matrimonio o unión de hecho, tendrá derecho a una licencia con remuneración de tres días hábiles continuos en total, pudiendo solicitarla antes o después de la celebración del matrimonio.'
+                  UNION ALL
+                  SELECT 1, 'LICENCIA POR PATERNIDAD', '10 DÍAS (NORMAL), 15 DÍAS (CESÁREA) Y 8 DÍAS MÁS PREMATURO, y 25 días Enfermedades Degenerativas etc.', 'Por paternidad, el servidor público tiene derecho a licencia con remuneración por el plazo de diez días contados desde el nacimiento de su hija o hijo cuando el parto es normal; en los casos de nacimiento múltiple o por cesárea se ampliará por cinco días más; En los casos de nacimientos prematuros o en condiciones de cuidado especial, se prolongará la licencia por paternidad con remuneración por ocho días más; y, cuando hayan nacido con una enfermedad degenerativa, terminal o irreversible o con un grado de discapacidad severa, el padre podrá tener licencia con remuneración por veinte y cinco días, hecho que se justificará con la presentación de un certificado médico, otorgado por un facultativo del Instituto Ecuatoriano de Seguridad Social y a falta de éste, por otro profesional médico debidamente avalado por los centros de salud pública; En caso de fallecimiento de la madre, durante el parto o mientras goza de la licencia por maternidad, el padre podrá hacer uso de la totalidad, o en su caso de la parte que reste del período de licencia que le hubiere correspondido a la madre;'
+                  UNION ALL
+                  SELECT 1, 'PERMISO PARA ESTUDIOS REGULARES', 'HASTA DOS HORAS RECUPERABLES', 'En el caso de contratos de servicios ocasionales se podrá otorgar este permiso de conformidad con las necesidades institucionales siempre que la servidora o el servidor recupere el tiempo solicitado.'
+                  UNION ALL
+                  SELECT 1, 'PERMISO POR DÍAS CON CARGO A', 'Tomar en cuenta que los días de vacaciones son en un numero de 30 días (22 laborales, 8 sábados y domingos), después de 11 meses laborados, el cálculo se lo realiza multiplicando el tiempo laboral solicitado por 1,36363636363636', 'Podrán concederse permisos imputables a vacaciones, siempre que éstos no excedan los días de vacación a los que la servidora o el servidor tenga derecho al momento de la solicitud.  (se suman horas, fracciones de horas y días)'
+                  UNION ALL
+                  SELECT 1, 'PERMISO POR ASUNTOS OFICIALES', 'NO IMPUTABLE A VACACIONES', 'Esta licencia se hará efectiva siempre y cuando exista la disposición por su jefe inmediato de realizar labores innherentes a su puesto o a la Institución, o a su vez sea dispuesto por la máxima autoridad.'
+                  UNION ALL
+                  SELECT 1, 'PERMISO POR ATENCIÓN MÉDICA', 'HASTA POR 2 HORAS', 'Las y los servidores/as tendrán derecho a permiso para atención médica hasta por dos horas, siempre que se justifique con certificado médico correspondiente otorgado por el Instituto Ecuatoriano de Seguridad Social o abalizado por los centros de salud pública.'
+                  UNION ALL
+                  SELECT 1, 'OTROS', 'SEGÚN EL DETALLE SE LE ASIGNARÁ LA CATEGORÍA Y EL PERIODO', 'Los demás que contempla la ley Orgánica del Servicio Público, su Reglamento, y el Reglamento Interno de la Institución.'
+              ) AS datos
+WHERE NOT EXISTS (
+    SELECT 1 FROM motivo_permiso WHERE mot_nombre IN (
+                                                      'LICENCIA POR CALAMIDAD DOMÉSTICA', 'LICENCIA POR ENFERMEDAD', 'LICENCIA POR MATERNIDAD',
+                                                      'LICENCIA POR MATRIMONIO O UNIÓN DE HECHO', 'LICENCIA POR PATERNIDAD', 'PERMISO PARA ESTUDIOS REGULARES',
+                                                      'PERMISO POR DÍAS CON CARGO A', 'PERMISO POR ASUNTOS OFICIALES', 'PERMISO POR ATENCIÓN MÉDICA', 'OTROS'
+        )
+);
 
 -- REGIMEN
-INSERT IGNORE INTO regimen(reg_estado,reg_nombre)
-VALUES(1,'LOSEP'),(1,'Código Del Trabajo');
-
+INSERT INTO regimen (reg_estado, reg_nombre)
+SELECT * FROM (
+                  SELECT 1, 'LOSEP' AS reg_nombre
+                  UNION ALL
+                  SELECT 1, 'Código Del Trabajo'
+              ) AS datos
+WHERE NOT EXISTS (
+    SELECT 1 FROM regimen WHERE reg_nombre IN ('LOSEP', 'Código Del Trabajo')
+);
 
 
 -- PROVINCIAS
-INSERT IGNORE INTO provincia (pro_id, pro_nombre)
-VALUES (1, 'AZUAY'), (2, 'BOLIVAR'), (3, 'CAÑAR'), (4, 'CARCHI'), (5, 'COTOPAXI'), (6, 'CHIMBORAZO'), (7, 'EL ORO'), (8, 'ESMERALDAS'), (9, 'GUAYAS'), (10, 'IMBABURA'), (11, 'LOJA'), (12, 'LOS RIOS'), (13, 'MANABI'), (14, 'MORONA SANTIAGO'), (15, 'NAPO'), (16, 'PASTAZA'), (17, 'PICHINCHA'), (18, 'TUNGURAHUA'), (19, 'ZAMORA CHINCHIPE'), (20, 'GALAPAGOS'), (21, 'SUCUMBIOS'), (22, 'ORELLANA'), (23, 'SANTO DOMINGO DE LOS TSACHILAS'), (24, 'SANTA ELENA'), (25, 'ZONAS NO DELIMITADAS');
-
+INSERT INTO provincia (pro_id, pro_nombre)
+SELECT * FROM (
+                  SELECT 1, 'AZUAY' AS pro_nombre
+                  UNION ALL
+                  SELECT 2, 'BOLIVAR'
+                  UNION ALL
+                  SELECT 3, 'CAÑAR'
+                  UNION ALL
+                  SELECT 4, 'CARCHI'
+                  UNION ALL
+                  SELECT 5, 'COTOPAXI'
+                  UNION ALL
+                  SELECT 6, 'CHIMBORAZO'
+                  UNION ALL
+                  SELECT 7, 'EL ORO'
+                  UNION ALL
+                  SELECT 8, 'ESMERALDAS'
+                  UNION ALL
+                  SELECT 9, 'GUAYAS'
+                  UNION ALL
+                  SELECT 10, 'IMBABURA'
+                  UNION ALL
+                  SELECT 11, 'LOJA'
+                  UNION ALL
+                  SELECT 12, 'LOS RIOS'
+                  UNION ALL
+                  SELECT 13, 'MANABI'
+                  UNION ALL
+                  SELECT 14, 'MORONA SANTIAGO'
+                  UNION ALL
+                  SELECT 15, 'NAPO'
+                  UNION ALL
+                  SELECT 16, 'PASTAZA'
+                  UNION ALL
+                  SELECT 17, 'PICHINCHA'
+                  UNION ALL
+                  SELECT 18, 'TUNGURAHUA'
+                  UNION ALL
+                  SELECT 19, 'ZAMORA CHINCHIPE'
+                  UNION ALL
+                  SELECT 20, 'GALAPAGOS'
+                  UNION ALL
+                  SELECT 21, 'SUCUMBIOS'
+                  UNION ALL
+                  SELECT 22, 'ORELLANA'
+                  UNION ALL
+                  SELECT 23, 'SANTO DOMINGO DE LOS TSACHILAS'
+                  UNION ALL
+                  SELECT 24, 'SANTA ELENA'
+                  UNION ALL
+                  SELECT 25, 'ZONAS NO DELIMITADAS'
+              ) AS datos
+WHERE NOT EXISTS (
+    SELECT 1 FROM provincia WHERE pro_nombre IN (
+                                                 'AZUAY', 'BOLIVAR', 'CAÑAR', 'CARCHI', 'COTOPAXI',
+                                                 'CHIMBORAZO', 'EL ORO', 'ESMERALDAS', 'GUAYAS', 'IMBABURA',
+                                                 'LOJA', 'LOS RIOS', 'MANABI', 'MORONA SANTIAGO', 'NAPO',
+                                                 'PASTAZA', 'PICHINCHA', 'TUNGURAHUA', 'ZAMORA CHINCHIPE',
+                                                 'GALAPAGOS', 'SUCUMBIOS', 'ORELLANA', 'SANTO DOMINGO DE LOS TSACHILAS',
+                                                 'SANTA ELENA', 'ZONAS NO DELIMITADAS'
+        )
+);
 
 -- CIUDADES
-INSERT IGNORE INTO ciudad(ciu_nombre, pro_id)
+INSERT INTO ciudad(ciu_nombre, pro_id)
 VALUES ('CUENCA', 1),
        ('GIRÓN', 1),
        ('GUALACEO', 1),
